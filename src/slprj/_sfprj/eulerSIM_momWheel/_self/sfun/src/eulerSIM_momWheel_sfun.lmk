@@ -1,0 +1,39 @@
+CC     = "C:\Program Files\MATLAB\MATLAB Production Server\R2015a\sys\lcc64\lcc64\bin\lcc64.exe"
+LD     = "C:\Program Files\MATLAB\MATLAB Production Server\R2015a\sys\lcc64\lcc64\bin\lcclnk64.exe"
+LIBCMD = "C:\Program Files\MATLAB\MATLAB Production Server\R2015a\sys\lcc64\lcc64\bin\lcclib64.exe"
+CFLAGS = -dll -noregistrylookup  -c -Zp8 -DLCC_WIN64 -DMATLAB_MEX_FILE -DMX_COMPAT_32 -nodeclspec 
+LDFLAGS = -s -dll -L"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\sys\lcc64\lcc64\lib64" -entry LibMain -map sfun.map 
+LIBFLAGS = 
+
+OBJECTS = \
+	"eulerSIM_momWheel_sfun.obj"\
+	"c2_eulerSIM_momWheel.obj"\
+	"eulerSIM_momWheel_sfun_registry.obj"\
+	"lccstub.obj"\
+	"eulerSIM_momWheel_sfun.def"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\sf_runtime.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libmwblas.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libmx.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libmex.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libmat.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libfixedpoint.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libut.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libmwmathutil.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libemlrt.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libmwsl_log_load_blocks.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\lib\win64\microsoft\libmwsimulink.lib"\
+	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\lib\win64\libmwipp.lib"\
+
+INCLUDE_PATH= -I"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\sys\lcc64\lcc64\include64"  -I"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\extern\include"  -I"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\simulink\include"  -I"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\stateflow\c\mex\include"  -I"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\rtw\c\src"  -I"F:\Users\Toby Buckley\Documents\grad school documents\aa279c\src\slprj\_sfprj\eulerSIM_momWheel\_self\sfun\src" 
+ 
+
+eulerSIM_momWheel_sfun.mexw64 : $(MAKEFILE) $(OBJECTS)
+	$(LD) $(LDFLAGS) -o eulerSIM_momWheel_sfun.mexw64 @eulerSIM_momWheel_sfun.lmko
+eulerSIM_momWheel_sfun.obj :	"eulerSIM_momWheel_sfun.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "eulerSIM_momWheel_sfun.c"
+c2_eulerSIM_momWheel.obj :	"c2_eulerSIM_momWheel.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c2_eulerSIM_momWheel.c"
+eulerSIM_momWheel_sfun_registry.obj :	"eulerSIM_momWheel_sfun_registry.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "eulerSIM_momWheel_sfun_registry.c"
+lccstub.obj :	"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\sys\lcc64\lcc64\mex\lccstub.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "C:\Program Files\MATLAB\MATLAB Production Server\R2015a\sys\lcc64\lcc64\mex\lccstub.c"
