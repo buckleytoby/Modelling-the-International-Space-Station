@@ -31,6 +31,7 @@ for i=1:numCubs
           -1*repmat([S_top.cm_x; S_top.cm_y; S_top.cm_z], [1,6]);
 end
 
+
 % translate final tauGlobal to center of mass
 S_top.tauCM = convertToGlobalInertia(S_top.totMass, S_top.tauGlobal, ...
     S_top.cm_x, S_top.cm_y, S_top.cm_z, 0, 0, 0);
@@ -38,7 +39,12 @@ S_top.tauCM = convertToGlobalInertia(S_top.totMass, S_top.tauGlobal, ...
 % calculate principle axes (eigenvalue/vector problem)
 [V,D] = eig(S_top.tauCM);
 S_top.tauCM_P = D;
-S_top.DCM_B2P = V; %direction cosine matrix - principle to body
+S_top.DCM_P2B = V; %direction cosine matrix - principle to body
+S_top.DCM_B2P = S_top.DCM_P2B';
 
+% convert m to km 
+S_top.tauGlobal = S_top.tauGlobal / 1000^2;
+S_top.tauCM = S_top.tauCM / 1000^2;
+S_top.tauCM_P = S_top.tauCM_P / 1000^2;
 end
 

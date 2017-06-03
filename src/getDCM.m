@@ -1,6 +1,7 @@
 function [ A ] = getDCM( triad1, triad2 )
 %GETDCM calculate direction cosine matrix between two right-handed triads
-%   Detailed explanation goes here
+%   if triad1 = principle frame & triad2 = global frame, then A = DCM FROM
+%   global TO principle
 
 % triad = [ x_vector, y_vector, z_vector ], i_vector = 3x1
 % v_triad1 = A * v_triad2
