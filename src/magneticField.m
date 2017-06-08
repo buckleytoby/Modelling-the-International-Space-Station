@@ -17,7 +17,7 @@ a = 6371.2; %km
 %phi = azimuthal aka east longitude from greenwich
 theta = 90/180*pi - latitude;
 phi = longitude;
-k = 4;
+k = 1;
 Br = 0; Bth = 0; Bphi = 0;
 for n=1:k
   Br2 = 0;

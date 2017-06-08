@@ -1,0 +1,3 @@
+LIBRARY sixDOF_hw7_sfun.mexw64
+EXPORTS
+mexFunction

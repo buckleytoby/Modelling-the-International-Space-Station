@@ -1,6 +1,7 @@
 %the main wrapper
 %% setup
 clear;clc; close all
+cd('./aa279c/aa279c_github/src')
 addpath('./library')
 % ISS length: 72.8m width: 108.5m height: 20m
 
@@ -498,19 +499,21 @@ bGravGrad = 1;
 b_perturbs = 1;
 
 %euler inputs
-triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
-triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad1 = [[1 0 0]' [0 0 1]' [0 1 0]']; %y-axis out of orbit plane == UNSTABLE!!!
+%triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %global axes
 A0 = getDCM(triad1, triad2); %initial DCM
 I_principle = S_top.tauCM_P; %principle moment of inertia tensor
 t_total = 1*90*60;
 
 wz = n0; %mean motion
-w0 = [0 0 n0]';
+w0 = [0 -n0 0]'; %if rotate about y, use -n0. If robot about z, use +n0
 M0 = [0 0 0]';
 A_b2p = S_top.DCM_B2P;
 options = simset('SrcWorkspace','current');
 sim('sixDOF_SIM_perturbs',[],options);
 [ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+[ RTN ] = getRTNpostprocess( A_DCM, error_DCM, Xout );
 [yaw, pitch, roll] = dcm2angle( A_DCM ); %expressed in inertial
 
 % PS 5.2
@@ -520,17 +523,22 @@ subplot(3,1,1); plot(tout,[Mad_p]); title('Atm Drag')
 subplot(3,1,2); plot(tout,[Mgg_p]); title('Grav Grad')
 subplot(3,1,3); plot(tout,[Mm_p]); title('Mag Torq')
 
-figure; plot(tout, Moments);
-figure; plot(tout, XYZ);
-figure; plot(tout, [yaw, pitch, roll])
+figure; plot(tout, Moments); title('PS 5.2) Total Moments')
+figure; plot(tout, XYZ); title('PS 5.2) XYZ position')
+legend('x','y','z')
+figure; plot(tout, RTN); title('PS 5.2) RTN position')
+legend('x','y','z')
+figure; plot(tout, [yaw, pitch, roll]); title('PS 5.2) euler angles')
+legend('yaw','pitch','roll')
 
 % PS 5.3 attitude control error - error_DCM
 perm = permute(error_DCM, [3 1 2]);
 flat_error = reshape(perm, [], 9);
-figure; plot(tout, flat_error)
+figure; plot(tout, flat_error); title('PS 5.3) Att control error')
 % PS 5.4
 [yaw, pitch, roll] = dcm2angle( error_DCM ); %expressed in inertial
 figure; plot(tout, [yaw, pitch, roll]); title('Error in euler angles')
+legend('yaw','pitch','roll')
 
 % PS 5.5
 fprintf('... man idfk\n')
@@ -541,6 +549,240 @@ fprintf('... man idfk\n')
 %% 
 % ------------------------ PS6 ------------------------
 
+% GPS
+% 4 thrusters - 13.3 kg-f (29.3 lbf) https://www.quora.com/How-does-the-International-Space-Station-maintain-its-orbit-and-what-propellant-does-it-use
+% https://en.wikipedia.org/wiki/Attitude_control
+% https://www.youtube.com/watch?v=9XDRTysaCww
+%   -> 4 control moment gyroscopes, 200 lbs
+% https://space.stackexchange.com/questions/566/do-any-spacecraft-use-gnss-for-attitude-determination
+%   -> 4 GPS receivers
+
+% PS 6.2a determinstic method
+
+% PS 6.2b q-method
+
+% PS 6.2c ang vel measurements & reconstruction of A_DCM through kinematic
+% eq's
+%       --> assume gyros (IMU's) and horizon sensor
+
+
+% PS 6.3 plotting estimated attitude
+% run sim
+bNoise = 0;
+t_total = 0.1*90*60;
+run6DOFSim_ps6
+
+error1 = zeros(3,3,size(A_DCM,3));
+error2 = error1;
+error3 = error1;
+error4 = error1;
+for i=1:size(A_DCM,3)
+  error1(:,:,i) = getDCM(A_i2p_meas(:,:,i)' , A_DCM(:,:,i)' );
+  error2(:,:,i) = getDCM(A_i2p_meas2(:,:,i)' , A_DCM(:,:,i)' );
+  error3(:,:,i) = getDCM(A_i2p_meas3(:,:,i)' , A_DCM(:,:,i)' );
+  error4(:,:,i) = getDCM(A_DCM_meas(:,:,i)' , A_DCM(:,:,i)' );
+end
+perm1 = permute(error1, [3 1 2]);
+perm2 = permute(error2, [3 1 2]);
+perm3 = permute(error3, [3 1 2]);
+perm4 = permute(error4, [3 1 2]);
+flat_error1 = reshape(perm1, [], 9);
+flat_error2 = reshape(perm2, [], 9);
+flat_error3 = reshape(perm3, [], 9);
+flat_error4 = reshape(perm4, [], 9);
+figure; hold on
+subplot(4,1,1); plot(tout, flat_error1); title('PS 6.3) Att meas error - Algebra')
+subplot(4,1,2); plot(tout, flat_error2); title('PS 6.3) Att meas error - Algebra distributed')
+subplot(4,1,3); plot(tout, flat_error3); title('PS 6.3) Att meas error - Statistical')
+subplot(4,1,4); plot(tout, flat_error4); title('PS 6.3) Att meas error - integrated from measured ang. vel.')
+
+% PS 6.4 introduce sensor errors - constant bias & gaussian noise
+bNoise = 1;
+t_total = 0.1*90*60;
+run6DOFSim_ps6
+
+error1 = zeros(3,3,size(A_DCM,3));
+error2 = error1;
+error3 = error1;
+error4 = error1;
+for i=1:size(A_DCM,3)
+  error1(:,:,i) = getDCM(A_i2p_meas(:,:,i)' , A_DCM(:,:,i)' );
+  error2(:,:,i) = getDCM(A_i2p_meas2(:,:,i)' , A_DCM(:,:,i)' );
+  error3(:,:,i) = getDCM(A_i2p_meas3(:,:,i)' , A_DCM(:,:,i)' );
+  error4(:,:,i) = getDCM(A_DCM_meas(:,:,i)' , A_DCM(:,:,i)' );
+end
+perm1 = permute(error1, [3 1 2]);
+perm2 = permute(error2, [3 1 2]);
+perm3 = permute(error3, [3 1 2]);
+perm4 = permute(error4, [3 1 2]);
+flat_error1 = reshape(perm1, [], 9);
+flat_error2 = reshape(perm2, [], 9);
+flat_error3 = reshape(perm3, [], 9);
+flat_error4 = reshape(perm4, [], 9);
+figure; hold on
+subplot(4,1,1); plot(tout, flat_error1); title('PS 6.3) Att meas error - Algebra')
+subplot(4,1,2); plot(tout, flat_error2); title('PS 6.3) Att meas error - Algebra distributed')
+subplot(4,1,3); plot(tout, flat_error3); title('PS 6.3) Att meas error - Statistical')
+subplot(4,1,4); plot(tout, flat_error4); title('PS 6.3) Att meas error - integrated from measured ang. vel.')
+
+% PS 6.6
+
+% PS 6.7 - attitude control error using measured attitude
+perm = permute(error_DCM, [3 1 2]);
+flat_error = reshape(perm, [], 9);
+figure; plot(tout, flat_error); title('PS 5.3) Att control error')
+[yaw, pitch, roll] = dcm2angle( error_DCM ); %expressed in inertial
+figure; plot(tout, [yaw, pitch, roll]); title('Error in euler angles')
+legend('yaw','pitch','roll')
+
+
+
+
+
+%% 
+% ------------------------ PS7 ------------------------
+% let state = [p,dp,r,dr,y,dy] 3 angles & rates
+
+% http://renaissance.ucsd.edu/courses/mae207/wie_chap6.pdf
+% page 350, ch 6.7 gives the linearized euler equations
+
+% PS 7.2a - linearEuler.m
+% PS 7.2b - control moment gyros
+
+% PS 7.2d - initial state uncertainty
+x0 = rand(3,1);
+P0 = 0.01*eye(3); %I guessed - error covariance matrix
+% PS 7.2e - defined similar to P_0 but smaller
+Q0 = P0 ./ 10;
+% PS 7.2f - sensitivity matrix
+H0 = eye(3); %direct mapping
+% PS 7.2g - constant measurement error covariance
+R0 = (10 /180*pi)^2 * eye(3,3);
+
+% PS 7.3 - simulation & plotting
+%orbital elements
+mu = 3.986e14 / 1000^3;
+a0 = 6776; %km
+n0 = sqrt(mu/a0^3); %in rad/s
+e0 = 0.0004758;
+incl0 = 0; %all angles in degrees
+OMEGA0 = 0;
+omega0 = 0;
+nu0 = 0;
+UTC_0 = [06,02,2017];
+tOffset = 0;
+%perturbations
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; %kg/km^3
+wEarth = [0 0 7.292116e-5]'; %rad/s
+bGravGrad = 1;
+b_perturbs = 1;
+bNoise = 1;
+t_total = 0.01*90*60;
+
+%euler inputs
+triad1 = [[1 0 0]' [0 0 1]' [0 1 0]']; %y-axis out of orbit plane == UNSTABLE!!!
+%triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %global axes
+A0 = getDCM(triad1, triad2); %initial DCM, I2P
+I_principle = S_top.tauCM_P; %principle moment of inertia tensor
+
+wz = n0; %mean motion
+w0 = [0 -2 0]'; %if rotate about y, use -n0. If robot about z, use +n0
+M0 = [0 0 0]';
+A_b2p = S_top.DCM_B2P;
+options = simset('SrcWorkspace','current');
+sim('sixDOF_hw7',[],options);
+% analysis
+state_error = w_true - x_ekf;
+% plotting
+figure;hold on; title('Ang. Vel. and Errors')
+subplot(2,1,1); plot(tout, [w_true(:,1), x_ekf(:,1)]); legend('wx_true','x_ekf')
+subplot(2,1,2); plot(tout, state_error(:,1))
+figure;hold on
+subplot(2,1,1); plot(tout, [w_true(:,2), w_meas(:,2), x_ekf(:,2)]);legend('wy_true','y_meas', 'y_ekf')
+subplot(2,1,2); plot(tout, state_error(:,2))
+figure;hold on
+subplot(2,1,1); plot(tout, [w_true(:,3), x_ekf(:,3)]);legend('wz_true','z_ekf')
+subplot(2,1,2); plot(tout, state_error(:,3))
+
+% residuals (y_meas & z_ekf)
+y_meas = w_meas;
+resi_pre = abs(y_meas - z_ekf_pre);
+resi_post = abs(y_meas - z_ekf_post);
+figure;plot(tout, [resi_pre(:,2), resi_post(:,2)]);legend('Pre','Post')
+
+
+residuals_error = z_ekf_pre - z_ekf_post;
+figure;hold on
+subplot(2,1,1); plot(tout, [z_ekf_pre, z_ekf_post]); title('Measured and estimated Ang Vel')
+%legend('wx_meas','wy_meas','wz_meas','wx_est','wy_est','wz_est')
+subplot(2,1,2); plot(tout, residuals_error);
+legend('wx','wy','wz'); title('Residuals Error')
+% plot error covariance (P) matrix
+perm1 = permute(P_ekf, [3 1 2]);
+flat_error1 = reshape(perm1, [], 9);
+figure; plot(tout, flat_error1); title('Error Covariance Matrix over time')
+
+
+%% 
+% ------------------------ PS8 ------------------------
+% PS 8.1 - finish kalman filter - done
+
+% PS 8.2 - model the actuators in simulink
+% ISS has 4760 N*m*s CMG's. I'll cheat and say 1 in each body axis
+% 258 N*m
+% https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/20100021932.pdf
+
+
+% PS 8.3 - implement linear control law
+setupCMG;
+bControl = 0;
+bGravGrad = 1;
+b_perturbs = 1;
+bNoise = 0; % PS 7.2 hint
+t_total = 1.5*90*60;
+dt = 1;
+w_des = [0 -n0 0]';
+%run sim
+runHW8Sim
+sim('sixDOF_hw8',[],options);
+%post-process
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+[yaw, pitch, roll] = dcm2angle( A_DCM ); %expressed in inertial
+figure;plot(tout, [yaw, pitch, roll]); 
+% figure; plot(tout, XYZ); title('PS 8) XYZ position')
+% legend('x','y','z')
+% [ RTN ] = getRTNpostprocess( A_DCM, error_DCM, Xout );
+% figure; plot(tout, RTN); title('PS 5.2) RTN position')
+% legend('x','y','z')
+% figure; plot(Xout(:,1), Xout(:,2))
+w_true_free = w_true;
+%figure;plot(tout, w_true);title('Ang. Vel. in principle')
+
+
+bControl = 1;
+%run sim
+runHW8Sim
+sim('sixDOF_hw8',[],options);
+w_true_control = w_true;
+
+%post-process
+A_CMG_x = permute(A_CMG(:,1,:), [3 1 2]);
+A_CMG_y = permute(A_CMG(:,2,:), [3 1 2]);
+A_CMG_z = permute(A_CMG(:,3,:), [3 1 2]);
+figure;plot(tout, A_CMG_x);title('Rotation for CMG 1')
+figure;plot(tout, A_CMG_y);title('Rotation for CMG 2')
+figure;plot(tout, A_CMG_z);title('Rotation for CMG 3')
+figure; hold on
+subplot(2,1,1); plot(tout, w_true_free); title('8.4) True ang. vel. no control');
+legend('yaw','pitch','roll')
+subplot(2,1,2); plot(tout, w_true_control); title('8.4) True ang. vel. with CMG control')
+legend('yaw','pitch','roll')
+
+% PS 8.4 - plotting - att determ. errors, att. control errors, control
+% actions, CMG angles
 
 
 
@@ -549,12 +791,44 @@ fprintf('... man idfk\n')
 
 
 
+%% 
+% ------------------------ PS9 ------------------------
+close all
+% de-tumble
+setupCMG;
+bControl = 1;
+bGravGrad = 1;
+b_perturbs = 1;
+bNoise = 0;
+t_total = 0.2*90*60;
+dt = 0.5;
+w_des = [0 0 0]';
+%run sim
+runHW8Sim
+w0 = [0 0 0]';
+w0 = rand(3,1);
+sim('sixDOF_hw8',[],options);
+%plot
+figure;plot(tout(1:500/dt), w_true(1:500/dt,:));title('PS 9) De-tumble control: Ang. Vel. in principle')
+legend('wx','wy','wz')
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+figure; plot(tout, XYZ); title('PS 9) XYZ position')
+legend('x','y','z')
+[ RTN ] = getRTNpostprocess( A_DCM, error_DCM, Xout );
+figure; plot(tout, RTN); title('PS 9) RTN position')
+legend('x','y','z')
 
+perm = permute(error_DCM, [3 1 2]);
+flat_error = reshape(perm, [], 9);
+figure; plot(tout, flat_error); title('PS 9) Att control error')
+figure;plot(tout, reshape(permute(A_DCM, [3,1,2]),[],9));title('DCM Inertial 2 Principle')
 
-
-
-
-
+%plot quats
+figure;plot(tout, quat)
+figure;plot(tout, quat_des)
+for i=1:size(A_DCM,3)
+  dcm2quat(A_DCM(:,:,i));
+end
 
 
 
