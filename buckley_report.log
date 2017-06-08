@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.8)  7 JUN 2017 23:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.8)  8 JUN 2017 01:08
 entering extended mode
 **./buckley_report.tex
 (buckley_report.tex
@@ -82,12 +82,95 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box26
 \@float@everytoks=\toks16
 \@floatcapt=\box27
-) (buckley_report.aux
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2016/03/10 v2.15b AMS math features
+\@mathmargin=\skip43
 
-LaTeX Warning: Label `8:angvel' multiply defined.
+For additional information on amsmath, use the `?' option.
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01 AMS text
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen112
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen113
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count92
+LaTeX Info: Redefining \frac on input line 199.
+\uproot@=\count93
+\leftroot@=\count94
+LaTeX Info: Redefining \overline on input line 297.
+\classnum@=\count95
+\DOTSCASE@=\count96
+LaTeX Info: Redefining \ldots on input line 394.
+LaTeX Info: Redefining \dots on input line 397.
+LaTeX Info: Redefining \cdots on input line 518.
+\Mathstrutbox@=\box28
+\strutbox@=\box29
+\big@size=\dimen114
+LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
+\macc@depth=\count97
+\c@MaxMatrixCols=\count98
+\dotsspace@=\muskip10
+\c@parentequation=\count99
+\dspbrk@lvl=\count100
+\tag@help=\toks18
+\row@=\count101
+\column@=\count102
+\maxfields@=\count103
+\andhelp@=\toks19
+\eqnshift@=\dimen115
+\alignsep@=\dimen116
+\tagshift@=\dimen117
+\tagwidth@=\dimen118
+\totwidth@=\dimen119
+\lineht@=\dimen120
+\@envbody=\toks20
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2739.
+LaTeX Info: Redefining \] on input line 2740.
+)
+(buckley_report.aux
+
+LaTeX Warning: Label `6:ekf' multiply defined.
 
 
-LaTeX Warning: Label `8:angvel' multiply defined.
+LaTeX Warning: Label `6:ekf' multiply defined.
+
+
+LaTeX Warning: Label `6:ekf' multiply defined.
+
+
+LaTeX Warning: Label `6:ekf' multiply defined.
+
+
+LaTeX Warning: Label `6:ekf' multiply defined.
+
+
+LaTeX Warning: Label `7:ekf' multiply defined.
+
+
+LaTeX Warning: Label `7:ekf' multiply defined.
+
+
+LaTeX Warning: Label `7:ekf' multiply defined.
+
+
+LaTeX Warning: Label `7:ekf' multiply defined.
+
+
+LaTeX Warning: Label `7:ekf' multiply defined.
 
 
 LaTeX Warning: Label `8:angvel' multiply defined.
@@ -98,31 +181,31 @@ LaTeX Warning: Label `8:angvel' multiply defined.
 )
 \openout1 = `buckley_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
  ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count92
-\scratchdimen=\dimen112
-\scratchbox=\box28
-\nofMPsegments=\count93
-\nofMParguments=\count94
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count95
-\MPscratchDim=\dimen113
-\MPnumerator=\count96
-\makeMPintoPDFobject=\count97
-\everyMPtoPDFconversion=\toks18
+\scratchcounter=\count104
+\scratchdimen=\dimen121
+\scratchbox=\box30
+\nofMPsegments=\count105
+\nofMParguments=\count106
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count107
+\MPscratchDim=\dimen122
+\MPnumerator=\count108
+\makeMPintoPDFobject=\count109
+\everyMPtoPDFconversion=\toks23
 ) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -168,116 +251,262 @@ Package grfext Info: Graphics extension search list:
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 20.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 20.
  [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-<./src/html/PS8_controller.png, id=7, 593.96906pt x 177.66376pt>
+<./src/html/ps5_01.png, id=7, 421.575pt x 316.18124pt>
+File: ./src/html/ps5_01.png Graphic file (type png)
+
+<use ./src/html/ps5_01.png>
+Package pdftex.def Info: ./src/html/ps5_01.png used on input line 36.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+
+<./src/html/ps5_02.png, id=8, 421.575pt x 316.18124pt>
+File: ./src/html/ps5_02.png Graphic file (type png)
+
+<use ./src/html/ps5_02.png>
+Package pdftex.def Info: ./src/html/ps5_02.png used on input line 44.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [1 <./src/html/ps5_01.png (PNG copy)>]
+<./src/html/ps5_03.png, id=13, 421.575pt x 316.18124pt>
+File: ./src/html/ps5_03.png Graphic file (type png)
+
+<use ./src/html/ps5_03.png>
+Package pdftex.def Info: ./src/html/ps5_03.png used on input line 52.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [2 <./src/html/ps5_02.png (PNG copy)>]
+<./src/html/ps5_04.png, id=17, 421.575pt x 316.18124pt>
+File: ./src/html/ps5_04.png Graphic file (type png)
+
+<use ./src/html/ps5_04.png>
+Package pdftex.def Info: ./src/html/ps5_04.png used on input line 60.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [3 <./src/html/ps5_03.png (PNG copy)>]
+<./src/html/ps5_05.png, id=21, 421.575pt x 316.18124pt>
+File: ./src/html/ps5_05.png Graphic file (type png)
+
+<use ./src/html/ps5_05.png>
+Package pdftex.def Info: ./src/html/ps5_05.png used on input line 68.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [4 <./src/html/ps5_04.png (PNG copy)>]
+<./src/html/ps5_06.png, id=25, 421.575pt x 316.18124pt>
+File: ./src/html/ps5_06.png Graphic file (type png)
+
+<use ./src/html/ps5_06.png>
+Package pdftex.def Info: ./src/html/ps5_06.png used on input line 76.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [5 <./src/html/ps5_05.png (PNG copy)>]
+<./src/html/ps5_07.png, id=29, 421.575pt x 316.18124pt>
+File: ./src/html/ps5_07.png Graphic file (type png)
+
+<use ./src/html/ps5_07.png>
+Package pdftex.def Info: ./src/html/ps5_07.png used on input line 84.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [6 <./src/html/ps5_06.png (PNG copy)>]
+<./src/html/ps6_01.png, id=34, 421.575pt x 316.18124pt>
+File: ./src/html/ps6_01.png Graphic file (type png)
+
+<use ./src/html/ps6_01.png>
+Package pdftex.def Info: ./src/html/ps6_01.png used on input line 95.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [7 <./src/html/ps5_07.png (PNG copy)>]
+<./src/html/ps6_02.png, id=38, 421.575pt x 316.18124pt>
+File: ./src/html/ps6_02.png Graphic file (type png)
+
+<use ./src/html/ps6_02.png>
+Package pdftex.def Info: ./src/html/ps6_02.png used on input line 103.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [8 <./src/html/ps6_01.png (PNG copy)>]
+<./src/html/ps6_03.png, id=42, 421.575pt x 316.18124pt>
+File: ./src/html/ps6_03.png Graphic file (type png)
+
+<use ./src/html/ps6_03.png>
+Package pdftex.def Info: ./src/html/ps6_03.png used on input line 111.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [9 <./src/html/ps6_02.png (PNG copy)>]
+<./src/html/ps6_04.png, id=46, 421.575pt x 316.18124pt>
+File: ./src/html/ps6_04.png Graphic file (type png)
+
+<use ./src/html/ps6_04.png>
+Package pdftex.def Info: ./src/html/ps6_04.png used on input line 119.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [10 <./src/html/ps6_03.png (PNG copy)>]
+<./src/html/ps6_05.png, id=50, 421.575pt x 316.18124pt>
+File: ./src/html/ps6_05.png Graphic file (type png)
+
+<use ./src/html/ps6_05.png>
+Package pdftex.def Info: ./src/html/ps6_05.png used on input line 127.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [11 <./src/html/ps6_04.png (PNG copy)>]
+<./src/html/ps6_06.png, id=54, 421.575pt x 316.18124pt>
+File: ./src/html/ps6_06.png Graphic file (type png)
+
+<use ./src/html/ps6_06.png>
+Package pdftex.def Info: ./src/html/ps6_06.png used on input line 135.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [12 <./src/html/ps6_05.png (PNG copy)>]
+Overfull \hbox (19.35982pt too wide) in paragraph at lines 143--143
+[]\OT1/cmr/bx/n/17.28 Problem Set 7 - Im-ple-ment Ex-tended Kalman
+ []
+
+<./src/html/ps7_01.png, id=59, 421.575pt x 316.18124pt>
+File: ./src/html/ps7_01.png Graphic file (type png)
+
+<use ./src/html/ps7_01.png>
+Package pdftex.def Info: ./src/html/ps7_01.png used on input line 149.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [13 <./src/html/ps6_06.png (PNG copy)>]
+<./src/html/ps7_02.png, id=63, 421.575pt x 316.18124pt>
+File: ./src/html/ps7_02.png Graphic file (type png)
+
+<use ./src/html/ps7_02.png>
+Package pdftex.def Info: ./src/html/ps7_02.png used on input line 157.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [14 <./src/html/ps7_01.png (PNG copy)>]
+<./src/html/ps7_03.png, id=67, 421.575pt x 316.18124pt>
+File: ./src/html/ps7_03.png Graphic file (type png)
+
+<use ./src/html/ps7_03.png>
+Package pdftex.def Info: ./src/html/ps7_03.png used on input line 165.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [15 <./src/html/ps7_02.png (PNG copy)>]
+<./src/html/ps7_04.png, id=71, 421.575pt x 316.18124pt>
+File: ./src/html/ps7_04.png Graphic file (type png)
+
+<use ./src/html/ps7_04.png>
+Package pdftex.def Info: ./src/html/ps7_04.png used on input line 173.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [16 <./src/html/ps7_03.png (PNG copy)>]
+<./src/html/ps7_05.png, id=75, 421.575pt x 316.18124pt>
+File: ./src/html/ps7_05.png Graphic file (type png)
+
+<use ./src/html/ps7_05.png>
+Package pdftex.def Info: ./src/html/ps7_05.png used on input line 181.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [17 <./src/html/ps7_04.png (PNG copy)>]
+<./src/html/ps7_06.png, id=79, 421.575pt x 316.18124pt>
+File: ./src/html/ps7_06.png Graphic file (type png)
+
+<use ./src/html/ps7_06.png>
+Package pdftex.def Info: ./src/html/ps7_06.png used on input line 189.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+ [18 <./src/html/ps7_05.png (PNG copy)>] [19 <./src/html/ps7_06.png (PNG copy)>
+]
+<./src/html/PS8_controller.png, id=90, 593.96906pt x 177.66376pt>
 File: ./src/html/PS8_controller.png Graphic file (type png)
 
 <use ./src/html/PS8_controller.png>
-Package pdftex.def Info: ./src/html/PS8_controller.png used on input line 36.
+Package pdftex.def Info: ./src/html/PS8_controller.png used on input line 215.
 (pdftex.def)             Requested size: 415.7755pt x 124.36377pt.
 
-Overfull \hbox (25.7755pt too wide) in paragraph at lines 36--37
+Overfull \hbox (25.7755pt too wide) in paragraph at lines 215--216
  [][] 
  []
 
-<./src/html/ps8_01.png, id=9, 421.575pt x 316.18124pt>
+[20 <./src/html/PS8_controller.png>]
+<./src/html/ps8_lqrCost.png, id=97, 335.75438pt x 59.47218pt>
+File: ./src/html/ps8_lqrCost.png Graphic file (type png)
+
+<use ./src/html/ps8_lqrCost.png>
+Package pdftex.def Info: ./src/html/ps8_lqrCost.png used on input line 233.
+(pdftex.def)             Requested size: 235.02646pt x 41.63023pt.
+
+<./src/html/ps8_taylor.png, id=98, 179.92218pt x 35.38219pt>
+File: ./src/html/ps8_taylor.png Graphic file (type png)
+
+<use ./src/html/ps8_taylor.png>
+Package pdftex.def Info: ./src/html/ps8_taylor.png used on input line 242.
+(pdftex.def)             Requested size: 125.94466pt x 24.76735pt.
+ [21 <./src/html/ps8_lqrCost.png> <./src/html/ps8_taylor.png>] <./src/html/ps8_
+01.png, id=105, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_01.png Graphic file (type png)
 
 <use ./src/html/ps8_01.png>
-Package pdftex.def Info: ./src/html/ps8_01.png used on input line 44.
+Package pdftex.def Info: ./src/html/ps8_01.png used on input line 274.
 (pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [1 <./src/html/PS8_controller.png>]
-<./src/html/ps8_02.png, id=15, 421.575pt x 316.18124pt>
+ [22 <./src/html/ps8_01.png (PNG copy)>]
+<./src/html/ps8_02.png, id=110, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_02.png Graphic file (type png)
 
 <use ./src/html/ps8_02.png>
-Package pdftex.def Info: ./src/html/ps8_02.png used on input line 52.
+Package pdftex.def Info: ./src/html/ps8_02.png used on input line 283.
 (pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [2 <./src/html/ps8_01.png (PNG copy)>]
-<./src/html/ps8_03.png, id=19, 421.575pt x 316.18124pt>
+
+<./src/html/ps8_03.png, id=111, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_03.png Graphic file (type png)
 
 <use ./src/html/ps8_03.png>
-Package pdftex.def Info: ./src/html/ps8_03.png used on input line 60.
+Package pdftex.def Info: ./src/html/ps8_03.png used on input line 292.
 (pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [3 <./src/html/ps8_02.png (PNG copy)>]
-<./src/html/ps8_04.png, id=23, 421.575pt x 316.18124pt>
+ [23 <./src/html/ps8_02.png (PNG copy)>]
+<./src/html/ps8_04.png, id=115, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_04.png Graphic file (type png)
 
 <use ./src/html/ps8_04.png>
-Package pdftex.def Info: ./src/html/ps8_04.png used on input line 68.
+Package pdftex.def Info: ./src/html/ps8_04.png used on input line 301.
 (pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [4 <./src/html/ps8_03.png (PNG copy)>]
-<./src/html/ps8_05.png, id=27, 421.575pt x 316.18124pt>
+ [24 <./src/html/ps8_03.png (PNG copy)>]
+<./src/html/ps8_05.png, id=120, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_05.png Graphic file (type png)
 
 <use ./src/html/ps8_05.png>
-Package pdftex.def Info: ./src/html/ps8_05.png used on input line 76.
+Package pdftex.def Info: ./src/html/ps8_05.png used on input line 310.
 (pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [5 <./src/html/ps8_04.png (PNG copy)>]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 86.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 86.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 86.
-
-<./src/html/ps9_01.png, id=31, 421.575pt x 316.18124pt>
+ [25 <./src/html/ps8_04.png (PNG copy)>]
+<./src/html/ps9_01.png, id=124, 421.575pt x 316.18124pt>
 File: ./src/html/ps9_01.png Graphic file (type png)
 
 <use ./src/html/ps9_01.png>
-Package pdftex.def Info: ./src/html/ps9_01.png used on input line 91.
+Package pdftex.def Info: ./src/html/ps9_01.png used on input line 325.
 (pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [6 <./src/html/ps8_05.png (PNG copy)>]
-<./src/html/ps9_02.png, id=37, 421.575pt x 316.18124pt>
+ [26 <./src/html/ps8_05.png (PNG copy)>]
+<./src/html/ps9_02.png, id=128, 421.575pt x 316.18124pt>
 File: ./src/html/ps9_02.png Graphic file (type png)
 
 <use ./src/html/ps9_02.png>
-Package pdftex.def Info: ./src/html/ps9_02.png used on input line 102.
+Package pdftex.def Info: ./src/html/ps9_02.png used on input line 336.
 (pdftex.def)             Requested size: 191.10214pt x 143.32716pt.
 
-<./src/html/ps9_03.png, id=38, 421.575pt x 316.18124pt>
+<./src/html/ps9_03.png, id=129, 421.575pt x 316.18124pt>
 File: ./src/html/ps9_03.png Graphic file (type png)
 
 <use ./src/html/ps9_03.png>
-Package pdftex.def Info: ./src/html/ps9_03.png used on input line 105.
+Package pdftex.def Info: ./src/html/ps9_03.png used on input line 339.
 (pdftex.def)             Requested size: 191.10214pt x 143.32716pt.
- [7 <./src/html/ps9_01.png (PNG copy)>]
-<./src/html/ps9_04.png, id=43, 421.575pt x 316.18124pt>
+ [27 <./src/html/ps9_01.png (PNG copy)>]
+<./src/html/ps9_04.png, id=133, 421.575pt x 316.18124pt>
 File: ./src/html/ps9_04.png Graphic file (type png)
 
 <use ./src/html/ps9_04.png>
-Package pdftex.def Info: ./src/html/ps9_04.png used on input line 115.
+Package pdftex.def Info: ./src/html/ps9_04.png used on input line 349.
 (pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [8 <./src/html/ps9_02.png (PNG copy)> <./src/html/ps9_03.png (PNG copy)>] [9 <
-./src/html/ps9_04.png (PNG copy)>]
+ [28 <./src/html/ps9_02.png (PNG copy)> <./src/html/ps9_03.png (PNG copy)>] [29
+ <./src/html/ps9_04.png (PNG copy)>]
 (buckley_report.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2718 strings out of 493335
- 43119 string characters out of 3139264
- 100742 words of memory out of 3000000
- 6236 multiletter control sequences out of 15000+200000
- 8194 words of font info for 29 fonts, out of 3000000 for 9000
+ 3435 strings out of 493335
+ 52411 string characters out of 3139264
+ 115336 words of memory out of 3000000
+ 6914 multiletter control sequences out of 15000+200000
+ 9319 words of font info for 34 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,7n,40p,462b,375s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,8n,40p,842b,382s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on buckley_report.pdf (10 pages, 275325 bytes).
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb>
+Output written on buckley_report.pdf (30 pages, 841886 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
+ 169 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 156 words of extra memory for PDF output out of 10000 (max. 10000000)
 

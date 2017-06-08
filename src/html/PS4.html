@@ -1,0 +1,640 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PS4</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="PS4.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><p>------------------------ PS4 ------------------------</p><pre class="codeinput"><span class="comment">% PS 4.1a Single-spin satellite</span>
+<span class="comment">%config 1</span>
+close <span class="string">all</span>
+w0=[0 0 0]';
+M0 = w0;
+perturb = .01*rand([3,1]);
+triad1 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+triad2 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+A0 = getDCM(triad1, triad2); <span class="comment">%initial DCM</span>
+I_principle = S_top.tauCM_P; <span class="comment">%principle moment of inertia tensor</span>
+t_total = 200;
+<span class="keyword">for</span> i=1:3
+  w0(i) = 0.2;
+  w0 = w0 + perturb;
+  options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
+  sim(<span class="string">'eulerSIM'</span>,[],options);
+  figure; plot(tout, ang_vel);
+  title([<span class="string">'4.1a) Non-zero axis: '</span> num2str(i) <span class="string">'. Ang Vel over time'</span>])
+  legend(<span class="string">'wx'</span>,<span class="string">'wy'</span>,<span class="string">'wz'</span>)
+  xlabel(<span class="string">'time (s)'</span>); ylabel(<span class="string">'ang vel (rad/s)'</span>)
+  <span class="comment">%transform to euler angles</span>
+  [yaw, pitch, roll] = dcm2angle( A_DCM ); <span class="comment">%expressed in inertial</span>
+  figure; plot(tout, [yaw, pitch, roll]);
+  title([<span class="string">'4.1a) Non-zero axis: '</span> num2str(i) <span class="string">'. Euler angles over time'</span>])
+  legend(<span class="string">'Yaw'</span>,<span class="string">'Pitch'</span>,<span class="string">'Roll'</span>)
+  xlabel(<span class="string">'time (s)'</span>); ylabel(<span class="string">'Angle (rad)'</span>)
+
+  w0 = [0 0 0]';
+<span class="keyword">end</span>
+fprintf(<span class="string">'Rotation about min &amp; max principle axes is asymptotically stable, \nwhile rotation about the middle axis is unstable \n'</span>)
+
+<span class="comment">% PS 4.2a momentum wheel (dual-spin)</span>
+w0=[0 0 0]';
+M0 = w0;
+perturb = .01*rand([3,1]);
+triad1 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+triad2 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+A0 = getDCM(triad1, triad2); <span class="comment">%initial DCM</span>
+I_principle = S_top.tauCM_P; <span class="comment">%principle moment of inertia tensor</span>
+t_total = 200;
+<span class="comment">%momentum wheel</span>
+r_hat = [0 0 0]';
+Ir = 1e7;
+Mr0 = 0;
+wr0 = 0.1; <span class="comment">%rad/s</span>
+wdotr0 = 0;
+<span class="comment">%if Ir*wr0 &gt; 0.2*(I_principle(</span>
+<span class="keyword">for</span> i=2
+  w0(i) = 0.2;
+  r_hat(i) = 1; <span class="comment">%spin mom wheel about spin axis for equilibrium state</span>
+  w0 = w0 + perturb;
+  options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
+  sim(<span class="string">'eulerSIM_momWheel'</span>,[],options);
+  <span class="comment">% PS4.2b verify integration using previous tests (taken from PS2)</span>
+  <span class="comment">%PS2_SCRIPT</span>
+  <span class="comment">% PS4.2c equilibrium &amp; stability analysis</span>
+  figure; plot(tout, ang_vel);
+  title([<span class="string">'4.2c) Non-zero axis: '</span> num2str(i) <span class="string">'. Ang Vel over time'</span>])
+  legend(<span class="string">'wx'</span>,<span class="string">'wy'</span>,<span class="string">'wz'</span>)
+  xlabel(<span class="string">'time (s)'</span>); ylabel(<span class="string">'ang vel (rad/s)'</span>)
+  <span class="comment">%transform to euler angles</span>
+  [yaw, pitch, roll] = dcm2angle( A_DCM ); <span class="comment">%expressed in inertial</span>
+  figure; plot(tout, [yaw, pitch, roll]);
+  title([<span class="string">'4.2c) Non-zero axis: '</span> num2str(i) <span class="string">'. Euler angles over time'</span>])
+  legend(<span class="string">'Yaw'</span>,<span class="string">'Pitch'</span>,<span class="string">'Roll'</span>)
+  xlabel(<span class="string">'time (s)'</span>); ylabel(<span class="string">'Angle (rad)'</span>)
+
+
+  w0 = [0 0 0]';
+  r_hat = [0 0 0]';
+<span class="keyword">end</span>
+fprintf(<span class="string">'Now rotation about all directions \nis stable due to momentum wheel stabilization\n'</span>)
+
+mu = 3.986e14 / 1000^3;
+<span class="comment">% PS 4.3 - gravity gradient - gravGradient.m</span>
+<span class="comment">% PS 4.4 - magnitude of modelled torque consistent</span>
+[ M ] = gravGradient( mu, S_top.tauCM_P, 6776, 0, 0, 1 );
+fprintf(<span class="string">'Should be zero torques: %.2E\n'</span>,M)
+[ M ] = gravGradient( mu, S_top.tauCM_P, 6776, 0.25, 0.25, 0.93541 );
+fprintf(<span class="string">'Should be zero torques: %.2E\n'</span>,M)
+<span class="comment">% PS 4.5 - numerically integrate w/grav gradient in RTN</span>
+<span class="comment">%orbital elements</span>
+mu = 3.986e14 / 1000^3;
+a0 = 6776; <span class="comment">%km</span>
+n0 = sqrt(mu/a0^3);
+e0 = 0.0004758;
+incl0 = 0; <span class="comment">%all angles in degrees</span>
+OMEGA0 = 0;
+omega0 = 0;
+nu0 = 0;
+<span class="comment">%perturbations</span>
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; <span class="comment">%kg/km^3</span>
+H = 10;
+M = 1500; <span class="comment">%kg</span>
+Cd = 0;
+A = 20/1000^2; <span class="comment">%km</span>
+B = Cd*A/M;
+h0 = Re;
+wEarth0 = [0 0 7.292116e-5]'; <span class="comment">%rad/s</span>
+bGravGrad = 1;
+
+<span class="comment">%euler inputs</span>
+triad1 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+triad2 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+A0 = getDCM(triad1, triad2); <span class="comment">%initial DCM</span>
+I_principle = S_top.tauCM_P; <span class="comment">%principle moment of inertia tensor</span>
+t_total = 500;
+
+wz = n0; <span class="comment">%mean motion</span>
+w0 = [0 0 wz]';
+M0 = [0 0 0]';
+options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
+sim(<span class="string">'sixDOF_SIM'</span>,[],options);
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+<span class="comment">%plotting</span>
+figure;plot(tout, Moments)
+xlabel(<span class="string">'time (s)'</span>);ylabel(<span class="string">'External Moments (kN*km)'</span>)
+figure;plot(tout, XYZ)
+xlabel(<span class="string">'time (s)'</span>);ylabel(<span class="string">'Location principle axes (km)'</span>)
+fprintf(<span class="string">'As shown, the moments are zero while in line with RTN frame\n'</span>)
+fprintf(<span class="string">'Because of this, the principle frame stays in line with RTN frame\n'</span>)
+
+<span class="comment">% PS 4.6 - numerically integrate w/grav gradient arbitrary IC's</span>
+<span class="comment">%orbital elements</span>
+mu = 3.986e14 / 1000^3;
+a0 = 6776; <span class="comment">%km</span>
+n0 = sqrt(mu/a0^3); <span class="comment">%in rad/s</span>
+e0 = 0.0004758;
+incl0 = 51.6397; <span class="comment">%all angles in degrees</span>
+OMEGA0 = 106.0758;
+omega0 = 233.6745;
+nu0 = 0;
+<span class="comment">%perturbations</span>
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; <span class="comment">%kg/km^3</span>
+H = 10;
+M = 1500; <span class="comment">%kg</span>
+Cd = 0;
+A = 20/1000^2; <span class="comment">%km</span>
+B = Cd*A/M;
+h0 = Re;
+wEarth0 = [0 0 7.292116e-5]'; <span class="comment">%rad/s</span>
+bGravGrad = 1;
+
+<span class="comment">%euler inputs</span>
+triad1 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+triad2 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+A0 = getDCM(triad1, triad2); <span class="comment">%initial DCM</span>
+I_principle = S_top.tauCM_P; <span class="comment">%principle moment of inertia tensor</span>
+t_total = 2*90*60;
+
+wz = n0; <span class="comment">%mean motion</span>
+w0 = n0*rand(3,1);
+M0 = [0 0 0]';
+options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
+sim(<span class="string">'sixDOF_SIM'</span>,[],options);
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+[yaw, pitch, roll] = dcm2angle( A_DCM ); <span class="comment">%expressed in inertial</span>
+<span class="comment">% plot external torques w.r.t. time</span>
+figure;plot(tout, Moments); title(<span class="string">'PS 4.6) External Moments over time'</span>)
+xlabel(<span class="string">'time (s)'</span>);ylabel(<span class="string">'External Moments (kN*km)'</span>)
+<span class="comment">%without grav gradient:</span>
+bGravGrad = 0;
+sim(<span class="string">'sixDOF_SIM'</span>,[],options);
+[yaw1, pitch1, roll1] = dcm2angle( A_DCM ); <span class="comment">%expressed in inertial</span>
+dy = yaw-yaw1;
+dp = pitch-pitch1;
+dr = roll-roll1;
+<span class="comment">% plot attitude (euler angles)</span>
+figure;hold <span class="string">on</span>
+subplot(2,1,1);plot(tout,[yaw,pitch,roll]); title(<span class="string">'With grav gradient'</span>)
+legend(<span class="string">'yaw'</span>,<span class="string">'pitch'</span>,<span class="string">'roll'</span>)
+xlabel(<span class="string">'time (s)'</span>);ylabel(<span class="string">'Euler Angles (rad)'</span>)
+subplot(2,1,2);plot(tout,[yaw1,pitch1,roll1]); title(<span class="string">'Without grav gradient'</span>)
+legend(<span class="string">'yaw'</span>,<span class="string">'pitch'</span>,<span class="string">'roll'</span>)
+xlabel(<span class="string">'time (s)'</span>);ylabel(<span class="string">'Euler Angles (rad)'</span>)
+<span class="comment">% subplot(3,1,3);plot(tout,[dy,dp,dr]); title('Difference')</span>
+<span class="comment">% legend('yaw','pitch','roll')</span>
+<span class="comment">% xlabel('time (s)');ylabel('Euler Angles (rad)')</span>
+
+<span class="comment">% comment on results</span>
+fprintf(<span class="string">'The gravity gradient produces moments which act on the spacecraft\n'</span>)
+fprintf(<span class="string">'and affect the euler angles, as shown in the plot comparing angles\n'</span>)
+fprintf(<span class="string">'with and without the gravity gradient applied.\n'</span>)
+
+<span class="comment">% PS 4.7 - calc Ki, plot regions of stability</span>
+I=I_principle;
+kn = (I(2,2)-I(1,1))/I(3,3);
+kt = (I(3,3)-I(1,1))/I(2,2);
+kr = (I(3,3)-I(2,2))/I(1,1);
+fprintf(<span class="string">'kn: %.2E\n'</span>,kn)
+fprintf(<span class="string">'kt: %.2E\n'</span>,kt)
+fprintf(<span class="string">'kr: %.2E\n'</span>,kr)
+kt2=linspace(-1,1);
+kr2=linspace(1,-1);
+pitch = repmat(kt2, [100,1])&gt;repmat(kr2', [1,100]);
+roll_yaw = (kr2'*kt2 &gt; 0) &amp; ((1+3*repmat(kt2,[100,1])+kr2'*kt2) &gt; (4*sqrt(kr2'*kt2)));
+figure;mesh(kt2,kt2,flipud(double(~pitch)));hold <span class="string">on</span>
+LI1 = ~roll_yaw &amp; ~pitch;
+LI2 = ~roll_yaw &amp; pitch;
+mesh(kt2,kt2,flipud(double(LI1)*2))
+mesh(kt2,kt2,flipud(double(LI2)*3))
+view(2)
+xlabel(<span class="string">'k_r'</span>);ylabel(<span class="string">'k_t'</span>)
+plot3(kr,kt,10,<span class="string">'r*'</span>,<span class="string">'linewidth'</span>,5)
+<span class="comment">%legend</span>
+h = zeros(4, 1);
+h(1) = plot(NaN,NaN,<span class="string">'*g'</span>);
+h(2) = plot(NaN,NaN,<span class="string">'*b'</span>);
+h(3) = plot(NaN,NaN,<span class="string">'*y'</span>);
+h(4) = plot(NaN,NaN,<span class="string">'*'</span>,<span class="string">'color'</span>,[0.5 0 0.5]);
+h(5) = plot(NaN,NaN,<span class="string">'*r'</span>);
+legend(h, <span class="string">'unstable rpy'</span>,<span class="string">'unstable ry'</span>,<span class="string">'unstable p'</span>,<span class="string">'stable'</span>,<span class="string">'Intl space station'</span>);
+
+<span class="comment">% PS 4.8 - comment on expected stability, reproduce stable/unstable motion</span>
+fprintf(<span class="string">'It is expected that both roll and yaw will be unstable, but pitch will be OK\n'</span>);
+fprintf(<span class="string">'This is confirmed by the rpy plot from section 4.6 where pitch is marginally stable\n'</span>);
+fprintf(<span class="string">'But roll &amp; yaw are completely unstable'</span>)
+<span class="comment">%orbital elements</span>
+mu = 3.986e14 / 1000^3;
+a0 = 6776; <span class="comment">%km</span>
+n0 = sqrt(mu/a0^3); <span class="comment">%in rad/s</span>
+e0 = 0.0004758;
+incl0 = 0; <span class="comment">%all angles in degrees</span>
+OMEGA0 = 0;
+omega0 = 0;
+nu0 = 0;
+<span class="comment">%perturbations</span>
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; <span class="comment">%kg/km^3</span>
+H = 10;
+M = 1500; <span class="comment">%kg</span>
+Cd = 0;
+A = 20/1000^2; <span class="comment">%km</span>
+B = Cd*A/M;
+h0 = Re;
+wEarth0 = [0 0 7.292116e-5]'; <span class="comment">%rad/s</span>
+bGravGrad = 1;
+
+<span class="comment">%euler inputs</span>
+triad1 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+triad2 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+A0 = getDCM(triad1, triad2); <span class="comment">%initial DCM</span>
+I_principle = S_top.tauCM_P; <span class="comment">%principle moment of inertia tensor</span>
+t_total = 5*90*60;
+
+wz = n0; <span class="comment">%mean motion</span>
+w0 = [0 0 n0]';
+M0 = [0 0 0]';
+options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
+sim(<span class="string">'sixDOF_SIM'</span>,[],options);
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+[yaw, pitch, roll] = dcm2angle( A_DCM ); <span class="comment">%expressed in inertial</span>
+figure;hold <span class="string">on</span>
+subplot(2,1,1);plot(tout,[yaw,pitch,roll]); title(<span class="string">'PS 4.8) No perturb'</span>)
+legend(<span class="string">'yaw'</span>,<span class="string">'pitch'</span>,<span class="string">'roll'</span>)
+w0 = w0 + 0.0007*[1 1 1]';
+sim(<span class="string">'sixDOF_SIM'</span>,[],options);
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+[yaw, pitch, roll] = dcm2angle( A_DCM ); <span class="comment">%expressed in inertial</span>
+subplot(2,1,2);plot(tout,[yaw,pitch,roll]); title(<span class="string">'PS 4.8) perturbed'</span>)
+<span class="comment">%</span>
+fprintf(<span class="string">'As shown, after perturbing the satellite, the roll becomes unstable.\n'</span>)
+<span class="comment">% PS 4.9</span>
+fprintf(<span class="string">'No, change in mass distr not necessary because the instability is\n'</span>)
+fprintf(<span class="string">'very slow. There is plenty of time for small active control to stabilize.\n'</span>)
+</pre><pre class="codeoutput">Rotation about min &amp; max principle axes is asymptotically stable, 
+while rotation about the middle axis is unstable 
+Warning: Imaginary parts of complex X and/or Y
+arguments ignored 
+Now rotation about all directions 
+is stable due to momentum wheel stabilization
+Should be zero torques: 0.00E+00
+Should be zero torques: -0.00E+00
+Should be zero torques: 0.00E+00
+Should be zero torques: 9.42E-07
+Should be zero torques: -9.09E-06
+Should be zero torques: 2.18E-06
+As shown, the moments are zero while in line with RTN frame
+Because of this, the principle frame stays in line with RTN frame
+The gravity gradient produces moments which act on the spacecraft
+and affect the euler angles, as shown in the plot comparing angles
+with and without the gravity gradient applied.
+kn: 5.02E-01
+kt: 5.95E-01
+kr: 1.32E-01
+It is expected that both roll and yaw will be unstable, but pitch will be OK
+This is confirmed by the rpy plot from section 4.6 where pitch is marginally stable
+But roll &amp; yaw are completely unstableAs shown, after perturbing the satellite, the roll becomes unstable.
+No, change in mass distr not necessary because the instability is
+very slow. There is plenty of time for small active control to stabilize.
+</pre><img vspace="5" hspace="5" src="PS4_01.png" alt=""> <img vspace="5" hspace="5" src="PS4_02.png" alt=""> <img vspace="5" hspace="5" src="PS4_03.png" alt=""> <img vspace="5" hspace="5" src="PS4_04.png" alt=""> <img vspace="5" hspace="5" src="PS4_05.png" alt=""> <img vspace="5" hspace="5" src="PS4_06.png" alt=""> <img vspace="5" hspace="5" src="PS4_07.png" alt=""> <img vspace="5" hspace="5" src="PS4_08.png" alt=""> <img vspace="5" hspace="5" src="PS4_09.png" alt=""> <img vspace="5" hspace="5" src="PS4_10.png" alt=""> <img vspace="5" hspace="5" src="PS4_11.png" alt=""> <img vspace="5" hspace="5" src="PS4_12.png" alt=""> <img vspace="5" hspace="5" src="PS4_13.png" alt=""> <img vspace="5" hspace="5" src="PS4_14.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH PS4 REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+
+% PS 4.1a Single-spin satellite
+%config 1
+close all
+w0=[0 0 0]';
+M0 = w0;
+perturb = .01*rand([3,1]);
+triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+A0 = getDCM(triad1, triad2); %initial DCM
+I_principle = S_top.tauCM_P; %principle moment of inertia tensor
+t_total = 200;
+for i=1:3
+  w0(i) = 0.2;
+  w0 = w0 + perturb;
+  options = simset('SrcWorkspace','current');
+  sim('eulerSIM',[],options);
+  figure; plot(tout, ang_vel); 
+  title(['4.1a) Non-zero axis: ' num2str(i) '. Ang Vel over time'])
+  legend('wx','wy','wz')
+  xlabel('time (s)'); ylabel('ang vel (rad/s)')
+  %transform to euler angles
+  [yaw, pitch, roll] = dcm2angle( A_DCM ); %expressed in inertial
+  figure; plot(tout, [yaw, pitch, roll]); 
+  title(['4.1a) Non-zero axis: ' num2str(i) '. Euler angles over time'])
+  legend('Yaw','Pitch','Roll')
+  xlabel('time (s)'); ylabel('Angle (rad)')
+  
+  w0 = [0 0 0]';  
+end
+fprintf('Rotation about min & max principle axes is asymptotically stable, \nwhile rotation about the middle axis is unstable \n')
+
+% PS 4.2a momentum wheel (dual-spin)
+w0=[0 0 0]';
+M0 = w0;
+perturb = .01*rand([3,1]);
+triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+A0 = getDCM(triad1, triad2); %initial DCM
+I_principle = S_top.tauCM_P; %principle moment of inertia tensor
+t_total = 200;
+%momentum wheel
+r_hat = [0 0 0]';
+Ir = 1e7;
+Mr0 = 0;
+wr0 = 0.1; %rad/s
+wdotr0 = 0;
+%if Ir*wr0 > 0.2*(I_principle(
+for i=2
+  w0(i) = 0.2;
+  r_hat(i) = 1; %spin mom wheel about spin axis for equilibrium state
+  w0 = w0 + perturb;
+  options = simset('SrcWorkspace','current');
+  sim('eulerSIM_momWheel',[],options);
+  % PS4.2b verify integration using previous tests (taken from PS2)
+  %PS2_SCRIPT
+  % PS4.2c equilibrium & stability analysis
+  figure; plot(tout, ang_vel); 
+  title(['4.2c) Non-zero axis: ' num2str(i) '. Ang Vel over time'])
+  legend('wx','wy','wz')
+  xlabel('time (s)'); ylabel('ang vel (rad/s)')
+  %transform to euler angles
+  [yaw, pitch, roll] = dcm2angle( A_DCM ); %expressed in inertial
+  figure; plot(tout, [yaw, pitch, roll]); 
+  title(['4.2c) Non-zero axis: ' num2str(i) '. Euler angles over time'])
+  legend('Yaw','Pitch','Roll')
+  xlabel('time (s)'); ylabel('Angle (rad)')
+  
+  
+  w0 = [0 0 0]';  
+  r_hat = [0 0 0]';
+end
+fprintf('Now rotation about all directions \nis stable due to momentum wheel stabilization\n')
+
+mu = 3.986e14 / 1000^3;
+% PS 4.3 - gravity gradient - gravGradient.m
+% PS 4.4 - magnitude of modelled torque consistent
+[ M ] = gravGradient( mu, S_top.tauCM_P, 6776, 0, 0, 1 );
+fprintf('Should be zero torques: %.2E\n',M)
+[ M ] = gravGradient( mu, S_top.tauCM_P, 6776, 0.25, 0.25, 0.93541 );
+fprintf('Should be zero torques: %.2E\n',M)
+% PS 4.5 - numerically integrate w/grav gradient in RTN
+%orbital elements
+mu = 3.986e14 / 1000^3;
+a0 = 6776; %km
+n0 = sqrt(mu/a0^3);
+e0 = 0.0004758;
+incl0 = 0; %all angles in degrees
+OMEGA0 = 0;
+omega0 = 0;
+nu0 = 0;
+%perturbations
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; %kg/km^3
+H = 10;
+M = 1500; %kg
+Cd = 0;
+A = 20/1000^2; %km
+B = Cd*A/M;
+h0 = Re;
+wEarth0 = [0 0 7.292116e-5]'; %rad/s
+bGravGrad = 1;
+
+%euler inputs
+triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+A0 = getDCM(triad1, triad2); %initial DCM
+I_principle = S_top.tauCM_P; %principle moment of inertia tensor
+t_total = 500;
+
+wz = n0; %mean motion
+w0 = [0 0 wz]';
+M0 = [0 0 0]';
+options = simset('SrcWorkspace','current');
+sim('sixDOF_SIM',[],options);
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+%plotting
+figure;plot(tout, Moments)
+xlabel('time (s)');ylabel('External Moments (kN*km)')
+figure;plot(tout, XYZ)
+xlabel('time (s)');ylabel('Location principle axes (km)')
+fprintf('As shown, the moments are zero while in line with RTN frame\n')
+fprintf('Because of this, the principle frame stays in line with RTN frame\n')
+
+% PS 4.6 - numerically integrate w/grav gradient arbitrary IC's
+%orbital elements
+mu = 3.986e14 / 1000^3;
+a0 = 6776; %km
+n0 = sqrt(mu/a0^3); %in rad/s
+e0 = 0.0004758;
+incl0 = 51.6397; %all angles in degrees
+OMEGA0 = 106.0758;
+omega0 = 233.6745;
+nu0 = 0;
+%perturbations
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; %kg/km^3
+H = 10;
+M = 1500; %kg
+Cd = 0;
+A = 20/1000^2; %km
+B = Cd*A/M;
+h0 = Re;
+wEarth0 = [0 0 7.292116e-5]'; %rad/s
+bGravGrad = 1;
+
+%euler inputs
+triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+A0 = getDCM(triad1, triad2); %initial DCM
+I_principle = S_top.tauCM_P; %principle moment of inertia tensor
+t_total = 2*90*60;
+
+wz = n0; %mean motion
+w0 = n0*rand(3,1);
+M0 = [0 0 0]';
+options = simset('SrcWorkspace','current');
+sim('sixDOF_SIM',[],options);
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+[yaw, pitch, roll] = dcm2angle( A_DCM ); %expressed in inertial
+% plot external torques w.r.t. time
+figure;plot(tout, Moments); title('PS 4.6) External Moments over time')
+xlabel('time (s)');ylabel('External Moments (kN*km)')
+%without grav gradient:
+bGravGrad = 0;
+sim('sixDOF_SIM',[],options);
+[yaw1, pitch1, roll1] = dcm2angle( A_DCM ); %expressed in inertial
+dy = yaw-yaw1;
+dp = pitch-pitch1;
+dr = roll-roll1;
+% plot attitude (euler angles)
+figure;hold on
+subplot(2,1,1);plot(tout,[yaw,pitch,roll]); title('With grav gradient')
+legend('yaw','pitch','roll')
+xlabel('time (s)');ylabel('Euler Angles (rad)')
+subplot(2,1,2);plot(tout,[yaw1,pitch1,roll1]); title('Without grav gradient')
+legend('yaw','pitch','roll')
+xlabel('time (s)');ylabel('Euler Angles (rad)')
+% subplot(3,1,3);plot(tout,[dy,dp,dr]); title('Difference')
+% legend('yaw','pitch','roll')
+% xlabel('time (s)');ylabel('Euler Angles (rad)')
+
+% comment on results
+fprintf('The gravity gradient produces moments which act on the spacecraft\n')
+fprintf('and affect the euler angles, as shown in the plot comparing angles\n')
+fprintf('with and without the gravity gradient applied.\n')
+
+% PS 4.7 - calc Ki, plot regions of stability
+I=I_principle;
+kn = (I(2,2)-I(1,1))/I(3,3);
+kt = (I(3,3)-I(1,1))/I(2,2);
+kr = (I(3,3)-I(2,2))/I(1,1);
+fprintf('kn: %.2E\n',kn)
+fprintf('kt: %.2E\n',kt)
+fprintf('kr: %.2E\n',kr)
+kt2=linspace(-1,1);
+kr2=linspace(1,-1);
+pitch = repmat(kt2, [100,1])>repmat(kr2', [1,100]);
+roll_yaw = (kr2'*kt2 > 0) & ((1+3*repmat(kt2,[100,1])+kr2'*kt2) > (4*sqrt(kr2'*kt2)));
+figure;mesh(kt2,kt2,flipud(double(~pitch)));hold on
+LI1 = ~roll_yaw & ~pitch;
+LI2 = ~roll_yaw & pitch;
+mesh(kt2,kt2,flipud(double(LI1)*2))
+mesh(kt2,kt2,flipud(double(LI2)*3))
+view(2)
+xlabel('k_r');ylabel('k_t')
+plot3(kr,kt,10,'r*','linewidth',5)
+%legend
+h = zeros(4, 1);
+h(1) = plot(NaN,NaN,'*g');
+h(2) = plot(NaN,NaN,'*b');
+h(3) = plot(NaN,NaN,'*y');
+h(4) = plot(NaN,NaN,'*','color',[0.5 0 0.5]);
+h(5) = plot(NaN,NaN,'*r');
+legend(h, 'unstable rpy','unstable ry','unstable p','stable','Intl space station');
+
+% PS 4.8 - comment on expected stability, reproduce stable/unstable motion
+fprintf('It is expected that both roll and yaw will be unstable, but pitch will be OK\n');
+fprintf('This is confirmed by the rpy plot from section 4.6 where pitch is marginally stable\n');
+fprintf('But roll & yaw are completely unstable')
+%orbital elements
+mu = 3.986e14 / 1000^3;
+a0 = 6776; %km
+n0 = sqrt(mu/a0^3); %in rad/s
+e0 = 0.0004758;
+incl0 = 0; %all angles in degrees
+OMEGA0 = 0;
+omega0 = 0;
+nu0 = 0;
+%perturbations
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; %kg/km^3
+H = 10;
+M = 1500; %kg
+Cd = 0;
+A = 20/1000^2; %km
+B = Cd*A/M;
+h0 = Re;
+wEarth0 = [0 0 7.292116e-5]'; %rad/s
+bGravGrad = 1;
+
+%euler inputs
+triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+A0 = getDCM(triad1, triad2); %initial DCM
+I_principle = S_top.tauCM_P; %principle moment of inertia tensor
+t_total = 5*90*60;
+
+wz = n0; %mean motion
+w0 = [0 0 n0]';
+M0 = [0 0 0]';
+options = simset('SrcWorkspace','current');
+sim('sixDOF_SIM',[],options);
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+[yaw, pitch, roll] = dcm2angle( A_DCM ); %expressed in inertial
+figure;hold on
+subplot(2,1,1);plot(tout,[yaw,pitch,roll]); title('PS 4.8) No perturb')
+legend('yaw','pitch','roll')
+w0 = w0 + 0.0007*[1 1 1]';
+sim('sixDOF_SIM',[],options);
+[ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+[yaw, pitch, roll] = dcm2angle( A_DCM ); %expressed in inertial
+subplot(2,1,2);plot(tout,[yaw,pitch,roll]); title('PS 4.8) perturbed')
+%
+fprintf('As shown, after perturbing the satellite, the roll becomes unstable.\n')
+% PS 4.9
+fprintf('No, change in mass distr not necessary because the instability is\n')
+fprintf('very slow. There is plenty of time for small active control to stabilize.\n')
+##### SOURCE END #####
+--></body></html>
