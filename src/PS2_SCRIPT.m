@@ -17,10 +17,10 @@ zr = sqrt(2*T_rot(1) / I_principle(3,3));
 [xe, ye, ze] = ellipsoid(0,0,0,xr,yr,zr);
 
 % plotting
-figure; plot(tout, ang_vel); title('Ang. Vel.')
+figure; plot(tout, ang_vel); title('Anguler Velocity of Simulation');ylabel('ang. vel. (rad/s');xlabel('time (s)')
 legend('wx','wy','wz')
-figure; plot(tout, T_rot); title('Rotational Energy')
-figure; surf(xm, ym, zm); axis equal; title('Mom. Ellipsoid')
+figure; plot(tout, T_rot); title('Rotational Energy');ylabel('Energy (MJ');xlabel('time (s)')
+figure; surf(xm, ym, zm); axis equal; title('Mom. Ellipsoid and Polhode')
 hold on; surf(xe, ye, ze);
 % PS 2.4 - 3d plot of polhode
 plot3(ang_vel(:,1), ang_vel(:,2), ang_vel(:,3),'linewidth',5)

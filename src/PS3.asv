@@ -1,0 +1,104 @@
+%%
+% ------------------------ PS3 ------------------------
+close all
+I_principle = S_top.tauCM_P; %principle moment of inertia tensor
+M0 = [0 0 0]';
+w0 = 10/180*pi*rand([3,1]); %generate initial ang vel
+x_hat = rand([3,1]); x_hat = x_hat / norm(x_hat);
+angle = rand*2*pi; %random y_hat direction
+
+% z_hat = cross(x_hat, y_hat);
+% triad1 = [x_hat, y_hat, z_hat];
+triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+A0 = getDCM(triad1, triad2); %initial DCM
+q0 = DCM2Quat_3rdTry(A0);
+t_total = 1000;
+options = simset('SrcWorkspace','current');
+sim('eulerSIM',[],options);
+
+figure;plot(tout, reshape(permute(A_DCM, [3,1,2]),[],9));title('DCM Inertial 2 Principle')
+
+figure;plot(tout, quat);title('Quaternion Intertial 2 Principle')
+
+%plotting
+% PS 3.4
+L_xyz = I_principle * ang_vel'; %in body axes
+L_123 = zeros(size(L_xyz));
+w_123 = L_123;
+% figure; hold on; grid on
+for i=1:size(tout,1)
+  L_123(:,i) = getP2IfromA_DCM(A_DCM(:,:,i)) * L_xyz(:,i); %3xn
+  w_123(:,i) = getP2IfromA_DCM(A_DCM(:,:,i)) * ang_vel(i,:)'; %3xn
+end
+% view(3)
+figure; plot3(L_123(1,:), L_123(2,:), L_123(3,:)); grid on; axis equal
+title('Ang. Mom. over time (no effective change)')
+
+figure; plot3(w_123(1,:), w_123(2,:), w_123(3,:)); grid on; axis equal
+title('Ang. Vel. herpolhode')
+
+
+L_mag = sqrt(L_123(1,:).^2 + L_123(2,:).^2 + L_123(3,:).^2);
+L_hat = L_123 ./ repmat(L_mag, [3,1]);
+w_mag = sqrt(w_123(1,:).^2 + w_123(2,:).^2 + w_123(3,:).^2);
+w_hat = w_123 ./ repmat(w_mag, [3,1]);
+
+figure; plot3(w_hat(1,:), w_hat(2,:), w_hat(3,:)); grid on; axis equal
+hold on
+for i=1:size(tout,1)
+  plot3([0 L_hat(1,i)], [0 L_hat(2,i)], [0 L_hat(3,i)]) %ang mom
+end
+view(3)
+title('Normalized herpolhode with ang. mom. vector')
+
+% PS 3.4c
+DCM_B2P = S_top.DCM_P2B';
+f1 = figure; hold on
+f2 = figure; hold on
+for i=1:size(tout,1)
+  %clf(f1)
+  plotTriad(f1, A_DCM(:,:,i)'); %A_DCM is inertial 2 principle
+  DCM_I2B = getInertial2BodyDCM( getP2IfromA_DCM(A_DCM(:,:,i)), DCM_B2P );
+  plotTriad(f2, DCM_I2B' );
+  %plotSC(f1, S_top);
+  %drawnow
+end
+figure(f1);view(3); grid on; axis equal; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
+title('Inertial 2 Principle DCM over time')
+figure(f2);view(3); grid on; axis equal; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
+title('Inertial 2 Body DCM over time')
+
+% PS 3.5a
+w0 = [0; 0; 10/180*pi*rand()];
+triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+A0 = getDCM(triad1, triad2); %initial DCM
+q0 = DCM2Quat_3rdTry(A0);
+t_total = 2*pi / w0(3);
+options = simset('SrcWorkspace','current');
+sim('eulerSIM',[],options);
+
+%plot velocities and angles
+figure; plot(tout, ang_vel); title('3.5a) Ang Vel over time')
+legend('wx','wy','wz'); xlabel('time (s)'); ylabel('w (rad/s)')
+%angles
+f1 = figure; grid on
+for i=1:size(tout,1)
+  plotTriad(f1, A_DCM(:,:,i)); %A_DCM is inertial to principle
+end
+view(3); grid on; axis equal; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
+legend('x-dir','y-dir','z-dir')
+title('3.5a) Principle axes over time. Pure rotation about body-z')
+
+% PS 3.5b
+
+
+
+
+
+
+
+
+
+

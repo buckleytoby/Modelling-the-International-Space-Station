@@ -1,7 +1,7 @@
 %the main wrapper
 %% setup
 clear;clc; close all
-cd('./aa279c/aa279c_github/src')
+% cd('./aa279c/aa279c_github/src')
 addpath('./library')
 % ISS length: 72.8m width: 108.5m height: 20m
 

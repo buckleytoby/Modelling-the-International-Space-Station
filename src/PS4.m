@@ -43,22 +43,20 @@ I_principle = S_top.tauCM_P; %principle moment of inertia tensor
 t_total = 200;
 %momentum wheel
 r_hat = [0 0 0]';
-Ir = 1e7;
+Ir = 1e7 / 1000^2;
 Mr0 = 0;
 wr0 = 0.1; %rad/s
 wdotr0 = 0;
 %if Ir*wr0 > 0.2*(I_principle(
-for i=2
+for i=1:3
   w0(i) = 0.2;
   r_hat(i) = 1; %spin mom wheel about spin axis for equilibrium state
   w0 = w0 + perturb;
   options = simset('SrcWorkspace','current');
   sim('eulerSIM_momWheel',[],options);
-  % PS4.2b verify integration using previous tests (taken from PS2)
-  %PS2_SCRIPT
   % PS4.2c equilibrium & stability analysis
   figure; plot(tout, ang_vel); 
-  title(['4.2c) Non-zero axis: ' num2str(i) '. Ang Vel over time'])
+  title(['4.2c) Non-zero axis: ' num2str(i) '. Ang Vel over time with Momentum Wheel'])
   legend('wx','wy','wz')
   xlabel('time (s)'); ylabel('ang vel (rad/s)')
   %transform to euler angles
@@ -72,6 +70,8 @@ for i=2
   w0 = [0 0 0]';  
   r_hat = [0 0 0]';
 end
+% PS4.2b verify integration using previous tests (taken from PS2)
+PS2_SCRIPT
 fprintf('Now rotation about all directions \nis stable due to momentum wheel stabilization\n')
 
 mu = 3.986e14 / 1000^3;
@@ -118,10 +118,11 @@ options = simset('SrcWorkspace','current');
 sim('sixDOF_SIM',[],options);
 [ XYZ ] = getXYZpostprocess( A_DCM, Xout );
 %plotting
-figure;plot(tout, Moments)
+figure;plot(tout, Moments);title('PS 4.5) Moments when aligned with RTN frame')
 xlabel('time (s)');ylabel('External Moments (kN*km)')
-figure;plot(tout, XYZ)
-xlabel('time (s)');ylabel('Location principle axes (km)')
+xlabel('time (s)')
+figure;plot(tout, XYZ);title('Location in principle axes - in line with RTN')
+xlabel('time (s)');ylabel('Location (km)')
 fprintf('As shown, the moments are zero while in line with RTN frame\n')
 fprintf('Because of this, the principle frame stays in line with RTN frame\n')
 

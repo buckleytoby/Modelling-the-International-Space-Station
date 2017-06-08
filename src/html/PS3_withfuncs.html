@@ -1,0 +1,722 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PS3</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="PS3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+<h2>Called Functions</h2><ul><li><a href="#DCM2Quat_3rdTry">DCM2Quat_3rdTry </a></li><li><a href="#getDCM">getDCM </a></li><li><a href="#getInertial2BodyDCM">getInertial2BodyDCM </a></li><li><a href="#getP2IfromA_DCM">getP2IfromA_DCM </a></li><li><a href="#plotTriad">plotTriad </a></li></ul>
+I_principle = S_top.tauCM_P; <span class="comment">%principle moment of inertia tensor</span>
+M0 = [0 0 0]';
+w0 = 10/180*pi*rand([3,1]); <span class="comment">%generate initial ang vel</span>
+x_hat = rand([3,1]); x_hat = x_hat / norm(x_hat);
+angle = rand*2*pi; <span class="comment">%random y_hat direction</span>
+
+<span class="comment">% z_hat = cross(x_hat, y_hat);</span>
+<span class="comment">% triad1 = [x_hat, y_hat, z_hat];</span>
+triad1 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+triad2 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+A0 = getDCM(triad1, triad2); <span class="comment">%initial DCM</span>
+q0 = DCM2Quat_3rdTry(A0);
+t_total = 1000;
+options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
+sim(<span class="string">'eulerSIM'</span>,[],options);
+
+<span class="comment">%plotting</span>
+<span class="comment">% PS 3.4</span>
+L_xyz = I_principle * ang_vel'; <span class="comment">%in body axes</span>
+L_123 = zeros(size(L_xyz));
+w_123 = L_123;
+<span class="comment">% figure; hold on; grid on</span>
+<span class="keyword">for</span> i=1:size(tout,1)
+  L_123(:,i) = getP2IfromA_DCM(A_DCM(:,:,i)) * L_xyz(:,i); <span class="comment">%3xn</span>
+  w_123(:,i) = getP2IfromA_DCM(A_DCM(:,:,i)) * ang_vel(i,:)'; <span class="comment">%3xn</span>
+<span class="keyword">end</span>
+<span class="comment">% view(3)</span>
+figure; plot3(L_123(1,:), L_123(2,:), L_123(3,:)); grid <span class="string">on</span>; axis <span class="string">equal</span>
+title(<span class="string">'Ang. Mom. over time (no effective change)'</span>)
+
+figure; plot3(w_123(1,:), w_123(2,:), w_123(3,:)); grid <span class="string">on</span>; axis <span class="string">equal</span>
+title(<span class="string">'Ang. Vel. herpolhode'</span>)
+
+
+L_mag = sqrt(L_123(1,:).^2 + L_123(2,:).^2 + L_123(3,:).^2);
+L_hat = L_123 ./ repmat(L_mag, [3,1]);
+w_mag = sqrt(w_123(1,:).^2 + w_123(2,:).^2 + w_123(3,:).^2);
+w_hat = w_123 ./ repmat(w_mag, [3,1]);
+
+figure; plot3(w_hat(1,:), w_hat(2,:), w_hat(3,:)); grid <span class="string">on</span>; axis <span class="string">equal</span>
+hold <span class="string">on</span>
+<span class="keyword">for</span> i=1:size(tout,1)
+  plot3([0 L_hat(1,i)], [0 L_hat(2,i)], [0 L_hat(3,i)]) <span class="comment">%ang mom</span>
+<span class="keyword">end</span>
+view(3)
+title(<span class="string">'Normalized herpolhode with ang. mom. vector'</span>)
+
+<span class="comment">% PS 3.4c</span>
+DCM_B2P = S_top.DCM_P2B';
+f1 = figure; hold <span class="string">on</span>
+f2 = figure; hold <span class="string">on</span>
+<span class="keyword">for</span> i=1:size(tout,1)
+  <span class="comment">%clf(f1)</span>
+  plotTriad(f1, A_DCM(:,:,i)'); <span class="comment">%A_DCM is inertial 2 principle</span>
+  DCM_I2B = getInertial2BodyDCM( getP2IfromA_DCM(A_DCM(:,:,i)), DCM_B2P );
+  plotTriad(f2, DCM_I2B' );
+  <span class="comment">%plotSC(f1, S_top);</span>
+  <span class="comment">%drawnow</span>
+<span class="keyword">end</span>
+figure(f1);view(3); grid <span class="string">on</span>; axis <span class="string">equal</span>; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
+title(<span class="string">'Inertial 2 Principle DCM over time'</span>)
+figure(f2);view(3); grid <span class="string">on</span>; axis <span class="string">equal</span>; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
+title(<span class="string">'Inertial 2 Body DCM over time'</span>)
+
+<span class="comment">% PS 3.5a</span>
+w0 = [0; 0; 10/180*pi*rand()];
+triad1 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+triad2 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%principle axes</span>
+A0 = getDCM(triad1, triad2); <span class="comment">%initial DCM</span>
+q0 = DCM2Quat_3rdTry(A0);
+t_total = 2*pi / w0(3);
+options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
+sim(<span class="string">'eulerSIM'</span>,[],options);
+
+<span class="comment">%plot velocities and angles</span>
+figure; plot(tout, ang_vel); title(<span class="string">'3.5a) Ang Vel over time'</span>)
+legend(<span class="string">'wx'</span>,<span class="string">'wy'</span>,<span class="string">'wz'</span>); xlabel(<span class="string">'time (s)'</span>); ylabel(<span class="string">'w (rad/s)'</span>)
+<span class="comment">%angles</span>
+f1 = figure; grid <span class="string">on</span>
+<span class="keyword">for</span> i=1:size(tout,1)
+  plotTriad(f1, A_DCM(:,:,i)); <span class="comment">%A_DCM is inertial to principle</span>
+<span class="keyword">end</span>
+view(3); grid <span class="string">on</span>; axis <span class="string">equal</span>; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
+legend(<span class="string">'x-dir'</span>,<span class="string">'y-dir'</span>,<span class="string">'z-dir'</span>)
+title(<span class="string">'3.5a) Principle axes over time. Pure rotation about body-z'</span>)
+
+<span class="comment">% PS 3.5b</span>
+figure;plot(tout, reshape(permute(A_DCM, [3,1,2]),[],9));title(<span class="string">'DCM Inertial 2 Principle'</span>)
+xlabel(<span class="string">'time (s)'</span>)
+figure;plot(tout, quat);title(<span class="string">'Quaternion Intertial 2 Principle'</span>);xlabel(<span class="string">'time (s)'</span>)
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH PS3 REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+close all
+I_principle = S_top.tauCM_P; %principle moment of inertia tensor
+M0 = [0 0 0]';
+w0 = 10/180*pi*rand([3,1]); %generate initial ang vel
+x_hat = rand([3,1]); x_hat = x_hat / norm(x_hat);
+angle = rand*2*pi; %random y_hat direction
+
+% z_hat = cross(x_hat, y_hat);
+% triad1 = [x_hat, y_hat, z_hat];
+triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+A0 = getDCM(triad1, triad2); %initial DCM
+q0 = DCM2Quat_3rdTry(A0);
+t_total = 1000;
+options = simset('SrcWorkspace','current');
+sim('eulerSIM',[],options);
+
+%plotting
+% PS 3.4
+L_xyz = I_principle * ang_vel'; %in body axes
+L_123 = zeros(size(L_xyz));
+w_123 = L_123;
+% figure; hold on; grid on
+for i=1:size(tout,1)
+  L_123(:,i) = getP2IfromA_DCM(A_DCM(:,:,i)) * L_xyz(:,i); %3xn
+  w_123(:,i) = getP2IfromA_DCM(A_DCM(:,:,i)) * ang_vel(i,:)'; %3xn
+end
+% view(3)
+figure; plot3(L_123(1,:), L_123(2,:), L_123(3,:)); grid on; axis equal
+title('Ang. Mom. over time (no effective change)')
+
+figure; plot3(w_123(1,:), w_123(2,:), w_123(3,:)); grid on; axis equal
+title('Ang. Vel. herpolhode')
+
+
+L_mag = sqrt(L_123(1,:).^2 + L_123(2,:).^2 + L_123(3,:).^2);
+L_hat = L_123 ./ repmat(L_mag, [3,1]);
+w_mag = sqrt(w_123(1,:).^2 + w_123(2,:).^2 + w_123(3,:).^2);
+w_hat = w_123 ./ repmat(w_mag, [3,1]);
+
+figure; plot3(w_hat(1,:), w_hat(2,:), w_hat(3,:)); grid on; axis equal
+hold on
+for i=1:size(tout,1)
+  plot3([0 L_hat(1,i)], [0 L_hat(2,i)], [0 L_hat(3,i)]) %ang mom
+end
+view(3)
+title('Normalized herpolhode with ang. mom. vector')
+
+% PS 3.4c
+DCM_B2P = S_top.DCM_P2B';
+f1 = figure; hold on
+f2 = figure; hold on
+for i=1:size(tout,1)
+  %clf(f1)
+  plotTriad(f1, A_DCM(:,:,i)'); %A_DCM is inertial 2 principle
+  DCM_I2B = getInertial2BodyDCM( getP2IfromA_DCM(A_DCM(:,:,i)), DCM_B2P );
+  plotTriad(f2, DCM_I2B' );
+  %plotSC(f1, S_top);
+  %drawnow
+end
+figure(f1);view(3); grid on; axis equal; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
+title('Inertial 2 Principle DCM over time')
+figure(f2);view(3); grid on; axis equal; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
+title('Inertial 2 Body DCM over time')
+
+% PS 3.5a
+w0 = [0; 0; 10/180*pi*rand()];
+triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+A0 = getDCM(triad1, triad2); %initial DCM
+q0 = DCM2Quat_3rdTry(A0);
+t_total = 2*pi / w0(3);
+options = simset('SrcWorkspace','current');
+sim('eulerSIM',[],options);
+
+%plot velocities and angles
+figure; plot(tout, ang_vel); title('3.5a) Ang Vel over time')
+legend('wx','wy','wz'); xlabel('time (s)'); ylabel('w (rad/s)')
+%angles
+f1 = figure; grid on
+for i=1:size(tout,1)
+  plotTriad(f1, A_DCM(:,:,i)); %A_DCM is inertial to principle
+end
+view(3); grid on; axis equal; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
+legend('x-dir','y-dir','z-dir')
+title('3.5a) Principle axes over time. Pure rotation about body-z')
+
+% PS 3.5b
+figure;plot(tout, reshape(permute(A_DCM, [3,1,2]),[],9));title('DCM Inertial 2 Principle')
+xlabel('time (s)')
+figure;plot(tout, quat);title('Quaternion Intertial 2 Principle');xlabel('time (s)')
+
+
+
+
+
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>
+<a name="DCM2Quat_3rdTry"></a>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>DCM2Quat_3rdTry</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="DCM2Quat_3rdTry.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% Copyright (C) 2012 Nicholas K. Lincoln, Sandor M. Veres, Louise Dennis,</span>
+<span class="comment">% Michael Fisher, and Alexei Lisitsa.</span>
+<span class="comment">%</span>
+<span class="comment">% This file is part of the EASS (Engineering Autonomous Space Software)</span>
+<span class="comment">% Demonstrator Set.</span>
+<span class="comment">%</span>
+<span class="comment">% The EASS Demonstrator Set is free software: you can redistribute it</span>
+<span class="comment">% and/or modify it under the terms of the GNU Lesser General Public License</span>
+<span class="comment">% as published by the Free Software Foundation, either version 3 of the</span>
+<span class="comment">% License, or (at your option) any later version.</span>
+<span class="comment">%</span>
+<span class="comment">% The EASS Demonstrator Set is distributed in the hope that it will be</span>
+<span class="comment">% useful, but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="comment">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser</span>
+<span class="comment">% General Public License for more details.</span>
+<span class="comment">%</span>
+<span class="comment">% You should have received a copy of the GNU Lesser General Public License</span>
+<span class="comment">% along with the EASS Demonstrator Set.  If not, see</span>
+<span class="comment">% &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="keyword">function</span> Quat=DCM2Quat_3rdTry(DCM)
+<span class="comment">%Converts DCM to quaternion</span>
+
+Quat=zeros(4,1);
+d=diag(DCM);
+<span class="comment">%conditionally calculate quaternion based upon max value within DCM</span>
+<span class="comment">%diagonal (prevent numerical instability)</span>
+
+tr=trace(DCM);
+<span class="keyword">if</span> tr&gt;0,
+    Quat(4,1)=0.5*sqrt(1+tr);
+    Quat(1,1)=0.25*(DCM(2,3)-DCM(3,2))/Quat(4,1);
+    Quat(2,1)=0.25*(DCM(3,1)-DCM(1,3))/Quat(4,1);
+    Quat(3,1)=0.25*(DCM(1,2)-DCM(2,1))/Quat(4,1);
+
+<span class="keyword">elseif</span>((d(2) &gt; d(1)) &amp;&amp; (d(2) &gt; d(3)))
+<span class="comment">% max value at dcm(2,2)</span>
+    Quat(2,1)=0.5*sqrt(1+DCM(2,2)-DCM(1,1)-DCM(3,3));
+    Quat(1,1)=0.25*(DCM(1,2)+DCM(2,1))/Quat(2,1);
+    Quat(3,1)=0.25*(DCM(2,3)+DCM(3,2))/Quat(2,1);
+    Quat(4,1)=0.25*(DCM(3,1)-DCM(1,3))/Quat(2,1);
+
+<span class="keyword">elseif</span> (d(3) &gt; d(1))
+<span class="comment">% max value at dcm(3,3)</span>
+    Quat(3,1)=0.5*sqrt(1+DCM(3,3)-DCM(1,1)-DCM(2,2));
+    Quat(1,1)=0.25*(DCM(1,3)+DCM(3,1))/Quat(3,1);
+    Quat(2,1)=0.25*(DCM(2,3)+DCM(3,2))/Quat(3,1);
+    Quat(4,1)=0.25*(DCM(1,2)-DCM(2,1))/Quat(3,1);
+
+<span class="keyword">else</span>
+<span class="comment">% max value at dcm(1,1)</span>
+    Quat(1,1)=0.5*sqrt(1+DCM(1,1)-DCM(3,3)-DCM(2,2));
+    Quat(2,1)=0.25*(DCM(1,2)+DCM(2,1))/Quat(1,1);
+    Quat(3,1)=0.25*(DCM(1,3)+DCM(3,1))/Quat(1,1);
+    Quat(4,1)=0.25*(DCM(2,3)+DCM(3,2))/Quat(1,1);
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+\n
+--></body></html>
+<a name="getDCM"></a>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>getDCM</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="getDCM.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> [ A ] = getDCM( triad1, triad2 )
+<span class="comment">%GETDCM calculate direction cosine matrix between two right-handed triads</span>
+<span class="comment">%   if triad1 = principle frame &amp; triad2 = global frame, then A = DCM FROM</span>
+<span class="comment">%   global TO principle</span>
+
+<span class="comment">% triad = [ x_vector, y_vector, z_vector ], i_vector = 3x1</span>
+<span class="comment">% v_triad1 = A * v_triad2</span>
+<span class="comment">% v_triad2 = A' * v_triad1</span>
+x1 = triad1(:,1); y1 = triad1(:,2); z1 = triad1(:,3);
+x2 = triad2(:,1); y2 = triad2(:,2); z2 = triad2(:,3);
+A = [dot(x1, x2), dot(x1, y2), dot(x1, z2); <span class="keyword">...</span>
+     dot(y1, x2), dot(y1, y2), dot(y1, z2); <span class="keyword">...</span>
+     dot(z1, x2), dot(z1, y2), dot(z1, z2)];
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+\n
+--></body></html>
+<a name="getInertial2BodyDCM"></a>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>getInertial2BodyDCM</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="getInertial2BodyDCM.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> [ DCM ] = getInertial2BodyDCM( DCM_princ2inert, DCM_xyz2princ )
+<span class="comment">%GETINERTIAL2PRINCIPLEDCM Summary of this function goes here</span>
+<span class="comment">%   Detailed explanation goes here</span>
+DCM = DCM_xyz2princ' * DCM_princ2inert';
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+\n
+--></body></html>
+<a name="getP2IfromA_DCM"></a>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>getP2IfromA_DCM</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="getP2IfromA_DCM.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> A_p2i = getP2IfromA_DCM( A_DCM )
+<span class="comment">%GETP2IFROMA_DCM Summary of this function goes here</span>
+<span class="comment">%   get principle 2 inertial DCM from the A_DCM which is output by euler</span>
+<span class="comment">%   sim</span>
+A_p2i = A_DCM';
+
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+\n
+--></body></html>
+<a name="plotTriad"></a>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>plotTriad</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="plotTriad.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> [ fig ] = plotTriad( fig, triad )
+<span class="comment">%PLOTTRIAD Summary of this function goes here</span>
+<span class="comment">%   triad = [ x_hat, y_hat, z_hat], i_hat is 3x1 unit direction vector</span>
+figure(fig);hold <span class="string">on</span>
+
+colors = {<span class="string">'red'</span>,<span class="string">'green'</span>,<span class="string">'blue'</span>};
+<span class="keyword">for</span> i=1:3
+  quiver3(0,0,0, triad(1,i), triad(2,i), triad(3,i), 0, colors{i},<span class="string">'linewidth'</span>,3);
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+\n
+--></body></html>

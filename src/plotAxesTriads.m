@@ -3,7 +3,7 @@ function [ fig1 ] = plotAxesTriads( fig1, S_top, mult )
 %   Detailed explanation goes here
 
 figure(fig1);
-P = S_top.DCM_B2P;
+P = S_top.DCM_P2B;
 colors = {'red','green','blue'};
 for i=1:3
   Pi = mult.*P(:,i)';

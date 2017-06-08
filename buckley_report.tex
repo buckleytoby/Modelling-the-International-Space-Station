@@ -11,82 +11,566 @@
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{url}
+
+\usepackage[margin=1in]{geometry}
 
 \graphicspath{{./src/html/}}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+
+
+\makeatletter
+\newcommand\urlfootnote@[1]{\footnote{\url@{#1}}}
+\DeclareRobustCommand{\urlfootnote}{\hyper@normalise\urlfootnote@}
+\makeatother
+
+\linespread{1.25}
+
+
+
+
 
 \begin{document}
 
 \begin{titlepage}
 	\maketitle
+	\centering
+	\includegraphics[width=\textwidth]{ISS}
 \end{titlepage}
 
 
-testing
+
 
 
 
 % 4 thrusters - 13.3 kg-f (29.3 lbf) https://www.quora.com/How-does-the-International-Space-Station-maintain-its-orbit-and-what-propellant-does-it-use
 
 
+\section{Problem Set 1 - Mission Setup and Details.}
+\subsection{Project Overview}
+For this project the International Space Station (ISS) is modeled and explored, which orbits around the earth in low-earth-orbit (LEO). The ISS was first launched in 1998 and only fully completed in 2009. The full cost is estimated around 150 billion USD, making it the single-most expensive structure every created by man. In the nearly 20 years of operation, countless experiments have taken place onboard, dozens of astronauts have visited, and the total scientific value is immeasurable. The ISS is a tribute to humanity's ability to work together and has solidified its place in human history.
+
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8,width=\textwidth]{iss_config}
+	\caption{ISS component breakdown.}
+	\label{1:config}
+\end{figure}
+
+Fig. \ref{1:config} shows the exploded component view of the ISS. Over the course of its assembly parts were brought up by different rockets, the two most well known being the US Space Shuttle, and the Russian Soyuz. Sizing was done by referencing the ISS's wikipedia page\footnote{\url{https://en.wikipedia.org/wiki/Assembly_of_the_International_Space_Station}} as well as documents released by NASA\footnote{\url{https://www.nasa.gov/pdf/508318main_ISS_ref_guide_nov2010.pdf}}.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps1_childs}
+	\caption{Child creation code.}
+	\label{1:code1}
+\end{figure}
+
+When putting together the data structure for the vehicle, I implemented a nested parent-child system, where each component of the ISS could be defined and attached with respect to the parent center. Fig. \ref{1:code1} shows how the different main components are defined. When information was missing, educated guesses on size were used.
+
+In order to reduce complexity, only the largest components of the ISS were modeled. Structural elements such as the main truss, the pressurized cabin area, and solar panels were kept. Additionally, all body components are axis-aligned for ease of transformations and plotting.
+
+Orbit propagation is performed using the two-body problem differential equation (below). This is derived using the standard Newton's second law approach assuming that the only bodies affecting each-other are the satellite and the orbiting body (Earth).
+
+\begin{center}\includegraphics{ps1_2body}\end{center}
+
+
+The two-body problem is modeled in Matlab Simulink which serves as the core of the environment simulator. The state is output in the earth-centered-inertial (ECI) frame and fed into the rest of the model. Fig. \ref{1:orbit} shows the model, which includes J2 effects and atmospheric drag. Due to the ISS's proximity to Earth, both of these greatly affect the orbit, and within only a couple orbits its clear that the satellite begins falling to earth.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8,width=\textwidth]{ps1_orbitSim}
+	\caption{Simulink model of the orbit propagator. Drag and J2 perturbation are included.}
+	\label{1:orbit}
+\end{figure}
+
+When setting up the vehicle, the moment of inertia must be calculated for each component about a fixed point. In my code, each child automatically reports its inertia relative to the parent center, which is not necessarily the center of mass. Two transformations then take place; the first transforms the inertia relative to the true center of mass, and the second solves the principle axis eigenvalue problem. Eq. \ref{1:inertia1} \& \ref{1:eig1} show how these transformations are accomplished. For the eigenvalue problem, the eigenvalues are the principle axis inertia values, while the eigenvectors make up the unit triad which defines the rotation between the body and principle axes.
+
+\begin{gather}
+J_{ij} = I_{ij} + m(|R|^2\delta_{ij}-R_iR_j)
+\label{1:inertia1} \\ 
+(J-I*\lambda)A=0
+\label{1:eig1}
+\end{gather}
+
+Below the moment of inertia tensor for the simplified ISS is shown, in both body and principle axes with respect to the center of mass. All computations are done using km, so these values are in $kg*km^2$.
+
+
+\begin{equation}
+J_b =\left(\begin{array}{ccc} 15.63 & 0 & -0.36\\ 0 & 6.43 & 0\\ -0.36 & 0 & 16.40 \end{array}\right), J_p =
+\left(\begin{array}{ccc} 6.43 & 0 & 0\\ 0 & 15.49 & 0\\ 0 & 0 & 16.54 \end{array}\right)
+\label{1:eqJ}
+\end{equation}
+
+
+Fig. \ref{1:iss} shows the full simplified vehicle. In the middle, at the center of mass there is the unit triad which rotates any vector from body to principle axis. Because the ISS is symmetric about the XZ plane, the y-component is hidden along the main truss. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8,trim={10mm, 5mm, 13mm, 3mm},clip]{ps1_01}
+	\caption{Model of the ISS. Shown in blue, green, and red is the unit triad from body to principle.}
+	\label{1:iss}
+\end{figure}
+
+
+In order to properly model atmospheric drag and gravity gradient, it's necessary to know the location of each children surface's barycenter and normal direction. Fig. \ref{1:iss_normal} shows the full vehicle with normal directions plotted at each surface' barycenter.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.4\textwidth,trim={120mm, 20mm, 20mm, 10mm},clip]{iss_normals}
+	\caption{The surface normals for each child are shown.}
+	\label{1:iss_normal}
+\end{figure}
+
+
+
+The orbit propagation is demonstrated in Fig. \ref{1:orbit2}. Due to the proximity to Earth, the ISS travels at 4.76 miles/s and completes a single orbit in just around 90 minutes.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8,trim={10mm, 0mm, 1mm, 0mm},clip]{ps1_02}
+	\caption{Orbit propagation of ISS in LEO.}
+	\label{1:orbit2}
+\end{figure}
+
+
+
+
+
+\section{Problem Set 2 - Conservation Laws, Ellipsoids of Rotational Motion, Euler equations}
+
+The governing equation for the angular rates of a spacecraft is derived using the angular momentum version of Newton's second law, $M = \dot{H}$, where $H$ is the angular momentum. Below is the expanded version, as a function of the moment of inertia, $I$, and the angular velocity, $\omega$. It is assumed that the moment of inertia does not vary through the flight.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{ps2_euler1}
+\end{figure}
+
+The explicit relation between $\dot{\omega}$ and $\omega$ is shown below. The moments, $M_i$ are modeled as perturbations. Notice that only the diagonal elements of moment of inertia are present. That's because we perform our analysis in the principle frame, in which all off-diagonal elements of the $I$ matrix are zero. This is the power of maintaining a transformation to the principle axis.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{ps2_euler2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6,width=0.6\textwidth]{ps2_eulerSim}
+	\caption{Simulink model for the Euler equations.}
+	\label{2:eulerSim}
+\end{figure}
+
+Fig. \ref{2:eulerSim} shows how the Euler equations are implemented in the simulink model. All calculations are done in the principle frame, so post-processing requires transformation to inertial frame. 
+
+When validating the Euler equations, one can utilize the conservation of energy and angular momentum to ensure the integration is performed correctly. Below shows the energy and momentum ellipsoid equations. Motion is only physically possible when two closed lines form at the intersection of the two ellipsoids.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{ps2_energyEll}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{ps2_momEll}
+\end{figure}
+
+
+\subsection{Rotation about arbitary direction}
+
+For validation, the satellite is initiated with a random ang. vel. and allowed to propagate. After running the simulation, the output is post-processed to validate the results. A random starting velocity is generated and the euler equations propagate naturally. With no external torques, energy is conserved as shown in Fig. \ref{(2:angVelEnergy)}. The noise is due to numerical error from the simulation.
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_01}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_02}
+	\end{subfigure}
+	\caption{Ang vel. and rotational energy.}
+	\label{(2:angVelEnergy)}
+\end{figure}
+
+In Fig. \ref{2:ellipsoids} the momentum and energy ellipsoids are plotted for this simulation. Highlighted in orange and blue is the intersection. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_03}
+	\caption{Momentum and energy ellipsoids. The intersection is physically realizable.}
+	\label{2:ellipsoids}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.32\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_04}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.32\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_05}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.32\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_06}
+	\end{subfigure}
+	\caption{Polhode in each plane.}
+	\label{2:polhodePlanes}
+\end{figure}
+
+When the two ellipsoids are set equal to each-other, the resulting shape is described by eq. \ref{2:p1}-\ref{2:p3}. This produces an ellipse in the XY \& YZ planes, and a hyperbola in the XZ plane, as confirmed in Fig. \ref{2:polhodePlanes}.
+
+\begin{gather}
+\label{2:p1}
+(I_y-I_x)I_yw_y^2+(I_z-I_x)I_zw_z^2=L^2-2TI_x \\
+\label{2:p2}
+(I_z-I_y)I_xw_x^2+(I_z-I_y)I_zw_z^2=L^2-2TI_y \\
+\label{2:p3}
+(I_x-I_z)I_xw_x^2+(I_y-I_z)I_yw_y^2=L^2-2TI_z
+\end{gather}
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.32\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_07}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.32\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_08}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.32\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_09}
+	\end{subfigure}
+	\caption{Phase plane in each direction.}
+	\label{2:phaseplane}
+\end{figure}
+
+Along with analyzing the energy and momentum, we can directly plot the phase of the angular velocity by leaving the Euler equations in differential form and setting $\dot{\omega}=fcn(\omega)$. The phase plots (Fig. \ref{2:phaseplane}) have a near-sinusoidal solution, but with perturbations. As shown, this means shapes which are close to ellipses, but not quite.
+
+\subsection{Rotation along principle direction}
+
+In the following section, conservation analysis is repeated but the initial velocity is constrained to be in one of the three principle directions. This is in fact an equilibrium state when no external moments are present, as having any two components of $\omega$ set to zero reduces the Euler equations to $\dot{\omega}=0$.
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_10}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_11}
+	\end{subfigure}
+	\caption{Ang. vel. and energy when rotating about principle axes.}
+	\label{(2:angVel2)}
+\end{figure}
+
+The result is rather boring, as it should be. In the absence of extreme numerical error, nothing changes and the satellite's attitude remains in equilibrium. Rotational energy remains constant as expected. Below is the polhode again, but when aligned in principle axes, the two ellipsoids are exactly tangent.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_12}
+	\caption{Ellipsoids and polhode in principle axes.}
+	\label{2:polhode2}
+\end{figure}
+
+\subsection{Comparison to analytic solution for axi-symmetric satellites}
+
+Next, the moment of inertia is constrained such that $I_x=I_y$. In this case, the rotation about z-axis is constant, and the Euler equations can be simplified.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{ps2_analytic}
+	\caption{Reduced Euler equations.}
+	\label{2:reducedEuler}
+\end{figure}
+
+Using the simpler differential equation, the partial-analytic is found using a Matlab ode solver, ode113 (Fig. \ref{2:codeEuler}). By solving the system using both this solver and the full Euler equations, the numerical accuracy can be examined.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{ps2_euleranalytic}
+	\caption{Code for ode113.}
+	\label{2:codeEuler}
+\end{figure}
+
+Fig. \ref{2:error} shows the error over time for each ang. vel. Over time, numerical errors build up and the difference between true ang. vel. and numeric ang. vel. grows. Because of the nature of numerical error, there is no way to recover from this. Proper setting of simulation time-step and solver type can reduce the impact it has on simulations.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9,trim={10mm, 5mm, 13mm, 3mm},clip]{ps2_19}
+	\caption{Numerical accuracy of the Euler equation propagator.}
+	\label{2:error}
+\end{figure}
+
+
+
+
+\section{Problem Set 3 - Kinematic Equations \& Stability}
+
+In this section, the kinematic equations which govern the attitude propagation are explored, as well as the stability of satellites when operating in different states.
+
+\subsection{Direction Cosine Matrix}
+
+The direction cosine matrix (DCM) allows vectors to be transformed from one coordinate system to another. Specifically, it is a generalized 3-dimensional rotation which does not change the scale of the input vector. Below shows how a vector is transformed, along with how the DCM is generated.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{ps3_DCM1}
+\end{figure}
+
+Attitude of an aircraft can be expressed using DCM's and as a simulation progresses, the DCM must be updated accordingly. The kinematic equations describe how an attitude representation evolves in time. Below is the time-derivative of a DCM, $A$, as a function of the ang. vel. expressed in principle axes.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{ps3_DCM2}
+\end{figure}
+
+The left side multiplication uses shorthand for a tensor which is expanded in Eq. \ref{3:wx}.
+
+\begin{equation}
+[\omega x]=\left(\begin{array}{ccc} 0 & - \mathrm{w_z} & \mathrm{w_y}\\ \mathrm{w_z} & 0 & - \mathrm{w_x}\\ - \mathrm{w_y} & \mathrm{w_x} & 0 \end{array}\right)
+\label{3:wx}
+\end{equation}
+
+DCM's are powerful as there are no discontinuities nor singularities, they are easy to physically interpret, and they maintain a built-in redundancy. Indeed, a full 6 parameters are redundant. The downside however is they are far more computationally intensive, requiring a full matrix-to-matrix multiplication each time-step.
+
+\subsection{Quaternions}
+Quaternions solve the problem of attitude determination while being less dense as DCM's. Four numbers are required, and only a single redundant parameter remains. Quaternions also have no singularities but they can become discontinuous, because $-q=q$.
+
+In any case, having at least two attitude parameterizations creates a very robust system that allows checks to be implemented to ensure correct attitude determination.
+
+The quaternion evolves as a function of ang. vel. expressed in principle axis as well, shown below.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{ps3_quat2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{ps3_quat1}
+\end{figure}
+
+
+\subsection{Analysis of momentum in inertial frame.}
+
+For this test, a randomized initial ang. vel. was generated.
+
+Now that the spacecraft's attitude is known, the angular momentum can be transformed into an intertial frame and analyzed. With no external moments, the ang. mom. vector remains constant, as shown in \ref{3:herpolhode}. 
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_01}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_02}
+	\end{subfigure}
+	\caption{Ang. mom. vector and ang. vel. herpolhode.}
+	\label{3:herpolhode}
+\end{figure}
+
+When external moments are zero and the moment of inertia is diagonal, the resultant angular velocity herpolhode is contained within a plane perpendicular to the angular momentum vector. Fig. \ref{3:normHerpol} demonstrates this.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_03}
+	\caption{Normalized herpholhode relative to angular momentum vector.}
+	\label{3:normHerpol}
+\end{figure}
+
+For this simulation, the direction cosine matrices were also plotted.
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_04}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_05}
+	\end{subfigure}
+	\caption{Direction cosine matrices over time. Left is inertial-to-principle, right is inertial-to-body.}
+	\label{3:dcmplot}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_06}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_07}
+	\end{subfigure}
+	\caption{Ang. vel. when the x-axis is non-zero.}
+	\label{(4:xangvel1)}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_08}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_09}
+	\end{subfigure}
+	\caption{Ang. vel. when the x-axis is non-zero.}
+	\label{(4:xangvel1)}
+\end{figure}
+
+
+
+
+
+
 
 \section{Problem Set 4 - Gravity Gradient and Rotational Stability}
 
+don't forget to take the workspace output from matlab
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps4_01}
-	\caption{EKF performance.}
-	\label{4:ekf}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_01}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_02}
+	\end{subfigure}
+	\caption{Ang. vel. when the x-axis is non-zero.}
+	\label{(4:xangvel1)}
 \end{figure}
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps4_02}
-	\caption{EKF performance.}
-	\label{4:ekf}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_03}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_04}
+	\end{subfigure}
+	\caption{Ang. vel. when the y-axis is non-zero.}
+	\label{(4:yangvel1)}
 \end{figure}
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps4_03}
-	\caption{EKF performance.}
-	\label{4:ekf}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_05}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_06}
+	\end{subfigure}
+	\caption{Ang. vel. when the z-axis is non-zero.}
+	\label{(4:zangvel1)}
+\end{figure}
+
+
+
+%fig of rotational energy, polhode
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_14}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_15}
+	\end{subfigure}
+	\caption{Ang. vel. when the x-axis is non-zero.}
+	\label{(4:xangvel1)}
+\end{figure}
+
+
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_07}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_08}
+	\end{subfigure}
+	\caption{Ang. vel. when the x-axis is non-zero.}
+	\label{(4:xangvel1)}
 \end{figure}
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps4_04}
-	\caption{EKF performance.}
-	\label{4:ekf}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_09}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_10}
+	\end{subfigure}
+	\caption{Ang. vel. when the x-axis is non-zero.}
+	\label{(4:xangvel1)}
 \end{figure}
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps4_05}
-	\caption{EKF performance.}
-	\label{4:ekf}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_11}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_12}
+	\end{subfigure}
+	\caption{Ang. vel. when the x-axis is non-zero.}
+	\label{(4:xangvel1)}
+\end{figure}
+
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_22}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_23}
+	\end{subfigure}
+	\caption{Ang. vel. when the x-axis is non-zero.}
+	\label{(4:xangvel1)}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_24}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_25}
+	\end{subfigure}
+	\caption{Ang. vel. when the x-axis is non-zero.}
+	\label{(4:xangvel1)}
 \end{figure}
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps4_06}
+	\includegraphics[scale=0.9,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_26}
 	\caption{EKF performance.}
-	\label{4:ekf}
+	\label{5:ekf}
 \end{figure}
-
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps4_07}
+	\includegraphics[scale=0.9,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_27}
 	\caption{EKF performance.}
-	\label{4:ekf}
+	\label{5:ekf}
 \end{figure}
+
 
 
 
@@ -399,10 +883,10 @@ Fig. \ref{9:angvel} shows the angular velocity while de-tumbling. Because of the
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
-	\includegraphics[width=\textwidth]{ps9_02}
+	\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps9_02}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
-		\includegraphics[width=\textwidth]{ps9_03}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps9_03}
 	\end{subfigure}
 	\caption{The position during a de-tumble. The Target is earth-facing in the RTN frame.}
 	\label{(9:pos)}
@@ -421,5 +905,19 @@ Fig \ref{9:atterror} shows the evolution of the attitude control error over time
 
 
 
+\section{Appendices A - Matlab Code}
+
+\includepdf[pages=-]{ps1code.pdf}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+

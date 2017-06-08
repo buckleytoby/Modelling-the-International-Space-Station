@@ -108,22 +108,20 @@ I_principle = S_top.tauCM_P; <span class="comment">%principle moment of inertia 
 t_total = 200;
 <span class="comment">%momentum wheel</span>
 r_hat = [0 0 0]';
-Ir = 1e7;
+Ir = 1e7 / 1000^2;
 Mr0 = 0;
 wr0 = 0.1; <span class="comment">%rad/s</span>
 wdotr0 = 0;
 <span class="comment">%if Ir*wr0 &gt; 0.2*(I_principle(</span>
-<span class="keyword">for</span> i=2
+<span class="keyword">for</span> i=1:3
   w0(i) = 0.2;
   r_hat(i) = 1; <span class="comment">%spin mom wheel about spin axis for equilibrium state</span>
   w0 = w0 + perturb;
   options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
   sim(<span class="string">'eulerSIM_momWheel'</span>,[],options);
-  <span class="comment">% PS4.2b verify integration using previous tests (taken from PS2)</span>
-  <span class="comment">%PS2_SCRIPT</span>
   <span class="comment">% PS4.2c equilibrium &amp; stability analysis</span>
   figure; plot(tout, ang_vel);
-  title([<span class="string">'4.2c) Non-zero axis: '</span> num2str(i) <span class="string">'. Ang Vel over time'</span>])
+  title([<span class="string">'4.2c) Non-zero axis: '</span> num2str(i) <span class="string">'. Ang Vel over time with Momentum Wheel'</span>])
   legend(<span class="string">'wx'</span>,<span class="string">'wy'</span>,<span class="string">'wz'</span>)
   xlabel(<span class="string">'time (s)'</span>); ylabel(<span class="string">'ang vel (rad/s)'</span>)
   <span class="comment">%transform to euler angles</span>
@@ -137,6 +135,8 @@ wdotr0 = 0;
   w0 = [0 0 0]';
   r_hat = [0 0 0]';
 <span class="keyword">end</span>
+<span class="comment">% PS4.2b verify integration using previous tests (taken from PS2)</span>
+PS2_SCRIPT
 fprintf(<span class="string">'Now rotation about all directions \nis stable due to momentum wheel stabilization\n'</span>)
 
 mu = 3.986e14 / 1000^3;
@@ -183,10 +183,11 @@ options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string"
 sim(<span class="string">'sixDOF_SIM'</span>,[],options);
 [ XYZ ] = getXYZpostprocess( A_DCM, Xout );
 <span class="comment">%plotting</span>
-figure;plot(tout, Moments)
+figure;plot(tout, Moments);title(<span class="string">'PS 4.5) Moments when aligned with RTN frame'</span>)
 xlabel(<span class="string">'time (s)'</span>);ylabel(<span class="string">'External Moments (kN*km)'</span>)
-figure;plot(tout, XYZ)
-xlabel(<span class="string">'time (s)'</span>);ylabel(<span class="string">'Location principle axes (km)'</span>)
+xlabel(<span class="string">'time (s)'</span>)
+figure;plot(tout, XYZ);title(<span class="string">'Location in principle axes - in line with RTN'</span>)
+xlabel(<span class="string">'time (s)'</span>);ylabel(<span class="string">'Location (km)'</span>)
 fprintf(<span class="string">'As shown, the moments are zero while in line with RTN frame\n'</span>)
 fprintf(<span class="string">'Because of this, the principle frame stays in line with RTN frame\n'</span>)
 
@@ -353,15 +354,15 @@ Because of this, the principle frame stays in line with RTN frame
 The gravity gradient produces moments which act on the spacecraft
 and affect the euler angles, as shown in the plot comparing angles
 with and without the gravity gradient applied.
-kn: 5.02E-01
-kt: 5.95E-01
-kr: 1.32E-01
+kn: 5.48E-01
+kt: 6.52E-01
+kr: 1.63E-01
 It is expected that both roll and yaw will be unstable, but pitch will be OK
 This is confirmed by the rpy plot from section 4.6 where pitch is marginally stable
 But roll &amp; yaw are completely unstableAs shown, after perturbing the satellite, the roll becomes unstable.
 No, change in mass distr not necessary because the instability is
 very slow. There is plenty of time for small active control to stabilize.
-</pre><img vspace="5" hspace="5" src="PS4_01.png" alt=""> <img vspace="5" hspace="5" src="PS4_02.png" alt=""> <img vspace="5" hspace="5" src="PS4_03.png" alt=""> <img vspace="5" hspace="5" src="PS4_04.png" alt=""> <img vspace="5" hspace="5" src="PS4_05.png" alt=""> <img vspace="5" hspace="5" src="PS4_06.png" alt=""> <img vspace="5" hspace="5" src="PS4_07.png" alt=""> <img vspace="5" hspace="5" src="PS4_08.png" alt=""> <img vspace="5" hspace="5" src="PS4_09.png" alt=""> <img vspace="5" hspace="5" src="PS4_10.png" alt=""> <img vspace="5" hspace="5" src="PS4_11.png" alt=""> <img vspace="5" hspace="5" src="PS4_12.png" alt=""> <img vspace="5" hspace="5" src="PS4_13.png" alt=""> <img vspace="5" hspace="5" src="PS4_14.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="PS4_01.png" alt=""> <img vspace="5" hspace="5" src="PS4_02.png" alt=""> <img vspace="5" hspace="5" src="PS4_03.png" alt=""> <img vspace="5" hspace="5" src="PS4_04.png" alt=""> <img vspace="5" hspace="5" src="PS4_05.png" alt=""> <img vspace="5" hspace="5" src="PS4_06.png" alt=""> <img vspace="5" hspace="5" src="PS4_07.png" alt=""> <img vspace="5" hspace="5" src="PS4_08.png" alt=""> <img vspace="5" hspace="5" src="PS4_09.png" alt=""> <img vspace="5" hspace="5" src="PS4_10.png" alt=""> <img vspace="5" hspace="5" src="PS4_11.png" alt=""> <img vspace="5" hspace="5" src="PS4_12.png" alt=""> <img vspace="5" hspace="5" src="PS4_13.png" alt=""> <img vspace="5" hspace="5" src="PS4_14.png" alt=""> <img vspace="5" hspace="5" src="PS4_15.png" alt=""> <img vspace="5" hspace="5" src="PS4_16.png" alt=""> <img vspace="5" hspace="5" src="PS4_17.png" alt=""> <img vspace="5" hspace="5" src="PS4_18.png" alt=""> <img vspace="5" hspace="5" src="PS4_19.png" alt=""> <img vspace="5" hspace="5" src="PS4_20.png" alt=""> <img vspace="5" hspace="5" src="PS4_21.png" alt=""> <img vspace="5" hspace="5" src="PS4_22.png" alt=""> <img vspace="5" hspace="5" src="PS4_23.png" alt=""> <img vspace="5" hspace="5" src="PS4_24.png" alt=""> <img vspace="5" hspace="5" src="PS4_25.png" alt=""> <img vspace="5" hspace="5" src="PS4_26.png" alt=""> <img vspace="5" hspace="5" src="PS4_27.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %%
 % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH PS4 REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
@@ -408,22 +409,20 @@ I_principle = S_top.tauCM_P; %principle moment of inertia tensor
 t_total = 200;
 %momentum wheel
 r_hat = [0 0 0]';
-Ir = 1e7;
+Ir = 1e7 / 1000^2;
 Mr0 = 0;
 wr0 = 0.1; %rad/s
 wdotr0 = 0;
 %if Ir*wr0 > 0.2*(I_principle(
-for i=2
+for i=1:3
   w0(i) = 0.2;
   r_hat(i) = 1; %spin mom wheel about spin axis for equilibrium state
   w0 = w0 + perturb;
   options = simset('SrcWorkspace','current');
   sim('eulerSIM_momWheel',[],options);
-  % PS4.2b verify integration using previous tests (taken from PS2)
-  %PS2_SCRIPT
   % PS4.2c equilibrium & stability analysis
   figure; plot(tout, ang_vel); 
-  title(['4.2c) Non-zero axis: ' num2str(i) '. Ang Vel over time'])
+  title(['4.2c) Non-zero axis: ' num2str(i) '. Ang Vel over time with Momentum Wheel'])
   legend('wx','wy','wz')
   xlabel('time (s)'); ylabel('ang vel (rad/s)')
   %transform to euler angles
@@ -437,6 +436,8 @@ for i=2
   w0 = [0 0 0]';  
   r_hat = [0 0 0]';
 end
+% PS4.2b verify integration using previous tests (taken from PS2)
+PS2_SCRIPT
 fprintf('Now rotation about all directions \nis stable due to momentum wheel stabilization\n')
 
 mu = 3.986e14 / 1000^3;
@@ -483,10 +484,11 @@ options = simset('SrcWorkspace','current');
 sim('sixDOF_SIM',[],options);
 [ XYZ ] = getXYZpostprocess( A_DCM, Xout );
 %plotting
-figure;plot(tout, Moments)
+figure;plot(tout, Moments);title('PS 4.5) Moments when aligned with RTN frame')
 xlabel('time (s)');ylabel('External Moments (kN*km)')
-figure;plot(tout, XYZ)
-xlabel('time (s)');ylabel('Location principle axes (km)')
+xlabel('time (s)')
+figure;plot(tout, XYZ);title('Location in principle axes - in line with RTN')
+xlabel('time (s)');ylabel('Location (km)')
 fprintf('As shown, the moments are zero while in line with RTN frame\n')
 fprintf('Because of this, the principle frame stays in line with RTN frame\n')
 

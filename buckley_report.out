@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Problem Set 1 - Mission Setup and Details.}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Project Overview}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Problem Set 2 - Conservation Laws, Ellipsoids of Rotational Motion, Euler equations}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Rotation about arbitary direction}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Rotation along principle direction}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{Comparison to analytic solution for axi-symmetric satellites}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Problem Set 3 - Kinematic Equations \046 Stability}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Direction Cosine Matrix}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Quaternions}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Analysis of momentum in inertial frame.}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Problem Set 4 - Gravity Gradient and Rotational Stability}{}% 11
+\BOOKMARK [1][-]{section.5}{Problem Set 5 - something}{}% 12
+\BOOKMARK [1][-]{section.6}{Problem Set 6 - Attitude Determination with Sensor Errors}{}% 13
+\BOOKMARK [1][-]{section.7}{Problem Set 7 - Implement Extended Kalman Filter}{}% 14
+\BOOKMARK [1][-]{section.8}{Problem Set 8 - Implement Actuators and Controllers}{}% 15
+\BOOKMARK [1][-]{section.9}{Problem Set 9 - Define and Execute a Slew Maneuver}{}% 16
+\BOOKMARK [1][-]{section.10}{Appendices A - Matlab Code}{}% 17
