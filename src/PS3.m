@@ -87,13 +87,19 @@ view(3); grid on; axis equal; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
 legend('x-dir','y-dir','z-dir')
 title('3.5a) Principle axes over time. Pure rotation about body-z')
 
-% PS 3.5b
+
 figure;plot(tout, reshape(permute(A_DCM, [3,1,2]),[],9));title('DCM Inertial 2 Principle')
 xlabel('time (s)')
 figure;plot(tout, quat);title('Quaternion Intertial 2 Principle');xlabel('time (s)')
 
 
-
+% PS 3.5b
+%plot position in RTN frame
+% w0 = [0;0;.0011];
+% options = simset('SrcWorkspace','current');
+% sim('eulerSIM',[],options);
+% [ XYZ ] = getXYZpostprocess( A_DCM, Xout );
+% figure;plot(tout, XYZ);title('Position in RTN frame');xlabel('time (s)');ylabel('position (km)')
 
 
 

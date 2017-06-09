@@ -386,7 +386,7 @@ When external moments are zero and the moment of inertia is diagonal, the result
 	\label{3:normHerpol}
 \end{figure}
 
-For this simulation, the direction cosine matrices were also plotted.
+For this simulation, the direction cosine matrices were also plotted. Because the initial velocity is random in all directions, this doesn't actually tell us much. Note the symmetry between inertial-to-principle and inertial-to-body. This is because the principle axis is a constant offset from the body axis.
 
 \begin{figure}[H]
 	\centering
@@ -401,6 +401,12 @@ For this simulation, the direction cosine matrices were also plotted.
 \end{figure}
 
 
+\subsection{Equilibrium Test}
+
+In the following section, the ang. vel. is constrained to zero in two of three directions to demonstrate that it is truly an equilibrium. 
+
+Fig. \ref{3:5a} shows that the angular velocity indeed remains constant, and when plotting the DCM for this simulation, it's clear that a pure rotation about the z-axis occurs.
+
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
@@ -409,10 +415,11 @@ For this simulation, the direction cosine matrices were also plotted.
 	\begin{subfigure}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_07}
 	\end{subfigure}
-	\caption{Ang. vel. when the x-axis is non-zero.}
-	\label{(4:xangvel1)}
+	\caption{Ang. vel. and principle axes over time.}
+	\label{3:5a}
 \end{figure}
 
+Finally, the attitude is shown using both DCM's and quaternions. The constant values for each confirm that a pure rotation occured, while the curving elements show how the frame rotates. Notice that each element of the DCM returns to its initial value, because exactly one rotation was simulated. For the quaternion, it returns to the negative initial value, which as mentioned previously is the same rotation as the initial value.
 
 \begin{figure}[H]
 	\centering
@@ -422,19 +429,100 @@ For this simulation, the direction cosine matrices were also plotted.
 	\begin{subfigure}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps3_09}
 	\end{subfigure}
-	\caption{Ang. vel. when the x-axis is non-zero.}
-	\label{(4:xangvel1)}
+	\caption{Attitude in DCM (left) and quaternions (right).}
+	\label{3:attitude}
 \end{figure}
 
 
+\subsection{Equilibrium in RTN frame}
+Another equilibrium is shown here. When the rotation rate is kept at the mean motion of the orbit, in this case $n0=0.0011$ rad/s, then the vehicle stays aligned with the RTN frame. Fig. \ref{3:RTN} shows the position over time for this simulation. Any change in the x-position is due to numerical error or the atmospheric drag affects on the satellite.
 
-
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9,trim={10mm, 5mm, 13mm, 3mm},clip]{ps9_03}
+	\caption{Position in RTN frame.}
+	\label{3:RTN}
+\end{figure}
 
 
 
 \section{Problem Set 4 - Gravity Gradient and Rotational Stability}
 
 don't forget to take the workspace output from matlab
+
+In this section the equilibrium of the satellite is tested for both a single-spin and dual-spin system. For single-spin, the equilibrium analysis is performed by assuming the Euler equations behave linearly when in the local region of an equilibrium. A small perturbance is introduced in the form of an angle offset, and the system response is examined.
+
+\subsection{Derivation for single-spin}
+
+When $\omega=[0,0,\bar{\omega_z}]$ the Euler equations are in equilibrium. A small perturbation is added: $\omega_{perturb}=[\omega_x, \omega_y, \omega_z]$. Below is the simplified Euler equation after ignoring higher-order-terms.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{ps4_euler1}
+\end{figure}
+
+The resultant linear system gives the plant's eigenvalues which tell whether or not the system will remain stable. The eigenvalues are the open-loop poles of this linear system. If they are in the right-half plane then the system is unstable and any perturbations will grow exponentially with time. Since the eigenvalues are +- a square root, the only way to not have RHP poles is to place them on the imaginary axis, resulting in a marginally stable, or sinusoidally stable system.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9,width=\textwidth]{ps4_euler2}
+\end{figure}
+
+The resultant motion is stable if the following inequality holds true:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_euler3}
+\end{figure}
+
+In short, this tells us that rotation about either the minimum inertia axis or the maximum inertia axis is stable, but the intermediate is not.
+
+
+\subsection{Derivation for dual-spin}
+
+By adding a spinning rotor attached to the satellite, additional angular momentum is added to the system which can help stabilize the vehicle (Fig. \ref{4:dual}). In fact, this is the exact principle that many active attitude control systems such as reaction wheels and control-moment-gyros use.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_dual0}
+	\caption{Satellite with spinning internal rotor.}
+	\label{4:dual}
+\end{figure}
+
+Adding a rotor changes the dynamics of the system, which are updated below:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_dual1}
+\end{figure}
+
+Now the inertia of the rotor, along with its rotation rate will affect the stability of our system.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_dual2}
+\end{figure}
+
+Following the same procedure as before of defining an equilibrium, linearizing the system, and perturbing it, we get the following equation:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_dual3}
+\end{figure}
+
+After setting $\dot{\omega}=A\omega$ and solving for the eigenvalues, the following comes out of the equations as the requirements on moments of inertia and spin rate of the rotor:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_dual4}
+\end{figure}
+
+What this means is that with proper sizing of the rotor, all rotations of the satellite are stable.
+
+
+\subsection{Simulations with no momentum wheel}
+
+Stable and unstable configurations are now simulated to demonstrate the validity of our equilibrium analysis. For each simulation, two angular velocities are constrained to zero, while the third is an arbitrary value. A small perturbance of $\omega_{perturb} = 0.01*rand(3,1)$ is added to the initial ang. vel.
 
 \begin{figure}[H]
 	\centering
@@ -447,6 +535,8 @@ don't forget to take the workspace output from matlab
 	\caption{Ang. vel. when the x-axis is non-zero.}
 	\label{(4:xangvel1)}
 \end{figure}
+
+Rotation about x, the minimum inertia axis, is marginally stable, as shown by the oscillating wy and wz. The Euler angles depict a constant rolling motion.
 
 
 \begin{figure}[H]
@@ -461,6 +551,7 @@ don't forget to take the workspace output from matlab
 	\label{(4:yangvel1)}
 \end{figure}
 
+Rotation about y, the intermediate inertia axis, is unstable, as shown by the rapidly changing velocities and Euler angles.
 
 \begin{figure}[H]
 	\centering
@@ -474,6 +565,7 @@ don't forget to take the workspace output from matlab
 	\label{(4:zangvel1)}
 \end{figure}
 
+Rotation about z, the maximum inertia axis, is once again marginally stable. Note that wx and wy are oscillating more slowly than wy and wz with rotation about x. This is because more momentum is required to spin at the same rate about the maximum inertia axis, so change are slower to propagate.
 
 
 %fig of rotational energy, polhode
@@ -485,12 +577,20 @@ don't forget to take the workspace output from matlab
 	\begin{subfigure}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_15}
 	\end{subfigure}
-	\caption{Ang. vel. when the x-axis is non-zero.}
-	\label{(4:xangvel1)}
+	\caption{Constant rot. energy and mom. ellipsoid.}
+	\label{(4:pol1)}
 \end{figure}
 
+Fig. \ref{(4:pol1)} shows the rotational energy and momentum ellipsoid for the simulation about z-axis. Notice the small blue dot at the top of the ellipsoid, showing where the polhode is. This visually demonstrates how rotation about z is stable, as the polhode is very small.
 
+\subsection{Simulations with momentum wheel}
 
+Now simulations are run with the momentum wheel spinning at 0.1 rad/s and having an inertia of 1 $kg*km^2$. The wheel is aligned with the a principle axis. Like before, small perturbance of $\omega_{perturb} = 0.01*rand(3,1)$ is added to the initial ang. vel. In the code, only a single change is made: the below code is ran instead of the vanilla Euler equations inside of the state propagator.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ps4_dualCode}
+\end{figure}
 
 \begin{figure}[H]
 	\centering
@@ -501,8 +601,10 @@ don't forget to take the workspace output from matlab
 		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_08}
 	\end{subfigure}
 	\caption{Ang. vel. when the x-axis is non-zero.}
-	\label{(4:xangvel1)}
+	\label{(4:x2)}
 \end{figure}
+
+Rotation about x remains marginally stable, nothing has changed here. Fig. \ref{(4:y2)} shows the previously unstable rotation about y. Because of the momentum wheel, this rotation is now stabilized! It may appear that the Euler angles are still unstable, but that's an artifact of the dcm2euler matlab function. The pitch is linearly increasing with time and the yaw \& roll are switching between 0, 180, and 360 degrees because of the limits on pitch angle.
 
 
 \begin{figure}[H]
@@ -513,8 +615,8 @@ don't forget to take the workspace output from matlab
 	\begin{subfigure}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_10}
 	\end{subfigure}
-	\caption{Ang. vel. when the x-axis is non-zero.}
-	\label{(4:xangvel1)}
+	\caption{Ang. vel. when the y-axis is non-zero.}
+	\label{(4:y2)}
 \end{figure}
 
 
@@ -526,11 +628,53 @@ don't forget to take the workspace output from matlab
 	\begin{subfigure}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_12}
 	\end{subfigure}
-	\caption{Ang. vel. when the x-axis is non-zero.}
-	\label{(4:xangvel1)}
+	\caption{Ang. vel. when the z-axis is non-zero.}
+	\label{(4:z2)}
 \end{figure}
 
+And as before, the stability about z does not change.
 
+
+\subsection{Gravity gradient}
+
+When modeling gravity on the satellite, a simple approach is to assume the total force acts through the center of mass. This however, is untrue as the satellite has its mass distributed over many components. Depending on the distribution of the components and attitude of the satellite, gravity may exert a torque on the body. This is known as the gravity gradient. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_grav1}
+	\caption{Distributed mass causing moments about the CM}
+	\label{4:grav1}
+\end{figure}
+
+Fig. \ref{4:grav1} depicts a distributed mass and how the further from the center of mass a component is, the larger affect it will have in generating torque.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_grav2}
+\end{figure}
+
+The above equation shows the derivation of the analytic gravity induced moment. A simplification is made, after noticing that $r$ is magnitudes smaller than $R$. A first-order gravity approximation is used instead which reduces the equation to the following form:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_grav3}
+\end{figure}
+
+By simplifying this expression and replacing the integral with the corresponding moments of inertia, the following code is used to calculate the torque:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{ps4_grav4}
+\end{figure}
+
+Where the $c_i$ values are generated by expressing the satellite's position in the principle axes. Note that when two $c_i$ are zero, then the gravity gradient is also zero. This occurs when any axis of the RTN frame lines up with the principle axes.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{ps4_grav5}
+\end{figure}
+
+To first check the implementation, the satellite is flown in the RTN frame (Fig. \ref{(4:mom1)}). As expected, the moment generated is effectively zero, and the principle axes stay aligned with RTN.
 
 \begin{figure}[H]
 	\centering
@@ -540,9 +684,11 @@ don't forget to take the workspace output from matlab
 	\begin{subfigure}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_23}
 	\end{subfigure}
-	\caption{Ang. vel. when the x-axis is non-zero.}
-	\label{(4:xangvel1)}
+	\caption{Moments and position when aligned with RTN frame.}
+	\label{(4:mom1)}
 \end{figure}
+
+Next, a simulation is ran with the initial attitude in line with the inertial axes (Fig. \ref{(4:mom2)}). The external moments are plotted in kN*km, so they reach ~180 N*m at a maximum. This has a tangible affect on the Euler angles, as its clear the gravity gradient perturbs them compared to the nominal attitude.
 
 \begin{figure}[H]
 	\centering
@@ -552,32 +698,99 @@ don't forget to take the workspace output from matlab
 	\begin{subfigure}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_25}
 	\end{subfigure}
-	\caption{Ang. vel. when the x-axis is non-zero.}
-	\label{(4:xangvel1)}
+	\caption{Moments and euler angles after starting aligned with inertial axis.}
+	\label{(4:mom2)}
 \end{figure}
+
+\subsection{Gravity gradient stability analysis}
+
+We can model the gravity gradient when analyzing equilibrium and stability. After linearizing, once again we can see what modes produce unstable behavior under this perturbation. Knowing that the gradient is zero when aligned with RTN, we target the RTN frame as our nominal attitude. After perturbation, our $\omega$ is the following:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_grav0}
+\end{figure}
+
+Substituting into the Euler equations and ignoring higher-order-terms gives a system of three differential equations.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_grav6}
+\end{figure}
+
+The third equation, representing pitch motion, is decoupled and analyzed separately. Because our system is second-order, the laplace transform of our equations of motion is taken and simplified to a 2x2 linear plant matrix:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_grav7}
+\end{figure}
+
+The eigenvalues give us the open-loop poles and stability is summarized in the following inequalities.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_grav8}
+\end{figure}
+
+Where $k_t$ and $k_r$ are functions of the inertia.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps4_grav9}
+\end{figure}
+
+Regions of different stability are plotted in Fig. \ref{4:stableGrav} and the ISS is overlaid at its position in the graph. As shown, without active control the ISS is pitch stable, but roll \& yaw unstable with $k_n=0.548$, $k_t=0.653$, and $k_r=0.163$. Pitch stability is given by $k_n > 0$ which is true.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_26}
+	\caption{Stability under gravity gradient.}
+	\label{4:stableGrav}
+\end{figure}
+
+Unstable motion is reproduced by analyzing where the ISS lies in the Kt-Kr stability plot. At first an equilibrium is established by rotating the satellite about its z-axis. Since this is the maximum inertia axis, we know this is stable. Fig. \ref{4:eulerGrav} compares the flight with and without gravity gradient. As expected, when being perturbed, the yaw and roll become unstable, while the pitch remains marginally stable.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_27}
+	\caption{Euler angles with and without being perturbed by gravity gradient.}
+	\label{4:eulerGrav}
+\end{figure}
+
+
+For this project it does not make sense to change the mass distribution or nominal attitude because the gravity gradient is relatively small. The ISS is mostly symmetric so as long as the nadir direction is sufficiently controlled to point toward the earth, the gradient will remain small.
+
+
+
+
+\section{Problem Set 5 - Perturbations and Attitude Control Errors}
+
+\subsection{Magnetic torque}
+
+
+
+
+\subsection{Atmospheric drag}
+
+
+
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_26}
-	\caption{EKF performance.}
-	\label{5:ekf}
+	\includegraphics[scale=0.9,width=\textwidth]{ps5_gmst}
+	\caption{Simulink block for calculating GMST.}
+	\label{5:gmst}
 \end{figure}
+
+
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9,trim={10mm, 5mm, 13mm, 3mm},clip]{ps4_27}
-	\caption{EKF performance.}
-	\label{5:ekf}
+	\includegraphics[scale=0.75,width=\textwidth]{ps5_perturbs}
+	\caption{Simulink block for modeled perturbations.}
+	\label{5:perturb}
 \end{figure}
-
-
-
-
-
-
-
-\section{Problem Set 5 - something}
 
 
 
@@ -813,7 +1026,16 @@ q_{k+1} = A q_k + B \omega;\ A = eye(4),\ B = dt*1/2*\nabla_\omega q|_q
 \label{8:discreteQuat}
 \end{equation}
 
-In the simulink model, the control loop is ran once every ten time-steps. This is valid because linearized dynamics are accurate within an area surrounding the point of linearization. Satellite's dynamics evolve relatively slow compared to the time-step, so the gain matrix is only updated sparingly.
+In the simulink model, the control loop is ran once every ten time-steps. This is valid because linearized dynamics are accurate within an area surrounding the point of linearization. Satellite's dynamics evolve relatively slow compared to the time-step, so the gain matrix is only updated sparingly. Fig. \ref{8:code} shows how the controller is written in Matlab.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.75]{ps8_code}
+	\caption{Control loop code.}
+	\label{8:code}
+\end{figure}
+
 
 Initially, I had significant trouble getting the LQR controllers to function properly. The satellite could control its ang. vel., but not the attitude. After careful inspection, I figured out the issue: the weight matrices on each LQR were not properly adjusted after implementing the successive control-loop structure. With no feed-forward terms or direct coupling between attitude and control moment, there is a natural delay whenever an attitude is commanded. If the attitude controller doesn't allow enough time for the ang. vel. to 'catch up', then it will change the commanded ang. vel. before anything even happens. This was resolved by weighting the attitude rather low, and the ang. vel. higher, so that the inner-loop reaches the commanded velocity much quicker and is able to affect the attitude as desired.
 

@@ -17,10 +17,6 @@ t_total = 1000;
 options = simset('SrcWorkspace','current');
 sim('eulerSIM',[],options);
 
-figure;plot(tout, reshape(permute(A_DCM, [3,1,2]),[],9));title('DCM Inertial 2 Principle')
-
-figure;plot(tout, quat);title('Quaternion Intertial 2 Principle')
-
 %plotting
 % PS 3.4
 L_xyz = I_principle * ang_vel'; %in body axes
@@ -91,10 +87,16 @@ view(3); grid on; axis equal; xlim([-1 1]); ylim([-1 1]); zlim([-1 1])
 legend('x-dir','y-dir','z-dir')
 title('3.5a) Principle axes over time. Pure rotation about body-z')
 
+
+figure;plot(tout, reshape(permute(A_DCM, [3,1,2]),[],9));title('DCM Inertial 2 Principle')
+xlabel('time (s)')
+figure;plot(tout, quat);title('Quaternion Intertial 2 Principle');xlabel('time (s)')
+
+
 % PS 3.5b
-
-
-
+%plot position in RTN frame
+[ error_DCM ] = getAttError( A_DCM, state)
+RTN = get
 
 
 
