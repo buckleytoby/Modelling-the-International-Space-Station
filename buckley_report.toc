@@ -1,0 +1,40 @@
+\contentsline {section}{\numberline {1}Problem Set 1 - Mission Setup and Details.}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Project Overview}{2}{subsection.1.1}
+\contentsline {section}{\numberline {2}Problem Set 2 - Conservation Laws, Ellipsoids of Rotational Motion, Euler equations}{8}{section.2}
+\contentsline {subsection}{\numberline {2.1}Rotation about arbitary direction}{9}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Rotation along principle direction}{11}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Comparison to analytic solution for axi-symmetric satellites}{13}{subsection.2.3}
+\contentsline {section}{\numberline {3}Problem Set 3 - Kinematic Equations \& Stability}{14}{section.3}
+\contentsline {subsection}{\numberline {3.1}Direction Cosine Matrix}{14}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Quaternions}{15}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Analysis of momentum in inertial frame.}{16}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Equilibrium Test}{18}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Equilibrium in RTN frame}{19}{subsection.3.5}
+\contentsline {section}{\numberline {4}Problem Set 4 - Gravity Gradient and Rotational Stability}{20}{section.4}
+\contentsline {subsection}{\numberline {4.1}Derivation for single-spin}{20}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Derivation for dual-spin}{21}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Simulations with no momentum wheel}{22}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Simulations with momentum wheel}{24}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Gravity gradient}{26}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Gravity gradient stability analysis}{28}{subsection.4.6}
+\contentsline {section}{\numberline {5}Problem Set 5 - Perturbations and Attitude Control Errors}{31}{section.5}
+\contentsline {subsection}{\numberline {5.1}Magnetic torque}{31}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Atmospheric drag}{33}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Simulation}{34}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Attitude error}{38}{subsection.5.4}
+\contentsline {section}{\numberline {6}Problem Set 6 - Attitude Determination with Sensor Errors}{40}{section.6}
+\contentsline {subsection}{\numberline {6.1}Algebraic Approach}{40}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Algebraic with error reduction}{41}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Statistical Approach}{41}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Simulation - no noise}{42}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}Simulation - with noise}{43}{subsection.6.5}
+\contentsline {subsection}{\numberline {6.6}Attitude control error with sensing errors}{45}{subsection.6.6}
+\contentsline {section}{\numberline {7}Problem Set 7 - Implement Extended Kalman Filter (EKF)}{47}{section.7}
+\contentsline {subsection}{\numberline {7.1}Theory}{47}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Simulation}{49}{subsection.7.2}
+\contentsline {section}{\numberline {8}Problem Set 8 - Implement Actuators and Controllers}{53}{section.8}
+\contentsline {subsection}{\numberline {8.1}Actuators}{53}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Controller implementation using LQR}{54}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Simulation}{56}{subsection.8.3}
+\contentsline {section}{\numberline {9}Problem Set 9 - Define and Execute a Slew Maneuver}{61}{section.9}
+\contentsline {section}{\numberline {10}Appendices A - Matlab Code for setting up the satellite}{63}{section.10}

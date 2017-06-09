@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.8)  8 JUN 2017 19:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.8)  9 JUN 2017 02:13
 entering extended mode
 **./buckley_report.tex
 (buckley_report.tex
@@ -330,54 +330,6 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 ("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
 (buckley_report.aux
 
-LaTeX Warning: Label `5:ekf' multiply defined.
-
-
-LaTeX Warning: Label `5:ekf' multiply defined.
-
-
-LaTeX Warning: Label `5:ekf' multiply defined.
-
-
-LaTeX Warning: Label `5:ekf' multiply defined.
-
-
-LaTeX Warning: Label `5:ekf' multiply defined.
-
-
-LaTeX Warning: Label `5:ekf' multiply defined.
-
-
-LaTeX Warning: Label `6:ekf' multiply defined.
-
-
-LaTeX Warning: Label `6:ekf' multiply defined.
-
-
-LaTeX Warning: Label `6:ekf' multiply defined.
-
-
-LaTeX Warning: Label `6:ekf' multiply defined.
-
-
-LaTeX Warning: Label `6:ekf' multiply defined.
-
-
-LaTeX Warning: Label `7:ekf' multiply defined.
-
-
-LaTeX Warning: Label `7:ekf' multiply defined.
-
-
-LaTeX Warning: Label `7:ekf' multiply defined.
-
-
-LaTeX Warning: Label `7:ekf' multiply defined.
-
-
-LaTeX Warning: Label `7:ekf' multiply defined.
-
-
 LaTeX Warning: Label `8:angvel' multiply defined.
 
 
@@ -490,850 +442,1028 @@ LaTeX Info: Redefining \nameref on input line 36.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<ISS.jpg, id=111, 959.45651pt x 611.69328pt>
+<ISS.jpg, id=164, 959.45651pt x 611.69328pt>
 File: ISS.jpg Graphic file (type jpg)
  <use ISS.jpg>
-Package pdftex.def Info: ISS.jpg used on input line 41.
+Package pdftex.def Info: ISS.jpg used on input line 44.
 (pdftex.def)             Requested size: 469.75502pt x 299.48965pt.
  [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./ISS.jpg>]
-<iss_config.png, id=119, 1261.71375pt x 867.24pt>
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./ISS.jpg>] (buckley_repo
+rt.tocpdfTeX warning (ext4): destination with the same identifier (name{page.1}
+) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.32 ...tended Kalman Filter (EKF)}{45}{section.7}
+                                                   [1])
+\tf@toc=\write4
+\openout4 = `buckley_report.toc'.
+
+
+<iss_config.png, id=219, 1261.71375pt x 867.24pt>
 File: iss_config.png Graphic file (type png)
  <use iss_config.png>
-Package pdftex.def Info: iss_config.png used on input line 60.
+Package pdftex.def Info: iss_config.png used on input line 63.
 (pdftex.def)             Requested size: 1009.37239pt x 693.79295pt.
-
-<./src/html/ps1_childs.png, id=126, 453.19313pt x 360.59718pt>
+ [2]
+<./src/html/ps1_childs.png, id=230, 453.19313pt x 360.59718pt>
 File: ./src/html/ps1_childs.png Graphic file (type png)
 
 <use ./src/html/ps1_childs.png>
-Package pdftex.def Info: ./src/html/ps1_childs.png used on input line 70.
+Package pdftex.def Info: ./src/html/ps1_childs.png used on input line 73.
 (pdftex.def)             Requested size: 362.555pt x 288.47813pt.
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.73 \end{figure}
-                  [1 <./iss_config.png>]
-<./src/html/ps1_2body.png, id=138, 358.33875pt x 60.97781pt>
+ [3 <./iss_config.png>]
+<./src/html/ps1_2body.png, id=243, 358.33875pt x 60.97781pt>
 File: ./src/html/ps1_2body.png Graphic file (type png)
 
 <use ./src/html/ps1_2body.png>
-Package pdftex.def Info: ./src/html/ps1_2body.png used on input line 81.
+Package pdftex.def Info: ./src/html/ps1_2body.png used on input line 84.
 (pdftex.def)             Requested size: 358.33788pt x 60.97765pt.
- [2 <./src/html/ps1_childs.png> <./src/html/ps1_2body.png>] <./src/html/ps1_orb
-itSim.png, id=148, 714.41907pt x 506.6428pt>
+ [4 <./src/html/ps1_childs.png> <./src/html/ps1_2body.png>] <./src/html/ps1_orb
+itSim.png, id=252, 714.41907pt x 506.6428pt>
 File: ./src/html/ps1_orbitSim.png Graphic file (type png)
 
 <use ./src/html/ps1_orbitSim.png>
-Package pdftex.def Info: ./src/html/ps1_orbitSim.png used on input line 89.
+Package pdftex.def Info: ./src/html/ps1_orbitSim.png used on input line 92.
 (pdftex.def)             Requested size: 571.53604pt x 405.31479pt.
- [3 <./src/html/ps1_orbitSim.png>]
-<./src/html/ps1_01.png, id=160, 421.575pt x 316.18124pt>
+ [5 <./src/html/ps1_orbitSim.png>]
+<./src/html/ps1_01.png, id=267, 421.575pt x 316.18124pt>
 File: ./src/html/ps1_01.png Graphic file (type png)
 
 <use ./src/html/ps1_01.png>
-Package pdftex.def Info: ./src/html/ps1_01.png used on input line 117.
+Package pdftex.def Info: ./src/html/ps1_01.png used on input line 120.
 (pdftex.def)             Requested size: 284.90735pt x 234.73558pt.
- <iss_normals.png, id=163, 1445.4pt x 724.95844pt>
+ <iss_normals.png, id=270, 1445.4pt x 724.95844pt>
 File: iss_normals.png Graphic file (type png)
 
 <use iss_normals.png>
-Package pdftex.def Info: iss_normals.png used on input line 127.
+Package pdftex.def Info: iss_normals.png used on input line 130.
 (pdftex.def)             Requested size: 657.65416pt x 401.74985pt.
 
-Overfull \hbox (187.89914pt too wide) in paragraph at lines 127--128
+Overfull \hbox (187.89914pt too wide) in paragraph at lines 130--131
  [][] 
  []
 
-[4 <./src/html/ps1_01.png (PNG copy)>]
-<./src/html/ps1_02.png, id=178, 421.575pt x 316.18124pt>
+[6 <./src/html/ps1_01.png (PNG copy)>]
+<./src/html/ps1_02.png, id=283, 421.575pt x 316.18124pt>
 File: ./src/html/ps1_02.png Graphic file (type png)
 
 <use ./src/html/ps1_02.png>
-Package pdftex.def Info: ./src/html/ps1_02.png used on input line 139.
+Package pdftex.def Info: ./src/html/ps1_02.png used on input line 142.
 (pdftex.def)             Requested size: 312.22203pt x 252.94533pt.
- [5 <./iss_normals.png (PNG copy)>]
-<./src/html/ps2_euler1.png, id=186, 178.41656pt x 27.85406pt>
+ [7 <./iss_normals.png (PNG copy)>]
+<./src/html/ps2_euler1.png, id=291, 178.41656pt x 27.85406pt>
 File: ./src/html/ps2_euler1.png Graphic file (type png)
 
 <use ./src/html/ps2_euler1.png>
-Package pdftex.def Info: ./src/html/ps2_euler1.png used on input line 154.
+Package pdftex.def Info: ./src/html/ps2_euler1.png used on input line 157.
 (pdftex.def)             Requested size: 107.05075pt x 16.71254pt.
 
-<./src/html/ps2_euler2.png, id=187, 210.7875pt x 72.27pt>
+<./src/html/ps2_euler2.png, id=292, 210.7875pt x 72.27pt>
 File: ./src/html/ps2_euler2.png Graphic file (type png)
 
 <use ./src/html/ps2_euler2.png>
-Package pdftex.def Info: ./src/html/ps2_euler2.png used on input line 161.
+Package pdftex.def Info: ./src/html/ps2_euler2.png used on input line 164.
 (pdftex.def)             Requested size: 126.47346pt x 43.36232pt.
 
-<./src/html/ps2_eulerSim.png, id=188, 498.36188pt x 423.08063pt>
+<./src/html/ps2_eulerSim.png, id=293, 498.36188pt x 423.08063pt>
 File: ./src/html/ps2_eulerSim.png Graphic file (type png)
 
 <use ./src/html/ps2_eulerSim.png>
-Package pdftex.def Info: ./src/html/ps2_eulerSim.png used on input line 166.
+Package pdftex.def Info: ./src/html/ps2_eulerSim.png used on input line 169.
 (pdftex.def)             Requested size: 299.01942pt x 253.85033pt.
- [6 <./src/html/ps1_02.png (PNG copy)> <./src/html/ps2_euler1.png> <./src/html/
+ [8 <./src/html/ps1_02.png (PNG copy)> <./src/html/ps2_euler1.png> <./src/html/
 ps2_euler2.png>]
-<./src/html/ps2_energyEll.png, id=200, 305.64188pt x 70.76437pt>
+<./src/html/ps2_energyEll.png, id=304, 305.64188pt x 70.76437pt>
 File: ./src/html/ps2_energyEll.png Graphic file (type png)
 
 <use ./src/html/ps2_energyEll.png>
-Package pdftex.def Info: ./src/html/ps2_energyEll.png used on input line 177.
+Package pdftex.def Info: ./src/html/ps2_energyEll.png used on input line 180.
 (pdftex.def)             Requested size: 183.38652pt x 42.45894pt.
 
-<./src/html/ps2_momEll.png, id=201, 308.65312pt x 71.51718pt>
+<./src/html/ps2_momEll.png, id=305, 308.65312pt x 71.51718pt>
 File: ./src/html/ps2_momEll.png Graphic file (type png)
 
 <use ./src/html/ps2_momEll.png>
-Package pdftex.def Info: ./src/html/ps2_momEll.png used on input line 183.
+Package pdftex.def Info: ./src/html/ps2_momEll.png used on input line 186.
 (pdftex.def)             Requested size: 185.1933pt x 42.91063pt.
 
-<./src/html/ps2_01.png, id=203, 421.575pt x 316.18124pt>
+<./src/html/ps2_01.png, id=307, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_01.png Graphic file (type png)
 
 <use ./src/html/ps2_01.png>
-Package pdftex.def Info: ./src/html/ps2_01.png used on input line 194.
+Package pdftex.def Info: ./src/html/ps2_01.png used on input line 197.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps2_02.png, id=205, 421.575pt x 316.18124pt>
+<./src/html/ps2_02.png, id=309, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_02.png Graphic file (type png)
 
 <use ./src/html/ps2_02.png>
-Package pdftex.def Info: ./src/html/ps2_02.png used on input line 197.
+Package pdftex.def Info: ./src/html/ps2_02.png used on input line 200.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
- [7 <./src/html/ps2_eulerSim.png> <./src/html/ps2_energyEll.png> <./src/html/ps
+ [9 <./src/html/ps2_eulerSim.png> <./src/html/ps2_energyEll.png> <./src/html/ps
 2_momEll.png>]
-<./src/html/ps2_03.png, id=218, 421.575pt x 316.18124pt>
+<./src/html/ps2_03.png, id=322, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_03.png Graphic file (type png)
 
 <use ./src/html/ps2_03.png>
-Package pdftex.def Info: ./src/html/ps2_03.png used on input line 207.
+Package pdftex.def Info: ./src/html/ps2_03.png used on input line 210.
 (pdftex.def)             Requested size: 320.51736pt x 264.07474pt.
 
-<./src/html/ps2_04.png, id=220, 421.575pt x 316.18124pt>
+<./src/html/ps2_04.png, id=324, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_04.png Graphic file (type png)
 
 <use ./src/html/ps2_04.png>
-Package pdftex.def Info: ./src/html/ps2_04.png used on input line 216.
+Package pdftex.def Info: ./src/html/ps2_04.png used on input line 219.
 (pdftex.def)             Requested size: 150.32504pt x 123.85303pt.
 
-<./src/html/ps2_05.png, id=222, 421.575pt x 316.18124pt>
+<./src/html/ps2_05.png, id=326, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_05.png Graphic file (type png)
 
 <use ./src/html/ps2_05.png>
-Package pdftex.def Info: ./src/html/ps2_05.png used on input line 219.
+Package pdftex.def Info: ./src/html/ps2_05.png used on input line 222.
 (pdftex.def)             Requested size: 150.32504pt x 123.85303pt.
 
-<./src/html/ps2_06.png, id=224, 421.575pt x 316.18124pt>
+<./src/html/ps2_06.png, id=328, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_06.png Graphic file (type png)
 
 <use ./src/html/ps2_06.png>
-Package pdftex.def Info: ./src/html/ps2_06.png used on input line 222.
+Package pdftex.def Info: ./src/html/ps2_06.png used on input line 225.
 (pdftex.def)             Requested size: 150.32504pt x 123.85303pt.
- [8 <./src/html/ps2_01.png (PNG copy)> <./src/html/ps2_02.png (PNG copy)> <./sr
-c/html/ps2_03.png (PNG copy)>]
-<./src/html/ps2_07.png, id=238, 421.575pt x 316.18124pt>
+ [10 <./src/html/ps2_01.png (PNG copy)> <./src/html/ps2_02.png (PNG copy)> <./s
+rc/html/ps2_03.png (PNG copy)>]
+<./src/html/ps2_07.png, id=342, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_07.png Graphic file (type png)
 
 <use ./src/html/ps2_07.png>
-Package pdftex.def Info: ./src/html/ps2_07.png used on input line 243.
+Package pdftex.def Info: ./src/html/ps2_07.png used on input line 246.
 (pdftex.def)             Requested size: 150.32504pt x 123.85303pt.
 
-<./src/html/ps2_08.png, id=240, 421.575pt x 316.18124pt>
+<./src/html/ps2_08.png, id=344, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_08.png Graphic file (type png)
 
 <use ./src/html/ps2_08.png>
-Package pdftex.def Info: ./src/html/ps2_08.png used on input line 246.
+Package pdftex.def Info: ./src/html/ps2_08.png used on input line 249.
 (pdftex.def)             Requested size: 150.32504pt x 123.85303pt.
 
-<./src/html/ps2_09.png, id=242, 421.575pt x 316.18124pt>
+<./src/html/ps2_09.png, id=346, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_09.png Graphic file (type png)
 
 <use ./src/html/ps2_09.png>
-Package pdftex.def Info: ./src/html/ps2_09.png used on input line 249.
+Package pdftex.def Info: ./src/html/ps2_09.png used on input line 252.
 (pdftex.def)             Requested size: 150.32504pt x 123.85303pt.
- [9 <./src/html/ps2_04.png (PNG copy)> <./src/html/ps2_05.png (PNG copy)> <./sr
-c/html/ps2_06.png (PNG copy)> <./src/html/ps2_07.png (PNG copy)> <./src/html/ps
-2_08.png (PNG copy)> <./src/html/ps2_09.png (PNG copy)>] <./src/html/ps2_10.png
-, id=260, 421.575pt x 316.18124pt>
+ [11 <./src/html/ps2_04.png (PNG copy)> <./src/html/ps2_05.png (PNG copy)> <./s
+rc/html/ps2_06.png (PNG copy)> <./src/html/ps2_07.png (PNG copy)> <./src/html/p
+s2_08.png (PNG copy)> <./src/html/ps2_09.png (PNG copy)>] <./src/html/ps2_10.pn
+g, id=364, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_10.png Graphic file (type png)
 
 <use ./src/html/ps2_10.png>
-Package pdftex.def Info: ./src/html/ps2_10.png used on input line 264.
+Package pdftex.def Info: ./src/html/ps2_10.png used on input line 267.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps2_11.png, id=262, 421.575pt x 316.18124pt>
+<./src/html/ps2_11.png, id=366, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_11.png Graphic file (type png)
 
 <use ./src/html/ps2_11.png>
-Package pdftex.def Info: ./src/html/ps2_11.png used on input line 267.
+Package pdftex.def Info: ./src/html/ps2_11.png used on input line 270.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps2_12.png, id=264, 421.575pt x 316.18124pt>
+<./src/html/ps2_12.png, id=368, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_12.png Graphic file (type png)
 
 <use ./src/html/ps2_12.png>
-Package pdftex.def Info: ./src/html/ps2_12.png used on input line 277.
+Package pdftex.def Info: ./src/html/ps2_12.png used on input line 280.
 (pdftex.def)             Requested size: 320.51736pt x 264.07474pt.
 
-<./src/html/ps2_analytic.png, id=266, 232.61906pt x 59.47218pt>
+<./src/html/ps2_analytic.png, id=370, 232.61906pt x 59.47218pt>
 File: ./src/html/ps2_analytic.png Graphic file (type png)
 
 <use ./src/html/ps2_analytic.png>
-Package pdftex.def Info: ./src/html/ps2_analytic.png used on input line 288.
+Package pdftex.def Info: ./src/html/ps2_analytic.png used on input line 291.
 (pdftex.def)             Requested size: 209.35521pt x 53.52446pt.
- [10 <./src/html/ps2_10.png (PNG copy)> <./src/html/ps2_11.png (PNG copy)> <./s
+ [12 <./src/html/ps2_10.png (PNG copy)> <./src/html/ps2_11.png (PNG copy)> <./s
 rc/html/ps2_12.png (PNG copy)>]
-<./src/html/ps2_euleranalytic.png, id=277, 469.755pt x 118.19156pt>
+<./src/html/ps2_euleranalytic.png, id=382, 469.755pt x 118.19156pt>
 File: ./src/html/ps2_euleranalytic.png Graphic file (type png)
 
 <use ./src/html/ps2_euleranalytic.png>
-Package pdftex.def Info: ./src/html/ps2_euleranalytic.png used on input line 29
-7.
+Package pdftex.def Info: ./src/html/ps2_euleranalytic.png used on input line 30
+0.
 (pdftex.def)             Requested size: 422.7756pt x 106.37141pt.
 
-<./src/html/ps2_19.png, id=279, 421.575pt x 316.18124pt>
+<./src/html/ps2_19.png, id=384, 421.575pt x 316.18124pt>
 File: ./src/html/ps2_19.png Graphic file (type png)
 
 <use ./src/html/ps2_19.png>
-Package pdftex.def Info: ./src/html/ps2_19.png used on input line 306.
+Package pdftex.def Info: ./src/html/ps2_19.png used on input line 309.
 (pdftex.def)             Requested size: 320.51736pt x 264.07474pt.
- [11 <./src/html/ps2_analytic.png> <./src/html/ps2_euleranalytic.png>] <./src/h
-tml/ps3_DCM1.png, id=290, 455.45157pt x 76.78688pt>
+ [13 <./src/html/ps2_analytic.png> <./src/html/ps2_euleranalytic.png>] <./src/h
+tml/ps3_DCM1.png, id=395, 455.45157pt x 76.78688pt>
 File: ./src/html/ps3_DCM1.png Graphic file (type png)
 
 <use ./src/html/ps3_DCM1.png>
-Package pdftex.def Info: ./src/html/ps3_DCM1.png used on input line 324.
+Package pdftex.def Info: ./src/html/ps3_DCM1.png used on input line 327.
 (pdftex.def)             Requested size: 409.90262pt x 69.10754pt.
 
-<./src/html/ps3_DCM2.png, id=291, 282.30469pt x 43.66313pt>
+<./src/html/ps3_DCM2.png, id=396, 282.30469pt x 43.66313pt>
 File: ./src/html/ps3_DCM2.png Graphic file (type png)
 
 <use ./src/html/ps3_DCM2.png>
-Package pdftex.def Info: ./src/html/ps3_DCM2.png used on input line 331.
+Package pdftex.def Info: ./src/html/ps3_DCM2.png used on input line 334.
 (pdftex.def)             Requested size: 254.07185pt x 39.29643pt.
- [12 <./src/html/ps2_19.png (PNG copy)> <./src/html/ps3_DCM1.png>] <./src/html/
-ps3_quat2.png, id=301, 333.49594pt x 57.21375pt>
+ [14 <./src/html/ps2_19.png (PNG copy)> <./src/html/ps3_DCM1.png>] <./src/html/
+ps3_quat2.png, id=405, 333.49594pt x 57.21375pt>
 File: ./src/html/ps3_quat2.png Graphic file (type png)
 
 <use ./src/html/ps3_quat2.png>
-Package pdftex.def Info: ./src/html/ps3_quat2.png used on input line 352.
+Package pdftex.def Info: ./src/html/ps3_quat2.png used on input line 355.
 (pdftex.def)             Requested size: 300.14357pt x 51.49188pt.
 
-<./src/html/ps3_quat1.png, id=302, 234.8775pt x 82.80937pt>
+<./src/html/ps3_quat1.png, id=406, 234.8775pt x 82.80937pt>
 File: ./src/html/ps3_quat1.png Graphic file (type png)
 
 <use ./src/html/ps3_quat1.png>
-Package pdftex.def Info: ./src/html/ps3_quat1.png used on input line 357.
+Package pdftex.def Info: ./src/html/ps3_quat1.png used on input line 360.
 (pdftex.def)             Requested size: 211.38779pt x 74.52773pt.
- [13 <./src/html/ps3_DCM2.png> <./src/html/ps3_quat2.png> <./src/html/ps3_quat1
+ [15 <./src/html/ps3_DCM2.png> <./src/html/ps3_quat2.png> <./src/html/ps3_quat1
 .png>]
-<./src/html/ps3_01.png, id=315, 421.575pt x 316.18124pt>
+<./src/html/ps3_01.png, id=419, 421.575pt x 316.18124pt>
 File: ./src/html/ps3_01.png Graphic file (type png)
 
 <use ./src/html/ps3_01.png>
-Package pdftex.def Info: ./src/html/ps3_01.png used on input line 371.
+Package pdftex.def Info: ./src/html/ps3_01.png used on input line 374.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps3_02.png, id=317, 421.575pt x 316.18124pt>
+<./src/html/ps3_02.png, id=421, 421.575pt x 316.18124pt>
 File: ./src/html/ps3_02.png Graphic file (type png)
 
 <use ./src/html/ps3_02.png>
-Package pdftex.def Info: ./src/html/ps3_02.png used on input line 374.
+Package pdftex.def Info: ./src/html/ps3_02.png used on input line 377.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps3_03.png, id=320, 421.575pt x 316.18124pt>
+<./src/html/ps3_03.png, id=424, 421.575pt x 316.18124pt>
 File: ./src/html/ps3_03.png Graphic file (type png)
 
 <use ./src/html/ps3_03.png>
-Package pdftex.def Info: ./src/html/ps3_03.png used on input line 384.
+Package pdftex.def Info: ./src/html/ps3_03.png used on input line 387.
 (pdftex.def)             Requested size: 320.51736pt x 264.07474pt.
- [14 <./src/html/ps3_01.png (PNG copy)> <./src/html/ps3_02.png (PNG copy)>]
-<./src/html/ps3_04.png, id=330, 421.575pt x 316.18124pt>
+ [16 <./src/html/ps3_01.png (PNG copy)> <./src/html/ps3_02.png (PNG copy)>]
+<./src/html/ps3_04.png, id=434, 421.575pt x 316.18124pt>
 File: ./src/html/ps3_04.png Graphic file (type png)
 
 <use ./src/html/ps3_04.png>
-Package pdftex.def Info: ./src/html/ps3_04.png used on input line 394.
+Package pdftex.def Info: ./src/html/ps3_04.png used on input line 397.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps3_05.png, id=332, 421.575pt x 316.18124pt>
+<./src/html/ps3_05.png, id=436, 421.575pt x 316.18124pt>
 File: ./src/html/ps3_05.png Graphic file (type png)
 
 <use ./src/html/ps3_05.png>
-Package pdftex.def Info: ./src/html/ps3_05.png used on input line 397.
+Package pdftex.def Info: ./src/html/ps3_05.png used on input line 400.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
- [15 <./src/html/ps3_03.png (PNG copy)> <./src/html/ps3_04.png (PNG copy)> <./s
+ [17 <./src/html/ps3_03.png (PNG copy)> <./src/html/ps3_04.png (PNG copy)> <./s
 rc/html/ps3_05.png (PNG copy)>]
-<./src/html/ps3_06.png, id=343, 421.575pt x 316.18124pt>
+<./src/html/ps3_06.png, id=447, 421.575pt x 316.18124pt>
 File: ./src/html/ps3_06.png Graphic file (type png)
 
 <use ./src/html/ps3_06.png>
-Package pdftex.def Info: ./src/html/ps3_06.png used on input line 413.
+Package pdftex.def Info: ./src/html/ps3_06.png used on input line 416.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps3_07.png, id=345, 421.575pt x 316.18124pt>
+<./src/html/ps3_07.png, id=449, 421.575pt x 316.18124pt>
 File: ./src/html/ps3_07.png Graphic file (type png)
 
 <use ./src/html/ps3_07.png>
-Package pdftex.def Info: ./src/html/ps3_07.png used on input line 416.
+Package pdftex.def Info: ./src/html/ps3_07.png used on input line 419.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps3_08.png, id=347, 421.575pt x 316.18124pt>
+<./src/html/ps3_08.png, id=451, 421.575pt x 316.18124pt>
 File: ./src/html/ps3_08.png Graphic file (type png)
 
 <use ./src/html/ps3_08.png>
-Package pdftex.def Info: ./src/html/ps3_08.png used on input line 427.
+Package pdftex.def Info: ./src/html/ps3_08.png used on input line 430.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps3_09.png, id=349, 421.575pt x 316.18124pt>
+<./src/html/ps3_09.png, id=453, 421.575pt x 316.18124pt>
 File: ./src/html/ps3_09.png Graphic file (type png)
 
 <use ./src/html/ps3_09.png>
-Package pdftex.def Info: ./src/html/ps3_09.png used on input line 430.
+Package pdftex.def Info: ./src/html/ps3_09.png used on input line 433.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
- [16 <./src/html/ps3_06.png (PNG copy)> <./src/html/ps3_07.png (PNG copy)>]
-<./src/html/ps9_03.png, id=359, 421.575pt x 316.18124pt>
+ [18 <./src/html/ps3_06.png (PNG copy)> <./src/html/ps3_07.png (PNG copy)>]
+<./src/html/ps9_03.png, id=464, 421.575pt x 316.18124pt>
 File: ./src/html/ps9_03.png Graphic file (type png)
 
 <use ./src/html/ps9_03.png>
-Package pdftex.def Info: ./src/html/ps9_03.png used on input line 442.
+Package pdftex.def Info: ./src/html/ps9_03.png used on input line 445.
 (pdftex.def)             Requested size: 320.51736pt x 264.07474pt.
- [17 <./src/html/ps3_08.png (PNG copy)> <./src/html/ps3_09.png (PNG copy)> <./s
+ [19 <./src/html/ps3_08.png (PNG copy)> <./src/html/ps3_09.png (PNG copy)> <./s
 rc/html/ps9_03.png (PNG copy)>]
-<./src/html/ps4_euler1.png, id=370, 231.11343pt x 81.30376pt>
+<./src/html/ps4_euler1.png, id=475, 231.11343pt x 81.30376pt>
 File: ./src/html/ps4_euler1.png Graphic file (type png)
 
 <use ./src/html/ps4_euler1.png>
-Package pdftex.def Info: ./src/html/ps4_euler1.png used on input line 461.
+Package pdftex.def Info: ./src/html/ps4_euler1.png used on input line 464.
 (pdftex.def)             Requested size: 208.00017pt x 73.17268pt.
 
-<./src/html/ps4_euler2.png, id=371, 707.64375pt x 95.6072pt>
+<./src/html/ps4_euler2.png, id=476, 707.64375pt x 95.6072pt>
 File: ./src/html/ps4_euler2.png Graphic file (type png)
 
 <use ./src/html/ps4_euler2.png>
-Package pdftex.def Info: ./src/html/ps4_euler2.png used on input line 468.
+Package pdftex.def Info: ./src/html/ps4_euler2.png used on input line 471.
 (pdftex.def)             Requested size: 636.8735pt x 86.04567pt.
 
-<./src/html/ps4_euler3.png, id=372, 182.93344pt x 36.88782pt>
+<./src/html/ps4_euler3.png, id=477, 182.93344pt x 36.88782pt>
 File: ./src/html/ps4_euler3.png Graphic file (type png)
 
 <use ./src/html/ps4_euler3.png>
-Package pdftex.def Info: ./src/html/ps4_euler3.png used on input line 475.
+Package pdftex.def Info: ./src/html/ps4_euler3.png used on input line 478.
 (pdftex.def)             Requested size: 146.34694pt x 29.51027pt.
- [18 <./src/html/ps4_euler1.png> <./src/html/ps4_euler2.png> <./src/html/ps4_eu
+ [20 <./src/html/ps4_euler1.png> <./src/html/ps4_euler2.png> <./src/html/ps4_eu
 ler3.png>]
-<./src/html/ps4_dual0.png, id=385, 117.43875pt x 138.5175pt>
+<./src/html/ps4_dual0.png, id=489, 117.43875pt x 138.5175pt>
 File: ./src/html/ps4_dual0.png Graphic file (type png)
 
 <use ./src/html/ps4_dual0.png>
-Package pdftex.def Info: ./src/html/ps4_dual0.png used on input line 487.
+Package pdftex.def Info: ./src/html/ps4_dual0.png used on input line 490.
 (pdftex.def)             Requested size: 93.95111pt x 110.81413pt.
 
-<./src/html/ps4_dual1.png, id=386, 247.67531pt x 61.73062pt>
+<./src/html/ps4_dual1.png, id=490, 247.67531pt x 61.73062pt>
 File: ./src/html/ps4_dual1.png Graphic file (type png)
 
 <use ./src/html/ps4_dual1.png>
-Package pdftex.def Info: ./src/html/ps4_dual1.png used on input line 496.
+Package pdftex.def Info: ./src/html/ps4_dual1.png used on input line 499.
 (pdftex.def)             Requested size: 198.1405pt x 49.38454pt.
 
-<./src/html/ps4_dual2.png, id=387, 456.95718pt x 100.12407pt>
+<./src/html/ps4_dual2.png, id=491, 456.95718pt x 100.12407pt>
 File: ./src/html/ps4_dual2.png Graphic file (type png)
 
 <use ./src/html/ps4_dual2.png>
-Package pdftex.def Info: ./src/html/ps4_dual2.png used on input line 503.
+Package pdftex.def Info: ./src/html/ps4_dual2.png used on input line 506.
 (pdftex.def)             Requested size: 365.56622pt x 80.09935pt.
 
-<./src/html/ps4_dual3.png, id=388, 283.81032pt x 96.36pt>
+<./src/html/ps4_dual3.png, id=492, 283.81032pt x 96.36pt>
 File: ./src/html/ps4_dual3.png Graphic file (type png)
 
 <use ./src/html/ps4_dual3.png>
-Package pdftex.def Info: ./src/html/ps4_dual3.png used on input line 510.
+Package pdftex.def Info: ./src/html/ps4_dual3.png used on input line 513.
 (pdftex.def)             Requested size: 227.04855pt x 77.08807pt.
 
-<./src/html/ps4_dual4.png, id=389, 386.94562pt x 55.70813pt>
+<./src/html/ps4_dual4.png, id=493, 386.94562pt x 55.70813pt>
 File: ./src/html/ps4_dual4.png Graphic file (type png)
 
 <use ./src/html/ps4_dual4.png>
-Package pdftex.def Info: ./src/html/ps4_dual4.png used on input line 517.
+Package pdftex.def Info: ./src/html/ps4_dual4.png used on input line 520.
 (pdftex.def)             Requested size: 309.55692pt x 44.56654pt.
- [19 <./src/html/ps4_dual0.png> <./src/html/ps4_dual1.png> <./src/html/ps4_dual
+ [21 <./src/html/ps4_dual0.png> <./src/html/ps4_dual1.png> <./src/html/ps4_dual
 2.png> <./src/html/ps4_dual3.png>]
-<./src/html/ps4_01.png, id=402, 421.575pt x 316.18124pt>
+<./src/html/ps4_01.png, id=506, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_01.png Graphic file (type png)
 
 <use ./src/html/ps4_01.png>
-Package pdftex.def Info: ./src/html/ps4_01.png used on input line 530.
+Package pdftex.def Info: ./src/html/ps4_01.png used on input line 533.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_02.png, id=404, 421.575pt x 316.18124pt>
+<./src/html/ps4_02.png, id=508, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_02.png Graphic file (type png)
 
 <use ./src/html/ps4_02.png>
-Package pdftex.def Info: ./src/html/ps4_02.png used on input line 533.
+Package pdftex.def Info: ./src/html/ps4_02.png used on input line 536.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_03.png, id=406, 421.575pt x 316.18124pt>
+<./src/html/ps4_03.png, id=510, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_03.png Graphic file (type png)
 
 <use ./src/html/ps4_03.png>
-Package pdftex.def Info: ./src/html/ps4_03.png used on input line 545.
+Package pdftex.def Info: ./src/html/ps4_03.png used on input line 548.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_04.png, id=408, 421.575pt x 316.18124pt>
+<./src/html/ps4_04.png, id=512, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_04.png Graphic file (type png)
 
 <use ./src/html/ps4_04.png>
-Package pdftex.def Info: ./src/html/ps4_04.png used on input line 548.
+Package pdftex.def Info: ./src/html/ps4_04.png used on input line 551.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
- [20 <./src/html/ps4_01.png (PNG copy)> <./src/html/ps4_02.png (PNG copy)> <./s
+ [22 <./src/html/ps4_01.png (PNG copy)> <./src/html/ps4_02.png (PNG copy)> <./s
 rc/html/ps4_dual4.png>]
-<./src/html/ps4_05.png, id=419, 421.575pt x 316.18124pt>
+<./src/html/ps4_05.png, id=523, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_05.png Graphic file (type png)
 
 <use ./src/html/ps4_05.png>
-Package pdftex.def Info: ./src/html/ps4_05.png used on input line 559.
+Package pdftex.def Info: ./src/html/ps4_05.png used on input line 562.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_06.png, id=421, 421.575pt x 316.18124pt>
+<./src/html/ps4_06.png, id=525, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_06.png Graphic file (type png)
 
 <use ./src/html/ps4_06.png>
-Package pdftex.def Info: ./src/html/ps4_06.png used on input line 562.
+Package pdftex.def Info: ./src/html/ps4_06.png used on input line 565.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_14.png, id=423, 421.575pt x 316.18124pt>
+<./src/html/ps4_14.png, id=527, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_14.png Graphic file (type png)
 
 <use ./src/html/ps4_14.png>
-Package pdftex.def Info: ./src/html/ps4_14.png used on input line 575.
+Package pdftex.def Info: ./src/html/ps4_14.png used on input line 578.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_15.png, id=425, 421.575pt x 316.18124pt>
+<./src/html/ps4_15.png, id=529, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_15.png Graphic file (type png)
 
 <use ./src/html/ps4_15.png>
-Package pdftex.def Info: ./src/html/ps4_15.png used on input line 578.
+Package pdftex.def Info: ./src/html/ps4_15.png used on input line 581.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
- [21 <./src/html/ps4_03.png (PNG copy)> <./src/html/ps4_04.png (PNG copy)> <./s
+ [23 <./src/html/ps4_03.png (PNG copy)> <./src/html/ps4_04.png (PNG copy)> <./s
 rc/html/ps4_05.png (PNG copy)> <./src/html/ps4_06.png (PNG copy)>]
-<./src/html/ps4_dualCode.png, id=438, 489.32813pt x 157.33781pt>
+<./src/html/ps4_dualCode.png, id=542, 489.32813pt x 157.33781pt>
 File: ./src/html/ps4_dualCode.png Graphic file (type png)
 
 <use ./src/html/ps4_dualCode.png>
-Package pdftex.def Info: ./src/html/ps4_dualCode.png used on input line 592.
+Package pdftex.def Info: ./src/html/ps4_dualCode.png used on input line 595.
 (pdftex.def)             Requested size: 469.75502pt x 151.04736pt.
 
-<./src/html/ps4_07.png, id=439, 421.575pt x 316.18124pt>
+<./src/html/ps4_07.png, id=543, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_07.png Graphic file (type png)
 
 <use ./src/html/ps4_07.png>
-Package pdftex.def Info: ./src/html/ps4_07.png used on input line 598.
+Package pdftex.def Info: ./src/html/ps4_07.png used on input line 601.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_08.png, id=441, 421.575pt x 316.18124pt>
+<./src/html/ps4_08.png, id=545, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_08.png Graphic file (type png)
 
 <use ./src/html/ps4_08.png>
-Package pdftex.def Info: ./src/html/ps4_08.png used on input line 601.
+Package pdftex.def Info: ./src/html/ps4_08.png used on input line 604.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
- [22 <./src/html/ps4_14.png (PNG copy)> <./src/html/ps4_15.png (PNG copy)> <./s
+ [24 <./src/html/ps4_14.png (PNG copy)> <./src/html/ps4_15.png (PNG copy)> <./s
 rc/html/ps4_dualCode.png>]
-<./src/html/ps4_09.png, id=453, 421.575pt x 316.18124pt>
+<./src/html/ps4_09.png, id=558, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_09.png Graphic file (type png)
 
 <use ./src/html/ps4_09.png>
-Package pdftex.def Info: ./src/html/ps4_09.png used on input line 613.
+Package pdftex.def Info: ./src/html/ps4_09.png used on input line 616.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_10.png, id=455, 421.575pt x 316.18124pt>
+<./src/html/ps4_10.png, id=560, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_10.png Graphic file (type png)
 
 <use ./src/html/ps4_10.png>
-Package pdftex.def Info: ./src/html/ps4_10.png used on input line 616.
+Package pdftex.def Info: ./src/html/ps4_10.png used on input line 619.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_11.png, id=457, 421.575pt x 316.18124pt>
+<./src/html/ps4_11.png, id=562, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_11.png Graphic file (type png)
 
 <use ./src/html/ps4_11.png>
-Package pdftex.def Info: ./src/html/ps4_11.png used on input line 626.
+Package pdftex.def Info: ./src/html/ps4_11.png used on input line 629.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_12.png, id=459, 421.575pt x 316.18124pt>
+<./src/html/ps4_12.png, id=564, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_12.png Graphic file (type png)
 
 <use ./src/html/ps4_12.png>
-Package pdftex.def Info: ./src/html/ps4_12.png used on input line 629.
+Package pdftex.def Info: ./src/html/ps4_12.png used on input line 632.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
- [23 <./src/html/ps4_07.png (PNG copy)> <./src/html/ps4_08.png (PNG copy)> <./s
+ [25 <./src/html/ps4_07.png (PNG copy)> <./src/html/ps4_08.png (PNG copy)> <./s
 rc/html/ps4_09.png (PNG copy)> <./src/html/ps4_10.png (PNG copy)>] <./src/html/
-ps4_grav1.png, id=471, 170.88844pt x 265.74281pt>
+ps4_grav1.png, id=576, 170.88844pt x 265.74281pt>
 File: ./src/html/ps4_grav1.png Graphic file (type png)
 
 <use ./src/html/ps4_grav1.png>
-Package pdftex.def Info: ./src/html/ps4_grav1.png used on input line 644.
+Package pdftex.def Info: ./src/html/ps4_grav1.png used on input line 647.
 (pdftex.def)             Requested size: 136.71092pt x 212.59453pt.
 
-<./src/html/ps4_grav2.png, id=473, 298.11375pt x 59.47218pt>
+<./src/html/ps4_grav2.png, id=578, 298.11375pt x 59.47218pt>
 File: ./src/html/ps4_grav2.png Graphic file (type png)
 
 <use ./src/html/ps4_grav2.png>
-Package pdftex.def Info: ./src/html/ps4_grav2.png used on input line 653.
+Package pdftex.def Info: ./src/html/ps4_grav2.png used on input line 656.
 (pdftex.def)             Requested size: 238.49132pt x 47.5778pt.
- [24 <./src/html/ps4_11.png (PNG copy)> <./src/html/ps4_12.png (PNG copy)> <./s
+ [26 <./src/html/ps4_11.png (PNG copy)> <./src/html/ps4_12.png (PNG copy)> <./s
 rc/html/ps4_grav1.png>]
-<./src/html/ps4_grav3.png, id=484, 235.63031pt x 42.91031pt>
+<./src/html/ps4_grav3.png, id=588, 235.63031pt x 42.91031pt>
 File: ./src/html/ps4_grav3.png Graphic file (type png)
 
 <use ./src/html/ps4_grav3.png>
-Package pdftex.def Info: ./src/html/ps4_grav3.png used on input line 660.
+Package pdftex.def Info: ./src/html/ps4_grav3.png used on input line 663.
 (pdftex.def)             Requested size: 188.5045pt x 34.32828pt.
 
-<./src/html/ps4_grav4.png, id=485, 293.59688pt x 48.93282pt>
+<./src/html/ps4_grav4.png, id=589, 293.59688pt x 48.93282pt>
 File: ./src/html/ps4_grav4.png Graphic file (type png)
 
 <use ./src/html/ps4_grav4.png>
-Package pdftex.def Info: ./src/html/ps4_grav4.png used on input line 667.
+Package pdftex.def Info: ./src/html/ps4_grav4.png used on input line 670.
 (pdftex.def)             Requested size: 293.59615pt x 48.93268pt.
 
-<./src/html/ps4_grav5.png, id=486, 193.47281pt x 32.37094pt>
+<./src/html/ps4_grav5.png, id=590, 193.47281pt x 32.37094pt>
 File: ./src/html/ps4_grav5.png Graphic file (type png)
 
 <use ./src/html/ps4_grav5.png>
-Package pdftex.def Info: ./src/html/ps4_grav5.png used on input line 674.
+Package pdftex.def Info: ./src/html/ps4_grav5.png used on input line 677.
 (pdftex.def)             Requested size: 193.47234pt x 32.37085pt.
 
-<./src/html/ps4_22.png, id=488, 421.575pt x 316.18124pt>
+<./src/html/ps4_22.png, id=592, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_22.png Graphic file (type png)
 
 <use ./src/html/ps4_22.png>
-Package pdftex.def Info: ./src/html/ps4_22.png used on input line 682.
+Package pdftex.def Info: ./src/html/ps4_22.png used on input line 685.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_23.png, id=490, 421.575pt x 316.18124pt>
+<./src/html/ps4_23.png, id=594, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_23.png Graphic file (type png)
 
 <use ./src/html/ps4_23.png>
-Package pdftex.def Info: ./src/html/ps4_23.png used on input line 685.
+Package pdftex.def Info: ./src/html/ps4_23.png used on input line 688.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
- [25 <./src/html/ps4_grav2.png> <./src/html/ps4_grav3.png> <./src/html/ps4_grav
+ [27 <./src/html/ps4_grav2.png> <./src/html/ps4_grav3.png> <./src/html/ps4_grav
 4.png> <./src/html/ps4_grav5.png>]
-<./src/html/ps4_24.png, id=506, 421.575pt x 316.18124pt>
+<./src/html/ps4_24.png, id=610, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_24.png Graphic file (type png)
 
 <use ./src/html/ps4_24.png>
-Package pdftex.def Info: ./src/html/ps4_24.png used on input line 696.
+Package pdftex.def Info: ./src/html/ps4_24.png used on input line 699.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_25.png, id=508, 421.575pt x 316.18124pt>
+<./src/html/ps4_25.png, id=612, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_25.png Graphic file (type png)
 
 <use ./src/html/ps4_25.png>
-Package pdftex.def Info: ./src/html/ps4_25.png used on input line 699.
+Package pdftex.def Info: ./src/html/ps4_25.png used on input line 702.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps4_grav0.png, id=510, 233.37187pt x 76.78688pt>
+<./src/html/ps4_grav0.png, id=614, 233.37187pt x 76.78688pt>
 File: ./src/html/ps4_grav0.png Graphic file (type png)
 
 <use ./src/html/ps4_grav0.png>
-Package pdftex.def Info: ./src/html/ps4_grav0.png used on input line 711.
+Package pdftex.def Info: ./src/html/ps4_grav0.png used on input line 714.
 (pdftex.def)             Requested size: 186.69774pt x 61.42957pt.
- [26 <./src/html/ps4_22.png (PNG copy)> <./src/html/ps4_23.png (PNG copy)> <./s
+ [28 <./src/html/ps4_22.png (PNG copy)> <./src/html/ps4_23.png (PNG copy)> <./s
 rc/html/ps4_24.png (PNG copy)> <./src/html/ps4_25.png (PNG copy)>] <./src/html/
-ps4_grav6.png, id=520, 444.15938pt x 88.07906pt>
+ps4_grav6.png, id=624, 444.15938pt x 88.07906pt>
 File: ./src/html/ps4_grav6.png Graphic file (type png)
 
 <use ./src/html/ps4_grav6.png>
-Package pdftex.def Info: ./src/html/ps4_grav6.png used on input line 718.
+Package pdftex.def Info: ./src/html/ps4_grav6.png used on input line 721.
 (pdftex.def)             Requested size: 355.32797pt x 70.46332pt.
 
-<./src/html/ps4_grav7.png, id=521, 319.1925pt x 55.70813pt>
+<./src/html/ps4_grav7.png, id=625, 319.1925pt x 55.70813pt>
 File: ./src/html/ps4_grav7.png Graphic file (type png)
 
 <use ./src/html/ps4_grav7.png>
-Package pdftex.def Info: ./src/html/ps4_grav7.png used on input line 725.
+Package pdftex.def Info: ./src/html/ps4_grav7.png used on input line 728.
 (pdftex.def)             Requested size: 255.35434pt x 44.56654pt.
 
-<./src/html/ps4_grav8.png, id=522, 222.07968pt x 73.02281pt>
+<./src/html/ps4_grav8.png, id=626, 222.07968pt x 73.02281pt>
 File: ./src/html/ps4_grav8.png Graphic file (type png)
 
 <use ./src/html/ps4_grav8.png>
-Package pdftex.def Info: ./src/html/ps4_grav8.png used on input line 732.
+Package pdftex.def Info: ./src/html/ps4_grav8.png used on input line 735.
 (pdftex.def)             Requested size: 177.66397pt x 58.4183pt.
 
-<./src/html/ps4_grav9.png, id=523, 182.18062pt x 48.93282pt>
+<./src/html/ps4_grav9.png, id=627, 182.18062pt x 48.93282pt>
 File: ./src/html/ps4_grav9.png Graphic file (type png)
 
 <use ./src/html/ps4_grav9.png>
-Package pdftex.def Info: ./src/html/ps4_grav9.png used on input line 739.
+Package pdftex.def Info: ./src/html/ps4_grav9.png used on input line 742.
 (pdftex.def)             Requested size: 145.74467pt x 39.14629pt.
 
-<./src/html/ps4_26.png, id=525, 421.575pt x 316.18124pt>
+<./src/html/ps4_26.png, id=629, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_26.png Graphic file (type png)
 
 <use ./src/html/ps4_26.png>
-Package pdftex.def Info: ./src/html/ps4_26.png used on input line 746.
+Package pdftex.def Info: ./src/html/ps4_26.png used on input line 749.
 (pdftex.def)             Requested size: 284.90735pt x 234.73558pt.
- [27 <./src/html/ps4_grav0.png> <./src/html/ps4_grav6.png> <./src/html/ps4_grav
+ [29 <./src/html/ps4_grav0.png> <./src/html/ps4_grav6.png> <./src/html/ps4_grav
 7.png> <./src/html/ps4_grav8.png> <./src/html/ps4_grav9.png>] <./src/html/ps4_2
-7.png, id=542, 421.575pt x 316.18124pt>
+7.png, id=646, 421.575pt x 316.18124pt>
 File: ./src/html/ps4_27.png Graphic file (type png)
 
 <use ./src/html/ps4_27.png>
-Package pdftex.def Info: ./src/html/ps4_27.png used on input line 755.
+Package pdftex.def Info: ./src/html/ps4_27.png used on input line 758.
 (pdftex.def)             Requested size: 284.90735pt x 234.73558pt.
- [28 <./src/html/ps4_26.png (PNG copy)> <./src/html/ps4_27.png (PNG copy)>]
-<./src/html/ps5_gmst.png, id=551, 1045.65656pt x 427.5975pt>
+ [30 <./src/html/ps4_26.png (PNG copy)> <./src/html/ps4_27.png (PNG copy)>] <./
+src/html/ps5_mag4.png, id=656, 554.07pt x 168.63pt>
+File: ./src/html/ps5_mag4.png Graphic file (type png)
+
+<use ./src/html/ps5_mag4.png>
+Package pdftex.def Info: ./src/html/ps5_mag4.png used on input line 779.
+(pdftex.def)             Requested size: 387.84636pt x 118.04018pt.
+
+<./src/html/ps5_mag2.png, id=657, 268.75406pt x 182.18062pt>
+File: ./src/html/ps5_mag2.png Graphic file (type png)
+
+<use ./src/html/ps5_mag2.png>
+Package pdftex.def Info: ./src/html/ps5_mag2.png used on input line 786.
+(pdftex.def)             Requested size: 188.12656pt x 127.52554pt.
+
+<./src/html/ps5_mag3.png, id=658, 423.83344pt x 143.78719pt>
+File: ./src/html/ps5_mag3.png Graphic file (type png)
+
+<use ./src/html/ps5_mag3.png>
+Package pdftex.def Info: ./src/html/ps5_mag3.png used on input line 791.
+(pdftex.def)             Requested size: 296.68137pt x 100.65034pt.
+ [31 <./src/html/ps5_mag4.png> <./src/html/ps5_mag2.png>] <./src/html/ps5_mag1.
+png, id=668, 606.01407pt x 359.09157pt>
+File: ./src/html/ps5_mag1.png Graphic file (type png)
+
+<use ./src/html/ps5_mag1.png>
+Package pdftex.def Info: ./src/html/ps5_mag1.png used on input line 799.
+(pdftex.def)             Requested size: 424.20695pt x 251.36238pt.
+
+<./src/html/ps5_mag5.png, id=669, 283.0575pt x 89.58469pt>
+File: ./src/html/ps5_mag5.png Graphic file (type png)
+
+<use ./src/html/ps5_mag5.png>
+Package pdftex.def Info: ./src/html/ps5_mag5.png used on input line 808.
+(pdftex.def)             Requested size: 198.13889pt x 62.70883pt.
+ [32 <./src/html/ps5_mag3.png> <./src/html/ps5_mag1.png> <./src/html/ps5_mag5.p
+ng>]
+Overfull \hbox (99.74026pt too wide) in paragraph at lines 817--817
+[][][][]$\OT1/cmtt/m/n/10 https : / / space . stackexchange . com / questions /
+ 9482 / how-[]long-[]would-[]iss-[]stay-[]in-[]orbit-[]if-[]it-[]didnt-[]get-[]
+reboosts$[]| 
+ []
+
+<./src/html/ps5_drag1.png, id=684, 182.18062pt x 249.18094pt>
+File: ./src/html/ps5_drag1.png Graphic file (type png)
+
+<use ./src/html/ps5_drag1.png>
+Package pdftex.def Info: ./src/html/ps5_drag1.png used on input line 821.
+(pdftex.def)             Requested size: 127.52554pt x 174.42545pt.
+
+<./src/html/ps5_drag2.png, id=685, 274.02374pt x 54.2025pt>
+File: ./src/html/ps5_drag2.png Graphic file (type png)
+
+<use ./src/html/ps5_drag2.png>
+Package pdftex.def Info: ./src/html/ps5_drag2.png used on input line 830.
+(pdftex.def)             Requested size: 191.8153pt x 37.94148pt.
+
+<./src/html/ps5_drag3.png, id=686, 213.79875pt x 29.35968pt>
+File: ./src/html/ps5_drag3.png Graphic file (type png)
+
+<use ./src/html/ps5_drag3.png>
+Package pdftex.def Info: ./src/html/ps5_drag3.png used on input line 837.
+(pdftex.def)             Requested size: 149.6581pt x 20.55162pt.
+ [33 <./src/html/ps5_drag1.png> <./src/html/ps5_drag2.png> <./src/html/ps5_drag
+3.png>]
+<./src/html/ps5_gmst.png, id=698, 1045.65656pt x 427.5975pt>
 File: ./src/html/ps5_gmst.png Graphic file (type png)
 
 <use ./src/html/ps5_gmst.png>
-Package pdftex.def Info: ./src/html/ps5_gmst.png used on input line 781.
+Package pdftex.def Info: ./src/html/ps5_gmst.png used on input line 854.
 (pdftex.def)             Requested size: 941.08221pt x 384.83418pt.
 
-<./src/html/ps5_perturbs.png, id=552, 841.64438pt x 575.90157pt>
+<./src/html/ps5_perturbs.png, id=700, 841.64438pt x 575.90157pt>
 File: ./src/html/ps5_perturbs.png Graphic file (type png)
 
 <use ./src/html/ps5_perturbs.png>
-Package pdftex.def Info: ./src/html/ps5_perturbs.png used on input line 790.
+Package pdftex.def Info: ./src/html/ps5_perturbs.png used on input line 863.
 (pdftex.def)             Requested size: 631.23175pt x 431.92511pt.
- [29 <./src/html/ps5_gmst.png>]
-<./src/html/ps5_01.png, id=559, 421.575pt x 316.18124pt>
+ [34 <./src/html/ps5_gmst.png>]
+<./src/html/ps5_01.png, id=710, 421.575pt x 316.18124pt>
 File: ./src/html/ps5_01.png Graphic file (type png)
 
 <use ./src/html/ps5_01.png>
-Package pdftex.def Info: ./src/html/ps5_01.png used on input line 799.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [30 <./src/html/ps5_perturbs.png>]
-<./src/html/ps5_02.png, id=567, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps5_01.png used on input line 875.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [35 <./src/html/ps5_perturbs.png>]
+<./src/html/ps5_02.png, id=718, 421.575pt x 316.18124pt>
 File: ./src/html/ps5_02.png Graphic file (type png)
 
 <use ./src/html/ps5_02.png>
-Package pdftex.def Info: ./src/html/ps5_02.png used on input line 807.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
-
-<./src/html/ps5_03.png, id=568, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps5_02.png used on input line 884.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [36 <./src/html/ps5_01.png (PNG copy)> <./src/html/ps5_02.png (PNG copy)>]
+<./src/html/ps5_03.png, id=727, 421.575pt x 316.18124pt>
 File: ./src/html/ps5_03.png Graphic file (type png)
 
 <use ./src/html/ps5_03.png>
-Package pdftex.def Info: ./src/html/ps5_03.png used on input line 815.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [31 <./src/html/ps5_01.png (PNG copy)> <./src/html/ps5_02.png (PNG copy)>]
-<./src/html/ps5_04.png, id=575, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps5_03.png used on input line 894.
+(pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
+
+<./src/html/ps5_04.png, id=729, 421.575pt x 316.18124pt>
 File: ./src/html/ps5_04.png Graphic file (type png)
 
 <use ./src/html/ps5_04.png>
-Package pdftex.def Info: ./src/html/ps5_04.png used on input line 823.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+Package pdftex.def Info: ./src/html/ps5_04.png used on input line 897.
+(pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 
-<./src/html/ps5_05.png, id=576, 421.575pt x 316.18124pt>
+<./src/html/ps5_05.png, id=732, 421.575pt x 316.18124pt>
 File: ./src/html/ps5_05.png Graphic file (type png)
 
 <use ./src/html/ps5_05.png>
-Package pdftex.def Info: ./src/html/ps5_05.png used on input line 831.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [32 <./src/html/ps5_03.png (PNG copy)> <./src/html/ps5_04.png (PNG copy)>]
-<./src/html/ps5_06.png, id=583, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps5_05.png used on input line 907.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [37 <./src/html/ps5_03.png (PNG copy)> <./src/html/ps5_04.png (PNG copy)> <./s
+rc/html/ps5_05.png (PNG copy)>]
+<rtnframe.png, id=741, 345.29pt x 203.76125pt>
+File: rtnframe.png Graphic file (type png)
+ <use rtnframe.png>
+Package pdftex.def Info: rtnframe.png used on input line 919.
+(pdftex.def)             Requested size: 276.23236pt x 163.0092pt.
+
+<./src/html/ps5_06.png, id=744, 421.575pt x 316.18124pt>
 File: ./src/html/ps5_06.png Graphic file (type png)
 
 <use ./src/html/ps5_06.png>
-Package pdftex.def Info: ./src/html/ps5_06.png used on input line 839.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
-
-<./src/html/ps5_07.png, id=584, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps5_06.png used on input line 928.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [38 <./rtnframe.png (PNG copy)>]
+<./src/html/ps5_07.png, id=751, 421.575pt x 316.18124pt>
 File: ./src/html/ps5_07.png Graphic file (type png)
 
 <use ./src/html/ps5_07.png>
-Package pdftex.def Info: ./src/html/ps5_07.png used on input line 847.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [33 <./src/html/ps5_05.png (PNG copy)> <./src/html/ps5_06.png (PNG copy)>]
-<./src/html/ps6_01.png, id=591, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps5_07.png used on input line 936.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [39 <./src/html/ps5_06.png (PNG copy)> <./src/html/ps5_07.png (PNG copy)>]
+Overfull \hbox (71.4905pt too wide) in paragraph at lines 947--947
+[][][][]$\OT1/cmtt/m/n/10 https : / / space . stackexchange . com / questions /
+ 566 / do-[]any-[]spacecraft-[]use-[]gnss-[]for-[]attitude-[]determination$[]| 
+
+ []
+
+<./src/html/ps6_att1.png, id=762, 276.28218pt x 32.37094pt>
+File: ./src/html/ps6_att1.png Graphic file (type png)
+
+<use ./src/html/ps6_att1.png>
+Package pdftex.def Info: ./src/html/ps6_att1.png used on input line 956.
+(pdftex.def)             Requested size: 221.02603pt x 25.89677pt.
+
+<./src/html/ps6_att2.png, id=763, 359.84438pt x 73.77562pt>
+File: ./src/html/ps6_att2.png Graphic file (type png)
+
+<use ./src/html/ps6_att2.png>
+Package pdftex.def Info: ./src/html/ps6_att2.png used on input line 963.
+(pdftex.def)             Requested size: 287.87589pt x 59.02055pt.
+
+<./src/html/ps6_att3.png, id=764, 222.8325pt x 34.62938pt>
+File: ./src/html/ps6_att3.png Graphic file (type png)
+
+<use ./src/html/ps6_att3.png>
+Package pdftex.def Info: ./src/html/ps6_att3.png used on input line 970.
+(pdftex.def)             Requested size: 178.26624pt x 27.70352pt.
+ [40 <./src/html/ps6_att1.png> <./src/html/ps6_att2.png> <./src/html/ps6_att3.p
+ng>]
+<./src/html/ps6_att4.png, id=777, 224.33812pt x 51.19125pt>
+File: ./src/html/ps6_att4.png Graphic file (type png)
+
+<use ./src/html/ps6_att4.png>
+Package pdftex.def Info: ./src/html/ps6_att4.png used on input line 979.
+(pdftex.def)             Requested size: 179.47073pt x 40.95305pt.
+
+<./src/html/ps6_att5.png, id=778, 325.96782pt x 85.82062pt>
+File: ./src/html/ps6_att5.png Graphic file (type png)
+
+<use ./src/html/ps6_att5.png>
+Package pdftex.def Info: ./src/html/ps6_att5.png used on input line 986.
+(pdftex.def)             Requested size: 260.7746pt x 68.65657pt.
+
+<./src/html/ps6_att55.png, id=779, 479.54156pt x 73.02281pt>
+File: ./src/html/ps6_att55.png Graphic file (type png)
+
+<use ./src/html/ps6_att55.png>
+Package pdftex.def Info: ./src/html/ps6_att55.png used on input line 993.
+(pdftex.def)             Requested size: 383.63377pt x 58.4183pt.
+
+<./src/html/ps6_att6.png, id=780, 214.55156pt x 69.25874pt>
+File: ./src/html/ps6_att6.png Graphic file (type png)
+
+<use ./src/html/ps6_att6.png>
+Package pdftex.def Info: ./src/html/ps6_att6.png used on input line 1002.
+(pdftex.def)             Requested size: 171.64146pt x 55.40706pt.
+
+<./src/html/ps6_att7.png, id=781, 593.21625pt x 25.59563pt>
+File: ./src/html/ps6_att7.png Graphic file (type png)
+
+<use ./src/html/ps6_att7.png>
+Package pdftex.def Info: ./src/html/ps6_att7.png used on input line 1009.
+(pdftex.def)             Requested size: 474.57364pt x 20.47652pt.
+
+Overfull \hbox (4.81862pt too wide) in paragraph at lines 1009--1010
+ [][] 
+ []
+
+<./src/html/ps6_att8.png, id=782, 651.18282pt x 48.93282pt>
+File: ./src/html/ps6_att8.png Graphic file (type png)
+
+<use ./src/html/ps6_att8.png>
+Package pdftex.def Info: ./src/html/ps6_att8.png used on input line 1016.
+(pdftex.def)             Requested size: 520.94696pt x 39.14629pt.
+
+Overfull \hbox (51.19194pt too wide) in paragraph at lines 1016--1017
+ [][] 
+ []
+
+[41 <./src/html/ps6_att4.png> <./src/html/ps6_att5.png> <./src/html/ps6_att55.p
+ng> <./src/html/ps6_att6.png> <./src/html/ps6_att7.png>]
+<./src/html/ps6_01.png, id=794, 421.575pt x 316.18124pt>
 File: ./src/html/ps6_01.png Graphic file (type png)
 
 <use ./src/html/ps6_01.png>
-Package pdftex.def Info: ./src/html/ps6_01.png used on input line 858.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [34 <./src/html/ps5_07.png (PNG copy)>]
-<./src/html/ps6_02.png, id=597, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps6_01.png used on input line 1025.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+
+<./src/html/ps6_02.png, id=796, 421.575pt x 316.18124pt>
 File: ./src/html/ps6_02.png Graphic file (type png)
 
 <use ./src/html/ps6_02.png>
-Package pdftex.def Info: ./src/html/ps6_02.png used on input line 866.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [35 <./src/html/ps6_01.png (PNG copy)>]
-<./src/html/ps6_03.png, id=603, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps6_02.png used on input line 1034.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+ [42 <./src/html/ps6_att8.png> <./src/html/ps6_01.png (PNG copy)>] <./src/html/
+ps6_03.png, id=805, 421.575pt x 316.18124pt>
 File: ./src/html/ps6_03.png Graphic file (type png)
 
 <use ./src/html/ps6_03.png>
-Package pdftex.def Info: ./src/html/ps6_03.png used on input line 874.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
-
-<./src/html/ps6_04.png, id=604, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps6_03.png used on input line 1047.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [43 <./src/html/ps6_02.png (PNG copy)>]
+<./src/html/ps6_04.png, id=812, 421.575pt x 316.18124pt>
 File: ./src/html/ps6_04.png Graphic file (type png)
 
 <use ./src/html/ps6_04.png>
-Package pdftex.def Info: ./src/html/ps6_04.png used on input line 882.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [36 <./src/html/ps6_02.png (PNG copy)> <./src/html/ps6_03.png (PNG copy)>]
-<./src/html/ps6_05.png, id=612, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps6_04.png used on input line 1056.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+ [44 <./src/html/ps6_03.png (PNG copy)>]
+<./src/html/ps6_05.png, id=819, 421.575pt x 316.18124pt>
 File: ./src/html/ps6_05.png Graphic file (type png)
 
 <use ./src/html/ps6_05.png>
-Package pdftex.def Info: ./src/html/ps6_05.png used on input line 890.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
-
-<./src/html/ps6_06.png, id=613, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps6_05.png used on input line 1070.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [45 <./src/html/ps6_04.png (PNG copy)>]
+<./src/html/ps6_06.png, id=826, 421.575pt x 316.18124pt>
 File: ./src/html/ps6_06.png Graphic file (type png)
 
 <use ./src/html/ps6_06.png>
-Package pdftex.def Info: ./src/html/ps6_06.png used on input line 898.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [37 <./src/html/ps6_04.png (PNG copy)> <./src/html/ps6_05.png (PNG copy)>]
-<./src/html/ps7_01.png, id=620, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps6_06.png used on input line 1079.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [46 <./src/html/ps6_05.png (PNG copy)> <./src/html/ps6_06.png (PNG copy)>]
+<./src/html/ps7_ekf0.png, id=834, 180.675pt x 53.44969pt>
+File: ./src/html/ps7_ekf0.png Graphic file (type png)
+
+<use ./src/html/ps7_ekf0.png>
+Package pdftex.def Info: ./src/html/ps7_ekf0.png used on input line 1098.
+(pdftex.def)             Requested size: 144.54018pt x 42.75978pt.
+ [47 <./src/html/ps7_ekf0.png>]
+<./src/html/ps7_ekf1.png, id=852, 709.90219pt x 374.14781pt>
+File: ./src/html/ps7_ekf1.png Graphic file (type png)
+
+<use ./src/html/ps7_ekf1.png>
+Package pdftex.def Info: ./src/html/ps7_ekf1.png used on input line 1123.
+(pdftex.def)             Requested size: 567.92252pt x 299.31863pt.
+ [48 <./src/html/ps7_ekf1.png>]
+<./src/html/ps7_ekf2.png, id=866, 451.6875pt x 170.88844pt>
+File: ./src/html/ps7_ekf2.png Graphic file (type png)
+
+<use ./src/html/ps7_ekf2.png>
+Package pdftex.def Info: ./src/html/ps7_ekf2.png used on input line 1155.
+(pdftex.def)             Requested size: 361.35048pt x 136.71092pt.
+
+<./src/html/ps7_01.png, id=867, 421.575pt x 316.18124pt>
 File: ./src/html/ps7_01.png Graphic file (type png)
 
 <use ./src/html/ps7_01.png>
-Package pdftex.def Info: ./src/html/ps7_01.png used on input line 912.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [38 <./src/html/ps6_06.png (PNG copy)>]
-<./src/html/ps7_02.png, id=626, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps7_01.png used on input line 1164.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [49 <./src/html/ps7_ekf2.png>]
+<./src/html/ps7_02.png, id=876, 421.575pt x 316.18124pt>
 File: ./src/html/ps7_02.png Graphic file (type png)
 
 <use ./src/html/ps7_02.png>
-Package pdftex.def Info: ./src/html/ps7_02.png used on input line 920.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [39 <./src/html/ps7_01.png (PNG copy)>]
-<./src/html/ps7_03.png, id=632, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps7_02.png used on input line 1173.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [50 <./src/html/ps7_01.png (PNG copy)> <./src/html/ps7_02.png (PNG copy)>]
+<./src/html/ps7_03.png, id=884, 421.575pt x 316.18124pt>
 File: ./src/html/ps7_03.png Graphic file (type png)
 
 <use ./src/html/ps7_03.png>
-Package pdftex.def Info: ./src/html/ps7_03.png used on input line 928.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+Package pdftex.def Info: ./src/html/ps7_03.png used on input line 1182.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
 
-<./src/html/ps7_04.png, id=633, 421.575pt x 316.18124pt>
+<./src/html/ps7_04.png, id=886, 421.575pt x 316.18124pt>
 File: ./src/html/ps7_04.png Graphic file (type png)
 
 <use ./src/html/ps7_04.png>
-Package pdftex.def Info: ./src/html/ps7_04.png used on input line 936.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [40 <./src/html/ps7_02.png (PNG copy)> <./src/html/ps7_03.png (PNG copy)>]
-<./src/html/ps7_05.png, id=640, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps7_04.png used on input line 1191.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [51 <./src/html/ps7_03.png (PNG copy)>]
+<./src/html/ps7_05.png, id=893, 421.575pt x 316.18124pt>
 File: ./src/html/ps7_05.png Graphic file (type png)
 
 <use ./src/html/ps7_05.png>
-Package pdftex.def Info: ./src/html/ps7_05.png used on input line 944.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
-
-<./src/html/ps7_06.png, id=641, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps7_05.png used on input line 1200.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [52 <./src/html/ps7_04.png (PNG copy)> <./src/html/ps7_05.png (PNG copy)>]
+<./src/html/ps7_06.png, id=901, 421.575pt x 316.18124pt>
 File: ./src/html/ps7_06.png Graphic file (type png)
 
 <use ./src/html/ps7_06.png>
-Package pdftex.def Info: ./src/html/ps7_06.png used on input line 952.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [41 <./src/html/ps7_04.png (PNG copy)> <./src/html/ps7_05.png (PNG copy)>]
-Overfull \hbox (6.2708pt too wide) in paragraph at lines 959--959
+Package pdftex.def Info: ./src/html/ps7_06.png used on input line 1209.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+
+Overfull \hbox (6.2708pt too wide) in paragraph at lines 1217--1217
 []\OT1/cmr/bx/n/17.28 Problem Set 8 - Im-ple-ment Ac-tu-a-tors and Con-trollers
  
  []
 
-[42 <./src/html/ps7_06.png (PNG copy)>]
-<./src/html/PS8_controller.png, id=658, 593.96906pt x 177.66376pt>
+[53 <./src/html/ps7_06.png (PNG copy)>]
+<./src/html/PS8_controller.png, id=909, 593.96906pt x 177.66376pt>
 File: ./src/html/PS8_controller.png Graphic file (type png)
 
 <use ./src/html/PS8_controller.png>
-Package pdftex.def Info: ./src/html/PS8_controller.png used on input line 978.
-(pdftex.def)             Requested size: 415.7755pt x 124.36377pt.
+Package pdftex.def Info: ./src/html/PS8_controller.png used on input line 1240.
 
-<./src/html/ps8_lqrCost.png, id=662, 335.75438pt x 59.47218pt>
+(pdftex.def)             Requested size: 415.7755pt x 124.36377pt.
+ [54 <./src/html/PS8_controller.png>]
+<./src/html/ps8_lqrCost.png, id=923, 335.75438pt x 59.47218pt>
 File: ./src/html/ps8_lqrCost.png Graphic file (type png)
 
 <use ./src/html/ps8_lqrCost.png>
-Package pdftex.def Info: ./src/html/ps8_lqrCost.png used on input line 996.
+Package pdftex.def Info: ./src/html/ps8_lqrCost.png used on input line 1258.
 (pdftex.def)             Requested size: 235.02646pt x 41.63023pt.
 
-<./src/html/ps8_taylor.png, id=663, 179.92218pt x 35.38219pt>
+<./src/html/ps8_taylor.png, id=924, 179.92218pt x 35.38219pt>
 File: ./src/html/ps8_taylor.png Graphic file (type png)
 
 <use ./src/html/ps8_taylor.png>
-Package pdftex.def Info: ./src/html/ps8_taylor.png used on input line 1005.
+Package pdftex.def Info: ./src/html/ps8_taylor.png used on input line 1267.
 (pdftex.def)             Requested size: 125.94466pt x 24.76735pt.
- [43 <./src/html/PS8_controller.png> <./src/html/ps8_lqrCost.png>] <./src/html/
-ps8_code.png, id=675, 398.99063pt x 439.6425pt>
+
+<./src/html/ps8_code.png, id=927, 398.99063pt x 439.6425pt>
 File: ./src/html/ps8_code.png Graphic file (type png)
 
 <use ./src/html/ps8_code.png>
-Package pdftex.def Info: ./src/html/ps8_code.png used on input line 1034.
+Package pdftex.def Info: ./src/html/ps8_code.png used on input line 1296.
 (pdftex.def)             Requested size: 299.24223pt x 329.73106pt.
- [44 <./src/html/ps8_taylor.png>]
-<./src/html/ps8_01.png, id=684, 421.575pt x 316.18124pt>
+ [55 <./src/html/ps8_lqrCost.png> <./src/html/ps8_taylor.png>] <./src/html/ps8_
+01.png, id=938, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_01.png Graphic file (type png)
 
 <use ./src/html/ps8_01.png>
-Package pdftex.def Info: ./src/html/ps8_01.png used on input line 1046.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [45 <./src/html/ps8_code.png>]
-<./src/html/ps8_02.png, id=692, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps8_01.png used on input line 1311.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [56 <./src/html/ps8_code.png>]
+<./src/html/ps8_02.png, id=945, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_02.png Graphic file (type png)
 
 <use ./src/html/ps8_02.png>
-Package pdftex.def Info: ./src/html/ps8_02.png used on input line 1055.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [46 <./src/html/ps8_01.png (PNG copy)>]
-<./src/html/ps8_03.png, id=700, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps8_02.png used on input line 1320.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [57 <./src/html/ps8_01.png (PNG copy)>]
+<./src/html/ps8_03.png, id=953, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_03.png Graphic file (type png)
 
 <use ./src/html/ps8_03.png>
-Package pdftex.def Info: ./src/html/ps8_03.png used on input line 1064.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [47 <./src/html/ps8_02.png (PNG copy)>]
-<./src/html/ps8_04.png, id=706, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps8_03.png used on input line 1329.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [58 <./src/html/ps8_02.png (PNG copy)>]
+<./src/html/ps8_04.png, id=959, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_04.png Graphic file (type png)
 
 <use ./src/html/ps8_04.png>
-Package pdftex.def Info: ./src/html/ps8_04.png used on input line 1073.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [48 <./src/html/ps8_03.png (PNG copy)>]
-<./src/html/ps8_05.png, id=713, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps8_04.png used on input line 1338.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [59 <./src/html/ps8_03.png (PNG copy)>]
+<./src/html/ps8_05.png, id=965, 421.575pt x 316.18124pt>
 File: ./src/html/ps8_05.png Graphic file (type png)
 
 <use ./src/html/ps8_05.png>
-Package pdftex.def Info: ./src/html/ps8_05.png used on input line 1082.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [49 <./src/html/ps8_04.png (PNG copy)>]
-<./src/html/ps9_01.png, id=719, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps8_05.png used on input line 1347.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+ [60 <./src/html/ps8_04.png (PNG copy)> <./src/html/ps8_05.png (PNG copy)>]
+<./src/html/ps9_01.png, id=972, 421.575pt x 316.18124pt>
 File: ./src/html/ps9_01.png Graphic file (type png)
 
 <use ./src/html/ps9_01.png>
-Package pdftex.def Info: ./src/html/ps9_01.png used on input line 1097.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
- [50 <./src/html/ps8_05.png (PNG copy)>]
-<./src/html/ps9_02.png, id=725, 421.575pt x 316.18124pt>
+Package pdftex.def Info: ./src/html/ps9_01.png used on input line 1362.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+
+<./src/html/ps9_02.png, id=974, 421.575pt x 316.18124pt>
 File: ./src/html/ps9_02.png Graphic file (type png)
 
 <use ./src/html/ps9_02.png>
-Package pdftex.def Info: ./src/html/ps9_02.png used on input line 1108.
+Package pdftex.def Info: ./src/html/ps9_02.png used on input line 1373.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
 File: ./src/html/ps9_03.png Graphic file (type png)
  <use ./src/html/ps9_03.png>
-Package pdftex.def Info: ./src/html/ps9_03.png used on input line 1111.
+Package pdftex.def Info: ./src/html/ps9_03.png used on input line 1376.
 (pdftex.def)             Requested size: 230.18253pt x 189.65009pt.
- [51 <./src/html/ps9_02.png (PNG copy)> <./src/html/ps9_01.png (PNG copy)>]
-<./src/html/ps9_04.png, id=737, 421.575pt x 316.18124pt>
+ [61 <./src/html/ps9_01.png (PNG copy)>] <./src/html/ps9_04.png, id=983, 421.57
+5pt x 316.18124pt>
 File: ./src/html/ps9_04.png Graphic file (type png)
 
 <use ./src/html/ps9_04.png>
-Package pdftex.def Info: ./src/html/ps9_04.png used on input line 1121.
-(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+Package pdftex.def Info: ./src/html/ps9_04.png used on input line 1386.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
 
 
 pdfTeX warning: pdflatex.exe (file ./ps1code.pdf): PDF inclusion: found PDF ver
 sion <1.7>, but at most version <1.5> allowed
-<ps1code.pdf, id=739, 614.295pt x 794.97pt>
+<ps1code.pdf, id=985, 614.295pt x 794.97pt>
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf>
-Package pdftex.def Info: ps1code.pdf used on input line 1132.
+Package pdftex.def Info: ps1code.pdf used on input line 1397.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 
 
@@ -1341,7 +1471,7 @@ pdfTeX warning: pdflatex.exe (file ./ps1code.pdf): PDF inclusion: found PDF ver
 sion <1.7>, but at most version <1.5> allowed
 File: ps1code.pdf Graphic file (type pdf)
 <use ps1code.pdf>
-Package pdftex.def Info: ps1code.pdf used on input line 1132.
+Package pdftex.def Info: ps1code.pdf used on input line 1397.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 
 
@@ -1351,125 +1481,125 @@ sion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./ps1code.pdf): PDF inclusion: found PDF ver
 sion <1.7>, but at most version <1.5> allowed
-<ps1code.pdf, id=742, page=1, 614.295pt x 794.97pt>
+<ps1code.pdf, id=988, page=1, 614.295pt x 794.97pt>
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf, page 1>
-Package pdftex.def Info: ps1code.pdf, page1 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page1 used on input line 1397.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: ps1code.pdf Graphic file (type pdf)
 
 <use ps1code.pdf, page 1>
-Package pdftex.def Info: ps1code.pdf, page1 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page1 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [52 <./src/html/ps9_04.png (PNG copy)>]
+ [62 <./src/html/ps9_02.png (PNG copy)> <./src/html/ps9_04.png (PNG copy)>] [63
+]
+File: ps1code.pdf Graphic file (type pdf)
+ <use ps1code.pdf, page 1>
+Package pdftex.def Info: ps1code.pdf, page1 used on input line 1397.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ps1code.pdf Graphic file (type pdf)
+ <use ps1code.pdf, page 1>
+Package pdftex.def Info: ps1code.pdf, page1 used on input line 1397.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ps1code.pdf Graphic file (type pdf)
 
 <use ps1code.pdf, page 1>
-Package pdftex.def Info: ps1code.pdf, page1 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page1 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
-File: ps1code.pdf Graphic file (type pdf)
- <use ps1code.pdf, page 1>
-Package pdftex.def Info: ps1code.pdf, page1 used on input line 1132.
-(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
-File: ps1code.pdf Graphic file (type pdf)
- <use ps1code.pdf, page 1>
-Package pdftex.def Info: ps1code.pdf, page1 used on input line 1132.
-(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
-
-[53 <./ps1code.pdf>]
+ [64 <./ps1code.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./ps1code.pdf): PDF inclusion: found PDF ver
 sion <1.7>, but at most version <1.5> allowed
-<ps1code.pdf, id=777, page=2, 614.295pt x 794.97pt>
+<ps1code.pdf, id=1030, page=2, 614.295pt x 794.97pt>
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf, page 2>
-Package pdftex.def Info: ps1code.pdf, page2 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page2 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ps1code.pdf Graphic file (type pdf)
 
 <use ps1code.pdf, page 2>
-Package pdftex.def Info: ps1code.pdf, page2 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page2 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf, page 2>
-Package pdftex.def Info: ps1code.pdf, page2 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page2 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [54 <./ps1code.pdf>]
+ [65 <./ps1code.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./ps1code.pdf): PDF inclusion: found PDF ver
 sion <1.7>, but at most version <1.5> allowed
-<ps1code.pdf, id=783, page=3, 614.295pt x 794.97pt>
+<ps1code.pdf, id=1035, page=3, 614.295pt x 794.97pt>
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf, page 3>
-Package pdftex.def Info: ps1code.pdf, page3 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page3 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ps1code.pdf Graphic file (type pdf)
 
 <use ps1code.pdf, page 3>
-Package pdftex.def Info: ps1code.pdf, page3 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page3 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf, page 3>
-Package pdftex.def Info: ps1code.pdf, page3 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page3 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [55 <./ps1code.pdf>]
+ [66 <./ps1code.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./ps1code.pdf): PDF inclusion: found PDF ver
 sion <1.7>, but at most version <1.5> allowed
-<ps1code.pdf, id=788, page=4, 614.295pt x 794.97pt>
+<ps1code.pdf, id=1041, page=4, 614.295pt x 794.97pt>
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf, page 4>
-Package pdftex.def Info: ps1code.pdf, page4 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page4 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ps1code.pdf Graphic file (type pdf)
 
 <use ps1code.pdf, page 4>
-Package pdftex.def Info: ps1code.pdf, page4 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page4 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf, page 4>
-Package pdftex.def Info: ps1code.pdf, page4 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page4 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [56 <./ps1code.pdf>]
+ [67 <./ps1code.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./ps1code.pdf): PDF inclusion: found PDF ver
 sion <1.7>, but at most version <1.5> allowed
-<ps1code.pdf, id=793, page=5, 614.295pt x 794.97pt>
+<ps1code.pdf, id=1046, page=5, 614.295pt x 794.97pt>
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf, page 5>
-Package pdftex.def Info: ps1code.pdf, page5 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page5 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ps1code.pdf Graphic file (type pdf)
 
 <use ps1code.pdf, page 5>
-Package pdftex.def Info: ps1code.pdf, page5 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page5 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ps1code.pdf Graphic file (type pdf)
  <use ps1code.pdf, page 5>
-Package pdftex.def Info: ps1code.pdf, page5 used on input line 1132.
+Package pdftex.def Info: ps1code.pdf, page5 used on input line 1397.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [57 <./ps1code.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1134.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1134.
+ [68 <./ps1code.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1399.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1399.
 
 (buckley_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1134.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1134.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1399.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1399.
 
 Package rerunfilecheck Info: File `buckley_report.out' has not changed.
-(rerunfilecheck)             Checksum: ECF39A7B163758A98B345999955365FE;2203.
+(rerunfilecheck)             Checksum: E8493EF255CB5E9AA1A726282DA1D7C9;3151.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1134.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1399.
  ) 
 Here is how much of TeX's memory you used:
- 9270 strings out of 493335
- 142820 string characters out of 3139264
- 233042 words of memory out of 3000000
- 12405 multiletter control sequences out of 15000+200000
- 10021 words of font info for 37 fonts, out of 3000000 for 9000
+ 9481 strings out of 493335
+ 146650 string characters out of 3139264
+ 236733 words of memory out of 3000000
+ 12533 multiletter control sequences out of 15000+200000
+ 10844 words of font info for 40 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,18n,46p,842b,458s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
@@ -1481,10 +1611,12 @@ nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 msfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on buckley_report.pdf (58 pages, 4984998 bytes).
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on buckley_report.pdf (69 pages, 5515253 bytes).
 PDF statistics:
- 876 PDF objects out of 1000 (max. 8388607)
- 191 named destinations out of 1000 (max. 500000)
- 1115 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1148 PDF objects out of 1200 (max. 8388607)
+ 248 named destinations out of 1000 (max. 500000)
+ 1336 words of extra memory for PDF output out of 10000 (max. 10000000)
 

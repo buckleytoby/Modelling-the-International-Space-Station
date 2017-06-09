@@ -1,0 +1,249 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PS7</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="PS7.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><p>------------------------ PS7 ------------------------ let state = [p,dp,r,dr,y,dy] 3 angles &amp; rates</p><pre class="codeinput"><span class="comment">% http://renaissance.ucsd.edu/courses/mae207/wie_chap6.pdf</span>
+<span class="comment">% page 350, ch 6.7 gives the linearized euler equations</span>
+
+<span class="comment">% PS 7.2a - linearEuler.m</span>
+<span class="comment">% PS 7.2b - control moment gyros</span>
+
+<span class="comment">% PS 7.2d - initial state uncertainty</span>
+x0 = rand(3,1);
+P0 = 0.01*eye(3); <span class="comment">%I guessed - error covariance matrix</span>
+<span class="comment">% PS 7.2e - defined similar to P_0 but smaller</span>
+Q0 = P0 ./ 10;
+<span class="comment">% PS 7.2f - sensitivity matrix</span>
+H0 = eye(3); <span class="comment">%direct mapping</span>
+<span class="comment">% PS 7.2g - constant measurement error covariance</span>
+R0 = (10 /180*pi)^2 * eye(3,3);
+
+<span class="comment">% PS 7.3 - simulation &amp; plotting</span>
+<span class="comment">%orbital elements</span>
+mu = 3.986e14 / 1000^3;
+a0 = 6776; <span class="comment">%km</span>
+n0 = sqrt(mu/a0^3); <span class="comment">%in rad/s</span>
+e0 = 0.0004758;
+incl0 = 0; <span class="comment">%all angles in degrees</span>
+OMEGA0 = 0;
+omega0 = 0;
+nu0 = 0;
+UTC_0 = [06,02,2017];
+tOffset = 0;
+<span class="comment">%perturbations</span>
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; <span class="comment">%kg/km^3</span>
+wEarth = [0 0 7.292116e-5]'; <span class="comment">%rad/s</span>
+bGravGrad = 1;
+b_perturbs = 1;
+bNoise = 1;
+t_total = 0.01*90*60;
+
+<span class="comment">%euler inputs</span>
+triad1 = [[1 0 0]' [0 0 1]' [0 1 0]']; <span class="comment">%y-axis out of orbit plane == UNSTABLE!!!</span>
+<span class="comment">%triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes</span>
+triad2 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%global axes</span>
+A0 = getDCM(triad1, triad2); <span class="comment">%initial DCM, I2P</span>
+I_principle = S_top.tauCM_P; <span class="comment">%principle moment of inertia tensor</span>
+
+wz = n0; <span class="comment">%mean motion</span>
+w0 = [0 -2 0]'; <span class="comment">%if rotate about y, use -n0. If robot about z, use +n0</span>
+M0 = [0 0 0]';
+A_b2p = S_top.DCM_B2P;
+options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
+sim(<span class="string">'sixDOF_hw7'</span>,[],options);
+<span class="comment">% analysis</span>
+state_error = w_true - x_ekf;
+<span class="comment">% plotting</span>
+figure;hold <span class="string">on</span>; title(<span class="string">'Ang. Vel. and Errors'</span>)
+subplot(2,1,1); plot(tout, [w_true(:,1), x_ekf(:,1)]); legend(<span class="string">'wx_true'</span>,<span class="string">'x_ekf'</span>)
+subplot(2,1,2); plot(tout, state_error(:,1)); legend(<span class="string">'wx error'</span>)
+figure;hold <span class="string">on</span>
+subplot(2,1,1); plot(tout, [w_true(:,2), w_meas(:,2), x_ekf(:,2)]);legend(<span class="string">'wy_true'</span>,<span class="string">'y_meas'</span>, <span class="string">'y_ekf'</span>)
+subplot(2,1,2); plot(tout, state_error(:,2)); legend(<span class="string">'wy error'</span>)
+figure;hold <span class="string">on</span>
+subplot(2,1,1); plot(tout, [w_true(:,3), x_ekf(:,3)]);legend(<span class="string">'wz_true'</span>,<span class="string">'z_ekf'</span>)
+subplot(2,1,2); plot(tout, state_error(:,3)); legend(<span class="string">'wz error'</span>)
+
+<span class="comment">% residuals (y_meas &amp; z_ekf)</span>
+y_meas = w_meas;
+resi_pre = abs(y_meas - z_ekf_pre);
+resi_post = abs(y_meas - z_ekf_post);
+figure;plot(tout, [resi_pre(:,2), resi_post(:,2)]);legend(<span class="string">'Pre'</span>,<span class="string">'Post'</span>)
+xlabel(<span class="string">'time (s)'</span>);ylabel(<span class="string">'ang vel (rad/s)'</span>);title(<span class="string">'Residuals Pre &amp; Post estimation'</span>)
+
+
+residuals_error = z_ekf_pre - z_ekf_post;
+figure;hold <span class="string">on</span>
+subplot(2,1,1); plot(tout, [z_ekf_pre, z_ekf_post]); title(<span class="string">'Measured and estimated Ang Vel'</span>)
+<span class="comment">%legend('zx_pre','zy_pre','zz_pre','zx_post','zy_post','zz_post')</span>
+ylabel(<span class="string">'z_{pre} &amp; z_{post} (rad/s)'</span>)
+subplot(2,1,2); plot(tout, residuals_error);
+legend(<span class="string">'wx'</span>,<span class="string">'wy'</span>,<span class="string">'wz'</span>); title(<span class="string">'Residuals Error'</span>)
+ylabel(<span class="string">'Residuals (rad/s)'</span>)
+<span class="comment">% plot error covariance (P) matrix</span>
+perm1 = permute(P_ekf, [3 1 2]);
+flat_error1 = reshape(perm1, [], 9);
+figure; plot(tout, flat_error1); title(<span class="string">'Error Covariance Matrix over time'</span>)
+xlabel(<span class="string">'time (s)'</span>)
+</pre><pre class="codeoutput">Warning: Output port 1 of 'sixDOF_hw7/Add' is not
+connected. 
+</pre><img vspace="5" hspace="5" src="PS7_01.png" alt=""> <img vspace="5" hspace="5" src="PS7_02.png" alt=""> <img vspace="5" hspace="5" src="PS7_03.png" alt=""> <img vspace="5" hspace="5" src="PS7_04.png" alt=""> <img vspace="5" hspace="5" src="PS7_05.png" alt=""> <img vspace="5" hspace="5" src="PS7_06.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% 
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH PS7 REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% let state = [p,dp,r,dr,y,dy] 3 angles & rates
+
+% http://renaissance.ucsd.edu/courses/mae207/wie_chap6.pdf
+% page 350, ch 6.7 gives the linearized euler equations
+
+% PS 7.2a - linearEuler.m
+% PS 7.2b - control moment gyros
+
+% PS 7.2d - initial state uncertainty
+x0 = rand(3,1);
+P0 = 0.01*eye(3); %I guessed - error covariance matrix
+% PS 7.2e - defined similar to P_0 but smaller
+Q0 = P0 ./ 10;
+% PS 7.2f - sensitivity matrix
+H0 = eye(3); %direct mapping
+% PS 7.2g - constant measurement error covariance
+R0 = (10 /180*pi)^2 * eye(3,3);
+
+% PS 7.3 - simulation & plotting
+%orbital elements
+mu = 3.986e14 / 1000^3;
+a0 = 6776; %km
+n0 = sqrt(mu/a0^3); %in rad/s
+e0 = 0.0004758;
+incl0 = 0; %all angles in degrees
+OMEGA0 = 0;
+omega0 = 0;
+nu0 = 0;
+UTC_0 = [06,02,2017];
+tOffset = 0;
+%perturbations
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; %kg/km^3
+wEarth = [0 0 7.292116e-5]'; %rad/s
+bGravGrad = 1;
+b_perturbs = 1;
+bNoise = 1;
+t_total = 0.01*90*60;
+
+%euler inputs
+triad1 = [[1 0 0]' [0 0 1]' [0 1 0]']; %y-axis out of orbit plane == UNSTABLE!!!
+%triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes
+triad2 = [1 0 0; 0 1 0; 0 0 1]; %global axes
+A0 = getDCM(triad1, triad2); %initial DCM, I2P
+I_principle = S_top.tauCM_P; %principle moment of inertia tensor
+
+wz = n0; %mean motion
+w0 = [0 -2 0]'; %if rotate about y, use -n0. If robot about z, use +n0
+M0 = [0 0 0]';
+A_b2p = S_top.DCM_B2P;
+options = simset('SrcWorkspace','current');
+sim('sixDOF_hw7',[],options);
+% analysis
+state_error = w_true - x_ekf;
+% plotting
+figure;hold on; title('Ang. Vel. and Errors')
+subplot(2,1,1); plot(tout, [w_true(:,1), x_ekf(:,1)]); legend('wx_true','x_ekf')
+subplot(2,1,2); plot(tout, state_error(:,1)); legend('wx error')
+figure;hold on
+subplot(2,1,1); plot(tout, [w_true(:,2), w_meas(:,2), x_ekf(:,2)]);legend('wy_true','y_meas', 'y_ekf')
+subplot(2,1,2); plot(tout, state_error(:,2)); legend('wy error')
+figure;hold on
+subplot(2,1,1); plot(tout, [w_true(:,3), x_ekf(:,3)]);legend('wz_true','z_ekf')
+subplot(2,1,2); plot(tout, state_error(:,3)); legend('wz error')
+
+% residuals (y_meas & z_ekf)
+y_meas = w_meas;
+resi_pre = abs(y_meas - z_ekf_pre);
+resi_post = abs(y_meas - z_ekf_post);
+figure;plot(tout, [resi_pre(:,2), resi_post(:,2)]);legend('Pre','Post')
+xlabel('time (s)');ylabel('ang vel (rad/s)');title('Residuals Pre & Post estimation')
+
+
+residuals_error = z_ekf_pre - z_ekf_post;
+figure;hold on
+subplot(2,1,1); plot(tout, [z_ekf_pre, z_ekf_post]); title('Measured and estimated Ang Vel')
+%legend('zx_pre','zy_pre','zz_pre','zx_post','zy_post','zz_post')
+ylabel('z_{pre} & z_{post} (rad/s)')
+subplot(2,1,2); plot(tout, residuals_error);
+legend('wx','wy','wz'); title('Residuals Error')
+ylabel('Residuals (rad/s)')
+% plot error covariance (P) matrix
+perm1 = permute(P_ekf, [3 1 2]);
+flat_error1 = reshape(perm1, [], 9);
+figure; plot(tout, flat_error1); title('Error Covariance Matrix over time')
+xlabel('time (s)')
+
+##### SOURCE END #####
+--></body></html>

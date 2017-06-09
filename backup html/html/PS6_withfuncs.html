@@ -1,0 +1,440 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PS6</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="PS6.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+<h2>Called Functions</h2><ul><li><a href="#getDCM">getDCM </a></li><li><a href="#run6DOFSim_ps6">run6DOFSim_ps6 </a></li></ul>
+<span class="comment">% 4 thrusters - 13.3 kg-f (29.3 lbf) https://www.quora.com/How-does-the-International-Space-Station-maintain-its-orbit-and-what-propellant-does-it-use</span>
+<span class="comment">% https://en.wikipedia.org/wiki/Attitude_control</span>
+<span class="comment">% https://www.youtube.com/watch?v=9XDRTysaCww</span>
+<span class="comment">%   -&gt; 4 control moment gyroscopes, 200 lbs</span>
+<span class="comment">% https://space.stackexchange.com/questions/566/do-any-spacecraft-use-gnss-for-attitude-determination</span>
+<span class="comment">%   -&gt; 4 GPS receivers</span>
+
+<span class="comment">% PS 6.2a determinstic method</span>
+
+<span class="comment">% PS 6.2b q-method</span>
+
+<span class="comment">% PS 6.2c ang vel measurements &amp; reconstruction of A_DCM through kinematic</span>
+<span class="comment">% eq's</span>
+<span class="comment">%       --&gt; assume gyros (IMU's) and horizon sensor</span>
+
+
+<span class="comment">% PS 6.3 plotting estimated attitude</span>
+<span class="comment">% run sim</span>
+bNoise = 0;
+t_total = 0.1*90*60;
+run6DOFSim_ps6
+
+error1 = zeros(3,3,size(A_DCM,3));
+error2 = error1;
+error3 = error1;
+error4 = error1;
+<span class="keyword">for</span> i=1:size(A_DCM,3)
+  error1(:,:,i) = getDCM(A_i2p_meas(:,:,i)' , A_DCM(:,:,i)' );
+  error2(:,:,i) = getDCM(A_i2p_meas2(:,:,i)' , A_DCM(:,:,i)' );
+  error3(:,:,i) = getDCM(A_i2p_meas3(:,:,i)' , A_DCM(:,:,i)' );
+  error4(:,:,i) = getDCM(A_DCM_meas(:,:,i)' , A_DCM(:,:,i)' );
+<span class="keyword">end</span>
+perm1 = permute(error1, [3 1 2]);
+perm2 = permute(error2, [3 1 2]);
+perm3 = permute(error3, [3 1 2]);
+perm4 = permute(error4, [3 1 2]);
+flat_error1 = reshape(perm1, [], 9);
+flat_error2 = reshape(perm2, [], 9);
+flat_error3 = reshape(perm3, [], 9);
+flat_error4 = reshape(perm4, [], 9);
+figure;plot(tout, reshape(permute(A_i2p_meas, [3 1 2]),[],9));title(<span class="string">'PS 6.3) Estimated attitude with no errors'</span>)
+figure; hold <span class="string">on</span>
+subplot(4,1,1); plot(tout, flat_error1); title(<span class="string">'PS 6.3) Att meas error - Algebra'</span>)
+subplot(4,1,2); plot(tout, flat_error2); title(<span class="string">'PS 6.3) Att meas error - Algebra distributed'</span>)
+subplot(4,1,3); plot(tout, flat_error3); title(<span class="string">'PS 6.3) Att meas error - Statistical'</span>)
+subplot(4,1,4); plot(tout, flat_error4); title(<span class="string">'PS 6.3) Att meas error - integrated from measured ang. vel.'</span>)
+
+<span class="comment">% PS 6.4 introduce sensor errors - constant bias &amp; gaussian noise</span>
+bNoise = 1;
+t_total = 0.1*90*60;
+run6DOFSim_ps6
+
+error1 = zeros(3,3,size(A_DCM,3));
+error2 = error1;
+error3 = error1;
+error4 = error1;
+<span class="keyword">for</span> i=1:size(A_DCM,3)
+  error1(:,:,i) = getDCM(A_i2p_meas(:,:,i)' , A_DCM(:,:,i)' );
+  error2(:,:,i) = getDCM(A_i2p_meas2(:,:,i)' , A_DCM(:,:,i)' );
+  error3(:,:,i) = getDCM(A_i2p_meas3(:,:,i)' , A_DCM(:,:,i)' );
+  error4(:,:,i) = getDCM(A_DCM_meas(:,:,i)' , A_DCM(:,:,i)' );
+<span class="keyword">end</span>
+perm1 = permute(error1, [3 1 2]);
+perm2 = permute(error2, [3 1 2]);
+perm3 = permute(error3, [3 1 2]);
+perm4 = permute(error4, [3 1 2]);
+flat_error1 = reshape(perm1, [], 9);
+flat_error2 = reshape(perm2, [], 9);
+flat_error3 = reshape(perm3, [], 9);
+flat_error4 = reshape(perm4, [], 9);
+figure;plot(tout, reshape(permute(A_i2p_meas, [3 1 2]),[],9));title(<span class="string">'PS 6.5) Estimated attitude with sensor errors'</span>)
+figure; hold <span class="string">on</span>
+subplot(4,1,1); plot(tout, flat_error1); title(<span class="string">'PS 6.5) Att meas error - Algebra'</span>)
+subplot(4,1,2); plot(tout, flat_error2); title(<span class="string">'PS 6.5) Att meas error - Algebra distributed'</span>)
+subplot(4,1,3); plot(tout, flat_error3); title(<span class="string">'PS 6.5) Att meas error - Statistical'</span>)
+subplot(4,1,4); plot(tout, flat_error4); title(<span class="string">'PS 6.5) Att meas error - integrated from measured ang. vel.'</span>)
+
+<span class="comment">% PS 6.6</span>
+
+<span class="comment">% PS 6.7 - attitude control error using measured attitude</span>
+perm = permute(error_DCM, [3 1 2]);
+flat_error = reshape(perm, [], 9);
+figure; plot(tout, flat_error); title(<span class="string">'PS 6.7) Att control error'</span>)
+[yaw, pitch, roll] = dcm2angle( error_DCM ); <span class="comment">%expressed in inertial</span>
+figure; plot(tout, [yaw, pitch, roll]); title(<span class="string">'PS 6.7) Error in euler angles'</span>)
+legend(<span class="string">'yaw'</span>,<span class="string">'pitch'</span>,<span class="string">'roll'</span>)
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% 
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH PS6 REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+
+% GPS
+% 4 thrusters - 13.3 kg-f (29.3 lbf) https://www.quora.com/How-does-the-International-Space-Station-maintain-its-orbit-and-what-propellant-does-it-use
+% https://en.wikipedia.org/wiki/Attitude_control
+% https://www.youtube.com/watch?v=9XDRTysaCww
+%   -> 4 control moment gyroscopes, 200 lbs
+% https://space.stackexchange.com/questions/566/do-any-spacecraft-use-gnss-for-attitude-determination
+%   -> 4 GPS receivers
+
+% PS 6.2a determinstic method
+
+% PS 6.2b q-method
+
+% PS 6.2c ang vel measurements & reconstruction of A_DCM through kinematic
+% eq's
+%       REPLACE_WITH_DASH_DASH> assume gyros (IMU's) and horizon sensor
+
+
+% PS 6.3 plotting estimated attitude
+% run sim
+bNoise = 0;
+t_total = 0.1*90*60;
+run6DOFSim_ps6
+
+error1 = zeros(3,3,size(A_DCM,3));
+error2 = error1;
+error3 = error1;
+error4 = error1;
+for i=1:size(A_DCM,3)
+  error1(:,:,i) = getDCM(A_i2p_meas(:,:,i)' , A_DCM(:,:,i)' );
+  error2(:,:,i) = getDCM(A_i2p_meas2(:,:,i)' , A_DCM(:,:,i)' );
+  error3(:,:,i) = getDCM(A_i2p_meas3(:,:,i)' , A_DCM(:,:,i)' );
+  error4(:,:,i) = getDCM(A_DCM_meas(:,:,i)' , A_DCM(:,:,i)' );
+end
+perm1 = permute(error1, [3 1 2]);
+perm2 = permute(error2, [3 1 2]);
+perm3 = permute(error3, [3 1 2]);
+perm4 = permute(error4, [3 1 2]);
+flat_error1 = reshape(perm1, [], 9);
+flat_error2 = reshape(perm2, [], 9);
+flat_error3 = reshape(perm3, [], 9);
+flat_error4 = reshape(perm4, [], 9);
+figure;plot(tout, reshape(permute(A_i2p_meas, [3 1 2]),[],9));title('PS 6.3) Estimated attitude with no errors')
+figure; hold on
+subplot(4,1,1); plot(tout, flat_error1); title('PS 6.3) Att meas error - Algebra')
+subplot(4,1,2); plot(tout, flat_error2); title('PS 6.3) Att meas error - Algebra distributed')
+subplot(4,1,3); plot(tout, flat_error3); title('PS 6.3) Att meas error - Statistical')
+subplot(4,1,4); plot(tout, flat_error4); title('PS 6.3) Att meas error - integrated from measured ang. vel.')
+
+% PS 6.4 introduce sensor errors - constant bias & gaussian noise
+bNoise = 1;
+t_total = 0.1*90*60;
+run6DOFSim_ps6
+
+error1 = zeros(3,3,size(A_DCM,3));
+error2 = error1;
+error3 = error1;
+error4 = error1;
+for i=1:size(A_DCM,3)
+  error1(:,:,i) = getDCM(A_i2p_meas(:,:,i)' , A_DCM(:,:,i)' );
+  error2(:,:,i) = getDCM(A_i2p_meas2(:,:,i)' , A_DCM(:,:,i)' );
+  error3(:,:,i) = getDCM(A_i2p_meas3(:,:,i)' , A_DCM(:,:,i)' );
+  error4(:,:,i) = getDCM(A_DCM_meas(:,:,i)' , A_DCM(:,:,i)' );
+end
+perm1 = permute(error1, [3 1 2]);
+perm2 = permute(error2, [3 1 2]);
+perm3 = permute(error3, [3 1 2]);
+perm4 = permute(error4, [3 1 2]);
+flat_error1 = reshape(perm1, [], 9);
+flat_error2 = reshape(perm2, [], 9);
+flat_error3 = reshape(perm3, [], 9);
+flat_error4 = reshape(perm4, [], 9);
+figure;plot(tout, reshape(permute(A_i2p_meas, [3 1 2]),[],9));title('PS 6.5) Estimated attitude with sensor errors')
+figure; hold on
+subplot(4,1,1); plot(tout, flat_error1); title('PS 6.5) Att meas error - Algebra')
+subplot(4,1,2); plot(tout, flat_error2); title('PS 6.5) Att meas error - Algebra distributed')
+subplot(4,1,3); plot(tout, flat_error3); title('PS 6.5) Att meas error - Statistical')
+subplot(4,1,4); plot(tout, flat_error4); title('PS 6.5) Att meas error - integrated from measured ang. vel.')
+
+% PS 6.6
+
+% PS 6.7 - attitude control error using measured attitude
+perm = permute(error_DCM, [3 1 2]);
+flat_error = reshape(perm, [], 9);
+figure; plot(tout, flat_error); title('PS 6.7) Att control error')
+[yaw, pitch, roll] = dcm2angle( error_DCM ); %expressed in inertial
+figure; plot(tout, [yaw, pitch, roll]); title('PS 6.7) Error in euler angles')
+legend('yaw','pitch','roll')
+##### SOURCE END #####
+--></body></html>
+<a name="getDCM"></a>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>getDCM</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="getDCM.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> [ A ] = getDCM( triad1, triad2 )
+<span class="comment">%GETDCM calculate direction cosine matrix between two right-handed triads</span>
+<span class="comment">%   if triad1 = principle frame &amp; triad2 = global frame, then A = DCM FROM</span>
+<span class="comment">%   global TO principle</span>
+
+<span class="comment">% triad = [ x_vector, y_vector, z_vector ], i_vector = 3x1</span>
+<span class="comment">% v_triad1 = A * v_triad2</span>
+<span class="comment">% v_triad2 = A' * v_triad1</span>
+x1 = triad1(:,1); y1 = triad1(:,2); z1 = triad1(:,3);
+x2 = triad2(:,1); y2 = triad2(:,2); z2 = triad2(:,3);
+A = [dot(x1, x2), dot(x1, y2), dot(x1, z2); <span class="keyword">...</span>
+     dot(y1, x2), dot(y1, y2), dot(y1, z2); <span class="keyword">...</span>
+     dot(z1, x2), dot(z1, y2), dot(z1, z2)];
+
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+\n
+--></body></html>
+<a name="run6DOFSim_ps6"></a>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>run6DOFSim_ps6</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-08"><meta name="DC.source" content="run6DOFSim_ps6.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%orbital elements</span>
+mu = 3.986e14 / 1000^3;
+a0 = 6776; <span class="comment">%km</span>
+n0 = sqrt(mu/a0^3); <span class="comment">%in rad/s</span>
+e0 = 0.0004758;
+incl0 = 0; <span class="comment">%all angles in degrees</span>
+OMEGA0 = 0;
+omega0 = 0;
+nu0 = 0;
+UTC_0 = [06,02,2017];
+tOffset = 0;
+<span class="comment">%perturbations</span>
+J2 = 0;
+Re = 6371;
+rho0 = 1.225*1000^3; <span class="comment">%kg/km^3</span>
+wEarth = [0 0 7.292116e-5]'; <span class="comment">%rad/s</span>
+bGravGrad = 1;
+b_perturbs = 1;
+
+<span class="comment">%euler inputs</span>
+triad1 = [[1 0 0]' [0 0 1]' [0 1 0]']; <span class="comment">%y-axis out of orbit plane == UNSTABLE!!!</span>
+<span class="comment">%triad1 = [1 0 0; 0 1 0; 0 0 1]; %principle axes</span>
+triad2 = [1 0 0; 0 1 0; 0 0 1]; <span class="comment">%global axes</span>
+A0 = getDCM(triad1, triad2); <span class="comment">%initial DCM, I2P</span>
+I_principle = S_top.tauCM_P; <span class="comment">%principle moment of inertia tensor</span>
+
+wz = n0; <span class="comment">%mean motion</span>
+w0 = [0 -n0 0]'; <span class="comment">%if rotate about y, use -n0. If robot about z, use +n0</span>
+M0 = [0 0 0]';
+A_b2p = S_top.DCM_B2P;
+options = simset(<span class="string">'SrcWorkspace'</span>,<span class="string">'current'</span>);
+sim(<span class="string">'sixDOF_hw6'</span>,[],options);
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+\n
+--></body></html>

@@ -20,8 +20,21 @@
 \BOOKMARK [1][-]{section.5}{Problem Set 5 - Perturbations and Attitude Control Errors}{}% 20
 \BOOKMARK [2][-]{subsection.5.1}{Magnetic torque}{section.5}% 21
 \BOOKMARK [2][-]{subsection.5.2}{Atmospheric drag}{section.5}% 22
-\BOOKMARK [1][-]{section.6}{Problem Set 6 - Attitude Determination with Sensor Errors}{}% 23
-\BOOKMARK [1][-]{section.7}{Problem Set 7 - Implement Extended Kalman Filter}{}% 24
-\BOOKMARK [1][-]{section.8}{Problem Set 8 - Implement Actuators and Controllers}{}% 25
-\BOOKMARK [1][-]{section.9}{Problem Set 9 - Define and Execute a Slew Maneuver}{}% 26
-\BOOKMARK [1][-]{section.10}{Appendices A - Matlab Code}{}% 27
+\BOOKMARK [2][-]{subsection.5.3}{Simulation}{section.5}% 23
+\BOOKMARK [2][-]{subsection.5.4}{Attitude error}{section.5}% 24
+\BOOKMARK [1][-]{section.6}{Problem Set 6 - Attitude Determination with Sensor Errors}{}% 25
+\BOOKMARK [2][-]{subsection.6.1}{Algebraic Approach}{section.6}% 26
+\BOOKMARK [2][-]{subsection.6.2}{Algebraic with error reduction}{section.6}% 27
+\BOOKMARK [2][-]{subsection.6.3}{Statistical Approach}{section.6}% 28
+\BOOKMARK [2][-]{subsection.6.4}{Simulation - no noise}{section.6}% 29
+\BOOKMARK [2][-]{subsection.6.5}{Simulation - with noise}{section.6}% 30
+\BOOKMARK [2][-]{subsection.6.6}{Attitude control error with sensing errors}{section.6}% 31
+\BOOKMARK [1][-]{section.7}{Problem Set 7 - Implement Extended Kalman Filter \(EKF\)}{}% 32
+\BOOKMARK [2][-]{subsection.7.1}{Theory}{section.7}% 33
+\BOOKMARK [2][-]{subsection.7.2}{Simulation}{section.7}% 34
+\BOOKMARK [1][-]{section.8}{Problem Set 8 - Implement Actuators and Controllers}{}% 35
+\BOOKMARK [2][-]{subsection.8.1}{Actuators}{section.8}% 36
+\BOOKMARK [2][-]{subsection.8.2}{Controller implementation using LQR}{section.8}% 37
+\BOOKMARK [2][-]{subsection.8.3}{Simulation}{section.8}% 38
+\BOOKMARK [1][-]{section.9}{Problem Set 9 - Define and Execute a Slew Maneuver}{}% 39
+\BOOKMARK [1][-]{section.10}{Appendices A - Matlab Code for setting up the satellite}{}% 40

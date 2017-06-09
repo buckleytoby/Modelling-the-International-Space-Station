@@ -38,11 +38,14 @@
 \begin{titlepage}
 	\maketitle
 	\centering
+	For all the code used in this project please refer to the following github:
+	\url{https://github.com/buckleytoby/aa279c_github}
+	\\
 	\includegraphics[width=\textwidth]{ISS}
 \end{titlepage}
 
 
-
+\tableofcontents
 
 
 
@@ -765,16 +768,86 @@ For this project it does not make sense to change the mass distribution or nomin
 
 \section{Problem Set 5 - Perturbations and Attitude Control Errors}
 
+In this section the rest of the perturbations affecting the ISS are modeled and simulated in the environment. A nominal attitude is defined, and control errors in the form of a DCM are obtained.
+
 \subsection{Magnetic torque}
 
+A spherical harmonic model is adopted for the magnetic field of the Earth. The magnetic field, $B$ is calculated as the gradient of a potential function $B=-\nabla V$. Simplifications are made to the spherical harmonic model resulting in a set of equations whose accuracy is a function of the $k$ value.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ps5_mag4}
+\end{figure}
+
+To find $P$ and $\partial P/\partial\theta$, recursive relations are used (shown below).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ps5_mag2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ps5_mag3}
+\end{figure}
 
 
+To obtain values for $g^{n,m}$ and $h^{n,m}$ a lookup table is utilized (\ref{5:mag1}). These values are tabulated in appendix H of \textit{Spacecraft Attitude Determination and Control} by Wertz.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ps5_mag1}
+	\caption{IGRF coefficients for Epoch 1975}
+	\label{5:mag1}
+\end{figure}
+
+Finally, the magnetic field must be transformed from an Earth-fixed frame to the ECI frame. Below is the relation, which uses longitude and latitude. In order to determine long. and lat., a conversion is performed from epoch+sim time to GMST.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ps5_mag5}
+\end{figure}
+
+Finally, magnetic torque is computed as $M_m = m\times B$, where $m=NIAn$. $m$ represents the magnetic moment of a surface, which is a function of number of coils (1 coil), current (0.1 A), surface area, and surface normal.
+
+Because the magnetic field is strong in LEO and changes rapidly as a function of position, the 4th order model $k=4$ is used.
 
 \subsection{Atmospheric drag}
 
+Even though the atmosphere is rarefied in low-earth-orbit, it still has a large effect on orbiting satellites. In fact, without station keeping the ISS drops about 3km/month \footnote{\url{https://space.stackexchange.com/questions/9482/how-long-would-iss-stay-in-orbit-if-it-didnt-get-reboosts}}. This drag also causes torques about the center of mass which perturb the vehicle's attitude. Fig. \ref{5:drag1} shows how the drag affects a surface.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ps5_drag1}
+	\caption{Depiction of the drag force on a component's surface}
+	\label{5:drag1}
+\end{figure}
 
+Each surface in the model is a planar surface, so the $C_d$ is set to that of a flat plate: 1.28. Below is the well-known drag equation, which affects the aircraft in the $V$ direction.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ps5_drag2}
+\end{figure}
+
+This velocity is relative to the atmosphere though, so the relation above is used to compute relative velocity from inertial velocity using the Earth's rotation rate: $\omega=7.292e-5$ rad/s
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ps5_drag3}
+\end{figure}
+
+After the differential forces are found, the moment is calculated by summing up each partial moment created by the many surfaces.
+
+\begin{equation}
+M_{ad}=\sum _i r_{surf/CM} \times df_{aero}
+\end{equation}
+
+All perturbational moments are summed up and fed into the Euler equation propagator as a disturbance.
+
+\subsection{Simulation}
+
+Now that our perturbations are defined, they can be added to the simulation. Fig. \ref{5:gmst} shows how the GMST is computed which is then fed into the magnetic torque block.
 
 \begin{figure}[H]
 	\centering
@@ -783,7 +856,7 @@ For this project it does not make sense to change the mass distribution or nomin
 	\label{5:gmst}
 \end{figure}
 
-
+All perturbations are added to the simulink model and summed up (Fig. \ref{5:perturb}). 
 
 \begin{figure}[H]
 	\centering
@@ -792,171 +865,358 @@ For this project it does not make sense to change the mass distribution or nomin
 	\label{5:perturb}
 \end{figure}
 
+In order to calculate an accurate density at LEO, an exponential model is used. $$\rho=\rho0\exp(-(h-h0)/H)$$ with $h0=Re=6378$ km, H=10 km, and $\rho0=1.225/1000^3$ $kg/km^3$.
+
+
+Fig. \ref{5:01} shows the moments created by each perturbation. The atmospheric drag is larger by magnitudes, which is a function of the attitude. When all the solar panels are lined up perfectly, a very large torque is generated.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps5_01}
+	\caption{Moments generated by perturbations.}
+	\label{5:01}
+\end{figure}
+
+Fig. \ref{5:02} sums up the moments over time, again showing how the atmospheric drag dominates the moments.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps5_02}
+	\caption{Total external moments on the vehicle.}
+	\label{5:02}
+\end{figure}
+
+Without active control the perturbations will cause instability in the satellite. Fig. \ref{5:pos} shows the position over time. In this simulation the satellite is initiated rotating with the RTN frame. After 1500 seconds the ISS begins to tumble, and the principle axes are rotating out of control.
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps5_03}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth,trim={10mm, 5mm, 13mm, 3mm},clip]{ps5_04}
+	\end{subfigure}
+	\caption{The position subject to perturbations. The reference frame is RTN.}
+	\label{5:pos}
+\end{figure}
+
+Fig. \ref{5:05} shows how the Euler angles begin stable, but quickly become unstable due to perturbations.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps5_05}
+	\caption{Attitude over time subject to full perturbations.}
+	\label{5:05}
+\end{figure}
+
+\subsection{Attitude error}
+
+When attempting to control a satellite, an error function must be defined so that the controller knows how far away the vehicle is from its nominal state. For the ISS, the earth-facing orientation is desired, which aligns the principle axes with the RTN frame (Fig. \ref{5:rtn}).
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps5_01}
-	\caption{EKF performance.}
-	\label{5:ekf}
+	\includegraphics[scale=0.8]{rtnframe}
+	\caption{RTN frame.}
+	\label{5:rtn}
+\end{figure}
+
+The attitude control error is calculated using the same \href{https://github.com/buckleytoby/aa279c_github/blob/master/src/getDCM.m}{$getDCM$} function as any other transformation. The two inputs are the unit triad from inertial to principle, and the unit triad from inertial to RTN frame. Fig. \ref{5:06} shows the attitude control error during the simulation. As the perturbations destabilize the attitude, the error grows rapidly.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps5_06}
+	\caption{Attitude control error in the form of a DCM from principle to RTN frames.}
+	\label{5:06}
 \end{figure}
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps5_02}
-	\caption{EKF performance.}
-	\label{5:ekf}
+	\includegraphics[scale=0.8]{ps5_07}
+	\caption{Error in Euler angles.}
+	\label{5:07}
 \end{figure}
 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps5_03}
-	\caption{EKF performance.}
-	\label{5:ekf}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps5_04}
-	\caption{EKF performance.}
-	\label{5:ekf}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps5_05}
-	\caption{EKF performance.}
-	\label{5:ekf}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps5_06}
-	\caption{EKF performance.}
-	\label{5:ekf}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps5_07}
-	\caption{EKF performance.}
-	\label{5:ekf}
-\end{figure}
+The attitude control error is also plotted as euler angles in Fig. \ref{5:07}. These errors are using the true attitude of the spacecraft, which is an idealistic assumption. In reality there will be sensor noise and bias which affect how an onboard computer can determine its own attitude.
 
 \section{Problem Set 6 - Attitude Determination with Sensor Errors}
 
+We now simulate the onboard computer, including its sensor instrumentation and method for rejecting noise \& disturbances while calculating the satellite's attitude. 
 
+The ISS uses four GPS antennas situated in a 3x1.5 meter rectangle\footnote{\url{https://space.stackexchange.com/questions/566/do-any-spacecraft-use-gnss-for-attitude-determination}}. Additionally, I assume that gyros are used to sense angular velocity. GPS can be accurate to within 0.715 meters\footnote{\url{http://www.gps.gov/systems/gps/performance/accuracy/}} but that isn't the same GPS as the ISS. To be optimistic, let's set the std. deviation of the error to 10cm. For the gyros, Wertz pg 199 states that the resolution on closed-loop rate gyros can be less than 0.01 deg/s.
+
+Multiple approaches are taken in order to transform the position obtained by the GPS antennas into a measured attitude.
+
+\subsection{Algebraic Approach}
+The first approach is purely algebraic. It's assumed the spacecraft has a model of itself, and can compare that model to the observed signals.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps6_01}
-	\caption{EKF performance.}
-	\label{6:ekf}
+	\includegraphics[scale=0.8]{ps6_att1}
+\end{figure}
+
+In this formulation, $m_i$ are the measured locations of the GPS antennas, while $v_i$ is the onboard computer's internal model of their location, expressed in the inertial frame.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps6_att2}
+\end{figure}
+
+Each observation is concatenated and a least-squares fit is performed to produce the DCM from inertial to principle axes ($A$).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps6_att3}
 \end{figure}
 
 
+\subsection{Algebraic with error reduction}
+The second approach assumes that error can be mitigated by combining observed signals. This effectively shares the worst-case noise between two measurements, reducing the error by 1/2 in expectation. 
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps6_02}
-	\caption{EKF performance.}
-	\label{6:ekf}
+	\includegraphics[scale=0.8]{ps6_att4}
+\end{figure}
+
+After creating psuedo-observations, orthogonal vectors are created using cross products.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps6_att5}
+\end{figure}
+
+Finally, a matrix inversion gives the DCM.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps6_att55}
 \end{figure}
 
 
+\subsection{Statistical Approach}
+The last approach uses statistics to reduce the error across many signals. A cost function is defined which increases quadratically with DCM error. Calculus of variations (Lagrange multipliers) is used to solve for the optimal $A$ which reduces $J(A)$ most.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps6_03}
-	\caption{EKF performance.}
-	\label{6:ekf}
+	\includegraphics[scale=0.8]{ps6_att6}
 \end{figure}
 
+Each signal is weighted and placed into the $W$ and $U$ matrices.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps6_04}
-	\caption{EKF performance.}
-	\label{6:ekf}
+	\includegraphics[scale=0.8]{ps6_att7}
 \end{figure}
 
+A $K$ matrix is formed by combining different parts of the observation and modeled vectors. The full derivation proves that this is now an eigenvalue problem, where the eigenvector produced by the largest eigenvalue of $K$ is the optimal quaternion for the cost function.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps6_05}
-	\caption{EKF performance.}
-	\label{6:ekf}
+	\includegraphics[scale=0.8]{ps6_att8}
 \end{figure}
 
+Finally, $q_{optimal}$ is extracted from the eigen-problem.
+
+\subsection{Simulation - no noise}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps6_06}
-	\caption{EKF performance.}
-	\label{6:ekf}
+	\includegraphics[scale=0.8]{ps6_01}
+	\caption{Attitude is estimated correctly when no noise is present.}
+	\label{6:01}
 \end{figure}
 
-
-
-
-\section{Problem Set 7 - Implement Extended Kalman Filter}
-
-
+Fig. \ref{6:01} confirms that the estimated attitude is identical to true attitude when no noises are present. The drift in value is due to perturbations in the simulation.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps7_01}
+	\includegraphics[scale=1]{ps6_02}
+	\caption{Error in measured attitude for each system.}
+	\label{6:02}
+\end{figure}
+
+Fig. \ref{6:02} compares the three different methods for measuring attitude. The error is calculated against the true attitude and plotted. Additionally, the measured ang. vel. is integrated in the onboard computer. Notice that the integrated ang. vel. begins to drift over time due to numerical errors.
+
+\subsection{Simulation - with noise}
+
+The noise is Gaussian distributed with mean zero and std. dev. defined above as the measurement error. Noise is sampled from the distribution and added to the true state.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps6_03}
+	\caption{Estimated error with sensor errors.}
+	\label{6:03}
+\end{figure}
+
+Fig. \ref{6:03} shows the estimated error with the representative sensor noise active.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{ps6_04}
+	\caption{Error in measured attitude for each system with noise.}
+	\label{6:04}
+\end{figure}
+
+Fig. \ref{6:04} shows the error in measured attitude. Interestingly the simplest algebraic approach was most stable. This may be caused by the least-squares approach using all GPS signals. The statistical method also uses all signals, but I think some error is exacerbated when running Matlab's $dcm2quat$ and $quat2dcm$ functions.
+
+
+\subsection{Attitude control error with sensing errors}
+
+Now that sensing errors are incorporated, a representative attitude control error that would be found in real life is calculated. Again, the RTN frame is our desired attitude.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps6_05}
+	\caption{Attitude control error with noise.}
+	\label{6:05}
+\end{figure}
+
+Fig. \ref{6:05} shows the error over time, which is very noisy due to the sensor error.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps6_06}
+	\caption{Euler angle error with noise.}
+	\label{6:06}
+\end{figure}
+
+After converting DCM to Euler angles the noisiness is aggravated. Fig. \ref{6:06} shows how the yaw, pitch, and roll would be very difficult to control.
+
+
+
+\section{Problem Set 7 - Implement Extended Kalman Filter (EKF)}
+
+The previous section relied on deterministic or statistical approaches of determining a satellite's state given a set of observations. The Kalman Filter, and its non-linear counterpart the EKF, take a probabilistic approach to determining the state. The basic idea is to estimate what the observation should be, and compare that with the actual observation. A correction to the estimated state is then added as a function of the error between estimated and actual observation.
+
+\subsection{Theory}
+
+The following equations define the state, $x$ as a function of state and control, as well as a random process noise $w_k$. The estimated observation, $z$ is a function of state and a random observation noise. Usually the noise is either assumed to be white or Gaussian (normal) distributed. The optimality guarantees do not change either way.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps7_ekf0}
+\end{figure}
+
+For a linear system, eq. \ref{7:1} gives the state and $z=H*x+v_k$.
+
+
+\begin{gather}
+x_{k-}=\Phi_{k-1}x_{k-1}+Bu_{k-1} \label{7:1}\\
+P_{k-}=\Phi_{k-1}P_{k-1}\Phi_{k-1}^t+Q_{k-1} \label{7:2} \\
+z_{k-}=H_k*x_{k-} \label{7:3.5} 
+\end{gather}
+
+Eqs. \ref{7:1}-\ref{7:3.5} show the 'predict' step, where a predicted state and covariance estimation matrix are calculated. Afterwards, the 'update' step occurs, where the EKF measures the residual in the observation. This residual is multiplied against an optimal gain matrix, $K_k$ to give a correction factor to the state. Finally the covariance estimate is updated using the Joseph formulation (Eqs. \ref{7:3}-\ref{7:5}).
+
+\begin{gather}
+K_k=P_{k-}H_k^t(H_kP_{k-1}H_k^t+R_k)^{-1} \label{7:3} \\
+x_k=x_{k-}+K_k(y_k-z_{k-}) \label{7:4} \\
+z_{k+}=H_k*x_k \label{7:4.5} \\
+P_k=(I-K_kH_k)P_{k-}(I-K_kH_k)^t+K_kR_kK_k^t \label{7:5}
+\end{gather}
+
+The matrices P, Q, and R parameterize the uncertainty of the system in the following ways: P[mxm] is the uncertainty of state parameters, Q[mxm] is the uncertainty of the dynamics model, and R[nxn] is the uncertainty of the measurements.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8,width=\textwidth]{ps7_ekf1}
+	\caption{Visualization of the EKF.}
+	\label{7:ekf1}
+\end{figure}
+
+Fig. \ref{7:ekf1} visually depicts the EKF and how it converges onto the true state over time.
+
+For our system, the Euler equations must be linearized around the current state in order to obtain the $\Phi$ matrix. This is done by deriving the jacobian of the Euler equations as shown below.
+
+\[
+\nabla_\omega \dot{\omega} =
+\begin{bmatrix}
+0 &-k_xw_z &-k_xw_y \\
+-k_yw_z &0 &-k_yw_x \\
+-k_zw_y &-k_zw_x &0 
+\end{bmatrix}
+;\ \omega_{k+1} \approx dt*\nabla_\omega \dot{\omega}|_\omega*\omega_k + \omega_k
+\]
+
+Now the jacobian is evaluated at the current ang. vel. and the result is our linearized plant, $\Phi$ (Eq. \ref{7:discreteEuler}). The control in this case is simply the external moments, and the control matrix $B$ is unity divided by the moment of inertia matrix.
+
+\begin{equation}
+\omega_{k+1} = \Phi \omega_k + B u_k;\ \Phi = (I+dt*\nabla_\omega \dot{\omega}|_\omega),\ B = eye(3)*J^{-1}
+\label{7:discreteEuler}
+\end{equation}
+
+\subsection{Simulation}
+
+After defining the EKF, implementation is actually very straight forward. Fig. \ref{7:ekf3} shows the \href{https://github.com/buckleytoby/aa279c_github/blob/master/src/EKF.m}{code}, which mirrors the equations exactly. More difficult is setting up the uncertainty matrices, but overall they don't affect the EKF too greatly. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps7_ekf2}
+	\caption{EKF implemented in code.}
+	\label{7:ekf3}
+\end{figure}
+
+For simplicity, the state $x$ is taken as the angular velocities: $x=[w_x,\ w_y,\ w_z]^T$. For the simulation, $x0$ is set randomly, while the true $\omega0$ is a constant rotation about the y-axis.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps7_01}
+	\caption{The true x-velocity is compared against the EKF.}
+	\label{7:ekfx}
+\end{figure}
+
+Fig. \ref{7:ekfx} shows the estimated x-ang. vel. compared to the true value. Notice that the error begins largely, but after only a couple seconds quickly converges to zero error.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps7_02}
+	\caption{The true y-velocity is compared against the EKF.}
+	\label{7:ekfy}
+\end{figure}
+
+The estimated y-ang. vel. is compared to the true value and the noisy observation (Fig. \ref{7:ekfy}). Notice how the observation (orange) jumps around dramatically, while the ekf (yellow) is much smoother and closer to the true value.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps7_03}
+	\caption{The true z-velocity is compared against the EKF.}
+	\label{7:ekfz}
+\end{figure}
+
+Finally, z-angl. vel. is compared to the true value (Fig. \ref{7:ekfz}). Once again the EKF converges onto the true value and the error quickly reduces to near-zero.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps7_04}
+	\caption{Comparison of residuals.}
+	\label{7:04}
+\end{figure}
+
+The residuals are compared before and after the estimation is made (Fig. \ref{7:04}), where pre$=y_k-z_{k-}$ and post=$y_k-z_{k+}$. As expected, the post-fit residuals are reduced, meaning that the correction factor to $x_k$ is working as intended. The 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps7_05}
 	\caption{EKF performance.}
+	\label{7:05}
+\end{figure}
+
+The full state estimated ang. vel. and residuals are plotted in Fig. \ref{7:05}. Overall the EKF does a very good job obtaining the near-true state from observations.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ps7_06}
+	\caption{Evolution of P matrix.}
 	\label{7:ekf}
 \end{figure}
 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps7_02}
-	\caption{EKF performance.}
-	\label{7:ekf}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps7_03}
-	\caption{EKF performance.}
-	\label{7:ekf}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps7_04}
-	\caption{EKF performance.}
-	\label{7:ekf}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps7_05}
-	\caption{EKF performance.}
-	\label{7:ekf}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{ps7_06}
-	\caption{EKF performance.}
-	\label{7:ekf}
-\end{figure}
-
+The error covariance matrix (P) is plotted for the simulation. This tracks how the confidence in the state parameters grows over time. Notice how the largest values converge onto a minimum non-zero uncertainty. This shows how despite the performance of the EKF, it knows that the incoming observations are noisy, so some uncertainty is retained for the state.
 
 
 \section{Problem Set 8 - Implement Actuators and Controllers}
+
+\subsection{Actuators}
 
 The International Space Station uses 4 control-moment-gyros it uses for day-to-day station keeping. Each CMG can produce 4760 N*m*s, or 258 N*m, and spins at 691 rad/s. In reality, the ISS has all four aligned the in the same direction, but for simplicity I've decided to model three CMG's each aligned in a different body axis direction.
 
@@ -969,6 +1229,8 @@ I\dot{\omega} + \omega x I\omega = M + M_c;\ M_c = -A\dot{L_w}-\dot{A}L_w-\omega
 \end{equation}
 
 Because we have changed the dynamics of the vehicle by adding additional large rotating masses, the Euler equations must also change. Eq. \ref{8:eq1} shows how the CMG's are taken into account, by grouping them together into a control moment term, which we are able to take advantage of when determining a control sequence. 
+
+\subsection{Controller implementation using LQR}
 
 Control of the aircraft is performed using two successive loops (Fig. \ref{8:controller}). First, a high-level objective attitude is created (example: follow the RTN frame) and passed to the attitude controller. A first controller generates commanded angular velocity, which is passed to the second controller. The output of the inner-loop are the desired moments that the CMG's must impart on the vehicle. Those are perturbed slightly by assuming imperfect actuators, and then passed into the environment simulator. The required CMG angles are computed from the control-loop output by solving for $\dot{A}$ and performing a 1st order integration.
 
@@ -1009,14 +1271,14 @@ The plant matrix, $A$, was obtained by linearizing the euler and kinematic equat
 For attitude, $\dot{q} = 1/2\Omega q$ was linearized with respect to angular velocity. Below is the jacobian of $q$, as well as the discrete next-step quaternion.
 
 \[
-\nabla_\omega q =
+\nabla_\omega \dot{q} =
 \begin{bmatrix}
 q4 &-q3 &q2 \\
 q3 &q4 &-q1 \\
 -q2 &q1 &q4 \\
 -q1 &-q2 &-q3
 \end{bmatrix}
-;\ q_{k+1} \approx dt*1/2*\nabla_\omega q|_q*\omega + q_k
+;\ q_{k+1} \approx dt*1/2*\nabla_\omega \dot{q}|_q*\omega + q_k
 \]
 
 Eq. \ref{8:discreteQuat} places the known quantities into the usual discrete linear system form. For the inner-loop, the same linear model used in the EKF is used here.
@@ -1039,11 +1301,14 @@ In the simulink model, the control loop is ran once every ten time-steps. This i
 
 Initially, I had significant trouble getting the LQR controllers to function properly. The satellite could control its ang. vel., but not the attitude. After careful inspection, I figured out the issue: the weight matrices on each LQR were not properly adjusted after implementing the successive control-loop structure. With no feed-forward terms or direct coupling between attitude and control moment, there is a natural delay whenever an attitude is commanded. If the attitude controller doesn't allow enough time for the ang. vel. to 'catch up', then it will change the commanded ang. vel. before anything even happens. This was resolved by weighting the attitude rather low, and the ang. vel. higher, so that the inner-loop reaches the commanded velocity much quicker and is able to affect the attitude as desired.
 
+
+\subsection{Simulation}
+
 In testing the controller, a nominal trajectory was defined for the ISS to follow. The satellite begins in the RTN frame with $\omega=[0 -n0 0]'$ and is subject to perturbations. The goal is to maintain the desired attitude.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps8_01}
+	\includegraphics[scale=0.8]{ps8_01}
 	\caption{Angular velocity with and without control.}
 	\label{8:angvel}
 \end{figure}
@@ -1052,7 +1317,7 @@ Fig. \ref{8:angvel} shows how the euler angles evolve during the flight. With no
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps8_02}
+	\includegraphics[scale=0.8]{ps8_02}
 	\caption{EKF performance.}
 	\label{8:ekf}
 \end{figure}
@@ -1061,7 +1326,7 @@ Fig. \ref{8:ekf} shows how the extended kalman filter behaves near the beginning
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps8_03}
+	\includegraphics[scale=0.8]{ps8_03}
 	\caption{Error in attitude control between principle and RTN frames.}
 	\label{8:attError}
 \end{figure}
@@ -1070,7 +1335,7 @@ Above is the attitude control error during the flight. This represents the direc
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps8_04}
+	\includegraphics[scale=0.8]{ps8_04}
 	\caption{Angular velocity while de-tumbling.}
 	\label{8:angvel}
 \end{figure}
@@ -1079,7 +1344,7 @@ The output of the controller is how much moment to impart in each principle dire
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps8_05}
+	\includegraphics[scale=0.8]{ps8_05}
 	\caption{Angular velocity while de-tumbling.}
 	\label{8:angvel}
 \end{figure}
@@ -1094,7 +1359,7 @@ A problem all satellites deal with is de-tumbling. When launched into orbit the 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps9_01}
+	\includegraphics[scale=0.8]{ps9_01}
 	\caption{Angular velocity while de-tumbling.}
 	\label{9:angvel}
 \end{figure}
@@ -1118,7 +1383,7 @@ Fig. \ref{(9:pos)} shows how the principle axes aligns itself with the RTN frame
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{ps9_04}
+	\includegraphics[scale=0.8]{ps9_04}
 	\caption{Attitude control error until convergence.}
 	\label{9:atterror}
 \end{figure}
@@ -1127,7 +1392,7 @@ Fig \ref{9:atterror} shows the evolution of the attitude control error over time
 
 
 
-\section{Appendices A - Matlab Code}
+\section{Appendices A - Matlab Code for setting up the satellite}
 
 \includepdf[pages=-]{ps1code.pdf}
 
